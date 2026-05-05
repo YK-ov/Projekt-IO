@@ -1,0 +1,51 @@
+# depslib dependency file v1.0
+1776152578 source:c:\users\student\software-engineering\6\lab6\main.cpp
+	<iostream>
+	"Konto.h"
+	"Website.h"
+
+1776152328 source:c:\users\student\software-engineering\6\lab6\konto.cpp
+	"Konto.h"
+
+1776152001 c:\users\student\software-engineering\6\lab6\konto.h
+	<string>
+	<iostream>
+
+1776152308 source:c:\users\student\software-engineering\6\lab6\website.cpp
+	"Website.h"
+
+1776153216 c:\users\student\software-engineering\6\lab6\website.h
+	<string>
+	<iostream>
+	<vector>
+	"Konto.h"
+
+1776707301 source:c:\users\user\software-engineering\6\lab6\konto.cpp
+	"Konto.h"
+
+1776705842 c:\users\user\software-engineering\6\lab6\konto.h
+	<string>
+	<iostream>
+
+1776711309 source:c:\users\user\software-engineering\6\lab6\main.cpp
+	<iostream>
+	"Konto.h"
+	"Website.h"
+
+1776707791 c:\users\user\software-engineering\6\lab6\website.h
+	<string>
+	<vector>
+	"Sesja.h"
+	"Konto.h"
+
+1776711172 source:c:\users\user\software-engineering\6\lab6\website.cpp
+	"Website.h"
+
+1776708105 source:c:\users\user\software-engineering\6\lab6\sesja.cpp
+	"Sesja.h"
+
+1776708018 c:\users\user\software-engineering\6\lab6\sesja.h
+	<string>
+	<iostream>
+	"Konto.h"
+
