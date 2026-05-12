@@ -4,3 +4,5 @@ dziedzina problemu: fragment systemu ulatwiajacego pozyskiwanie wiedzy przez stu
 3) pokazac czasowa ewolucje systemu (diagram sekwencji)
 4) zaproponowac kompletna implementacje 
 5) zaproponowac testy i je wykonac
+
+Projekt jest wykonany w oparciu na model iteracyjny
