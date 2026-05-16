@@ -4,8 +4,8 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Przedmiot.h
-//  @ Date : 15.05.2026
-//  @ Author : 
+//  @ Date : 16.05.2026
+//  @ Author :
 //
 //
 
@@ -13,10 +13,18 @@
 #if !defined(_PRZEDMIOT_H)
 #define _PRZEDMIOT_H
 
+#include <string>
+#include <vector>
+#include "Material.h"
+#include "Wykladowca.h"
+#include "Student.h"
+
+using namespace std;
+
 
 class Przedmiot {
 public:
-	Przedmiot(string n);
+	Przedmiot(string n, string o, string k);
 	~Przedmiot();
 	void attachMaterial(Material* m);
 	void detachMaterial(string tytulVal);
@@ -30,7 +38,7 @@ public:
 	void setKontakt(string l);
 	void attachStudent(Student* s);
 	void detachStudent(string l);
-	void znajdzMaterial(string tytul);
+	Material* znajdzMaterial(string tytul);
 private:
 	string nazwa;
 	vector<Material*> materialy;

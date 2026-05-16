@@ -4,8 +4,8 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Student.cpp
-//  @ Date : 15.05.2026
-//  @ Author : 
+//  @ Date : 16.05.2026
+//  @ Author :
 //
 //
 
@@ -20,7 +20,7 @@ bool Student::zaproponujMaterial(string dane) {
 
 }
 
-Student::Student(string l, string h) {
+Student::Student(string l, string h) : Konto(l, h) {
 
 }
 

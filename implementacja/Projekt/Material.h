@@ -4,14 +4,18 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Material.h
-//  @ Date : 15.05.2026
-//  @ Author : 
+//  @ Date : 16.05.2026
+//  @ Author :
 //
 //
 
 
 #if !defined(_MATERIAL_H)
 #define _MATERIAL_H
+
+#include <string>
+
+using namespace std;
 
 
 class Material {

@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Przedmiot.cpp
-//  @ Date : 15.05.2026
+//  @ Date : 16.05.2026
 //  @ Author : 
 //
 //
@@ -12,7 +12,7 @@
 
 #include "Przedmiot.h"
 
-Przedmiot::Przedmiot(string n) {
+Przedmiot::Przedmiot(string n, string o, string k) {
 
 }
 
@@ -68,7 +68,7 @@ void Przedmiot::detachStudent(string l) {
 
 }
 
-void Przedmiot::znajdzMaterial(string tytul) {
+Material* Przedmiot::znajdzMaterial(string tytul) {
 
 }
 

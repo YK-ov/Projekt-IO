@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Admin.h
-//  @ Date : 15.05.2026
+//  @ Date : 16.05.2026
 //  @ Author : 
 //
 //
@@ -17,7 +17,7 @@
 
 class Admin : public Konto {
 public:
-	void dodajMaterial(string tytul);
+	void dodajZweryfkikowanyMaterial(string tytul);
 	Admin(string l, string h);
 	~Admin();
 };

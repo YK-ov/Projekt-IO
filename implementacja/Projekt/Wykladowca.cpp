@@ -4,8 +4,8 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Wykladowca.cpp
-//  @ Date : 15.05.2026
-//  @ Author : 
+//  @ Date : 16.05.2026
+//  @ Author :
 //
 //
 
@@ -24,7 +24,7 @@ void Wykladowca::dodajPrzedmiot(string nazwa, string opis, string kontakt) {
 
 }
 
-Wykladowca::Wykladowca(string l, string h) {
+Wykladowca::Wykladowca(string l, string h) : Konto(l, h) {
 
 }
 

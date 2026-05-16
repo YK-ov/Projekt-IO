@@ -4,14 +4,18 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Konto.h
-//  @ Date : 15.05.2026
-//  @ Author : 
+//  @ Date : 16.05.2026
+//  @ Author :
 //
 //
 
 
 #if !defined(_KONTO_H)
 #define _KONTO_H
+
+#include <string>
+
+using namespace std;
 
 
 class Konto {

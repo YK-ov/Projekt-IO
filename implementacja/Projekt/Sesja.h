@@ -4,14 +4,19 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Sesja.h
-//  @ Date : 15.05.2026
-//  @ Author : 
+//  @ Date : 16.05.2026
+//  @ Author :
 //
 //
 
 
 #if !defined(_SESJA_H)
 #define _SESJA_H
+
+#include <string>
+#include "Konto.h"
+
+using namespace std;
 
 
 class Sesja {

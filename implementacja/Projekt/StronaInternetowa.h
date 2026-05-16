@@ -4,14 +4,18 @@
 //
 //  @ Project : Untitled
 //  @ File Name : StronaInternetowa.h
-//  @ Date : 15.05.2026
-//  @ Author : 
+//  @ Date : 16.05.2026
+//  @ Author :
 //
 //
 
 
 #if !defined(_STRONAINTERNETOWA_H)
 #define _STRONAINTERNETOWA_H
+
+#include "Konto.h"
+#include "Sesja.h"
+#include "Przedmiot.h"
 
 
 class StronaInternetowa {
@@ -29,8 +33,8 @@ public:
 	void wykonajAkcjeUzytkownika();
 	void attachPrzedmiot(Przedmiot* p);
 	void detachPrzedmiot(string n);
-	void getPrzedmiot(string n);
 	Przedmiot* getPrzedmiot(string n);
+	bool sprawdzCzyUzytkownikIstnieje(Konto* k);
 	StronaInternetowa(string a, string n);
 	~StronaInternetowa();
 private:

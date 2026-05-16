@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : StronaInternetowa.cpp
-//  @ Date : 15.05.2026
+//  @ Date : 16.05.2026
 //  @ Author : 
 //
 //
@@ -64,11 +64,11 @@ void StronaInternetowa::detachPrzedmiot(string n) {
 
 }
 
-void StronaInternetowa::getPrzedmiot(string n) {
+Przedmiot* StronaInternetowa::getPrzedmiot(string n) {
 
 }
 
-Przedmiot* StronaInternetowa::getPrzedmiot(string n) {
+bool StronaInternetowa::sprawdzCzyUzytkownikIstnieje(Konto* k) {
 
 }
 

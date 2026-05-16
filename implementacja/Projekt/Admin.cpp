@@ -4,19 +4,19 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Admin.cpp
-//  @ Date : 15.05.2026
-//  @ Author : 
+//  @ Date : 16.05.2026
+//  @ Author :
 //
 //
 
 
 #include "Admin.h"
 
-void Admin::dodajMaterial(string tytul) {
+void Admin::dodajZweryfkikowanyMaterial(string tytul) {
 
 }
 
-Admin::Admin(string l, string h) {
+Admin::Admin(string l, string h) : Konto(l, h) {
 
 }
 
