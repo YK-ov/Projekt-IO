@@ -16,6 +16,11 @@
 #include "Konto.h"
 #include "Sesja.h"
 #include "Przedmiot.h"
+#include "Admin.h"
+#include "Student.h"
+#include "Wykladowca.h"
+
+#include <iostream>
 
 
 class StronaInternetowa {
@@ -30,11 +35,13 @@ public:
 	void setAdres(string a);
 	bool logowanie(string l, string h, string ip);
 	bool rejestracja(string l, string h, string ip);
-	void wykonajAkcjeUzytkownika();
+	void wykonajAkcjeUzytkownika(string login);
 	void attachPrzedmiot(Przedmiot* p);
 	void detachPrzedmiot(string n);
 	Przedmiot* getPrzedmiot(string n);
 	bool sprawdzCzyUzytkownikIstnieje(Konto* k);
+	Konto* getKonto(string l);
+	Sesja* getSesja(string i);
 	StronaInternetowa(string a, string n);
 	~StronaInternetowa();
 private:

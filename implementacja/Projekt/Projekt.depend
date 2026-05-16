@@ -2,32 +2,35 @@
 1743445502 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
 	<iostream>
 
-1778943191 source:c:\users\user\projekt-io\implementacja\projekt\konto.cpp
+1778947126 source:c:\users\user\projekt-io\implementacja\projekt\konto.cpp
 	"Konto.h"
 
-1778943695 c:\users\user\projekt-io\implementacja\projekt\konto.h
+1778962312 c:\users\user\projekt-io\implementacja\projekt\konto.h
 	<string>
+	<iostream>
 
-1778943191 source:c:\users\user\projekt-io\implementacja\projekt\material.cpp
+1778955035 source:c:\users\user\projekt-io\implementacja\projekt\material.cpp
 	"Material.h"
 
-1778943716 c:\users\user\projekt-io\implementacja\projekt\material.h
+1778954003 c:\users\user\projekt-io\implementacja\projekt\material.h
 	<string>
+	<iostream>
 
-1778943191 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
+1778959158 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
 	"Przedmiot.h"
 
-1778943794 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
+1778959152 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
 	<string>
 	<vector>
+	<iostream>
 	"Material.h"
 	"Wykladowca.h"
 	"Student.h"
 
-1778943191 c:\users\user\projekt-io\implementacja\projekt\wykladowca.h
+1778952338 c:\users\user\projekt-io\implementacja\projekt\wykladowca.h
 	"Konto.h"
 
-1778943191 c:\users\user\projekt-io\implementacja\projekt\student.h
+1778950739 c:\users\user\projekt-io\implementacja\projekt\student.h
 	"Konto.h"
 
 1778943191 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
@@ -38,19 +41,23 @@
 	"Sesja.h"
 	"Przedmiot.h"
 
-1778943819 c:\users\user\projekt-io\implementacja\projekt\sesja.h
+1778946408 c:\users\user\projekt-io\implementacja\projekt\sesja.h
 	<string>
+	<iostream>
 	"Konto.h"
 
-1778943191 source:c:\users\user\projekt-io\implementacja\projekt\sesja.cpp
+1778945709 source:c:\users\user\projekt-io\implementacja\projekt\sesja.cpp
 	"Sesja.h"
 
-1778943934 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
+1778952418 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
 	"Wykladowca.h"
 
-1778943961 source:c:\users\user\projekt-io\implementacja\projekt\admin.cpp
+1778956966 source:c:\users\user\projekt-io\implementacja\projekt\admin.cpp
 	"Admin.h"
 
-1778943191 c:\users\user\projekt-io\implementacja\projekt\admin.h
+1778956959 c:\users\user\projekt-io\implementacja\projekt\admin.h
 	"Konto.h"
+
+1778952354 source:c:\users\user\projekt-io\implementacja\projekt\student.cpp
+	"Student.h"
 

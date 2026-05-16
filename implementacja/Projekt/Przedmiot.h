@@ -15,6 +15,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 #include "Material.h"
 #include "Wykladowca.h"
 #include "Student.h"
@@ -24,7 +25,7 @@ using namespace std;
 
 class Przedmiot {
 public:
-	Przedmiot(string n, string o, string k);
+	Przedmiot(string n, string o, string k, string g);
 	~Przedmiot();
 	void attachMaterial(Material* m);
 	void detachMaterial(string tytulVal);
@@ -39,6 +40,14 @@ public:
 	void attachStudent(Student* s);
 	void detachStudent(string l);
 	Material* znajdzMaterial(string tytul);
+	string getGrupa();
+	void setGrupa(string g);
+    Material* getMaterialDoWeryfikacji(string t);
+	Material* getMaterialDoDodania(string t);
+	void attachMaterialDoWeryfikacji(Material* m);
+	void detachMaterialDoWeryfikacji(string t);
+	void attachMaterialDoDodania(Material* m);
+	void detachMaterialDoDodania(string t);
 private:
 	string nazwa;
 	vector<Material*> materialy;
@@ -46,6 +55,9 @@ private:
 	string opis;
 	string kontakt;
 	vector<Student*> studenty;
+	string grupa;
+	vector<Material*> materialyDoWeryfikacji;
+	vector<Material*> materialyDoDodania;
 };
 
 #endif  //_PRZEDMIOT_H

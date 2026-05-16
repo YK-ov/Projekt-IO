@@ -5,7 +5,7 @@
 //  @ Project : Untitled
 //  @ File Name : StronaInternetowa.cpp
 //  @ Date : 16.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
@@ -13,70 +13,547 @@
 #include "StronaInternetowa.h"
 
 void StronaInternetowa::attachKonto(Konto* k) {
-
+    konta.push_back(k);
 }
 
 void StronaInternetowa::attachSesja(Sesja* s) {
-
+    sesje.push_back(s);
 }
 
 void StronaInternetowa::detachKonto(string login) {
+    vector<Konto*>::iterator it;
 
+    Konto* foundKonto = nullptr;
+
+    for (it = konta.begin(); it != konta.end(); it++){
+        if ((*it)->getLogin() == login){
+            foundKonto = (*it);
+            konta.erase(it);
+            break;
+        }
+    }
+
+    if (foundKonto == nullptr){
+        cout << "Konta o loginie " << login << " nie znaleziono w systemie\n";
+    }
 }
 
 void StronaInternetowa::detachSesja(string ip) {
+    vector<Sesja*>::iterator it;
 
+    Sesja* foundSesja = nullptr;
+
+    for (it = sesje.begin(); it != sesje.end(); it++){
+        if ((*it)->getIpAdres() == ip){
+            foundSesja = (*it);
+            sesje.erase(it);
+            break;
+        }
+    }
+
+    if (foundSesja == nullptr){
+        cout << "Sesje o ip " << ip << " nie znaleziono w systemie\n";
+    }
 }
 
 string StronaInternetowa::getAdres() {
-
+    return adres;
 }
 
 string StronaInternetowa::getNazwa() {
-
+    return nazwa;
 }
 
 void StronaInternetowa::setNazwa(string n) {
-
+    nazwa = n;
 }
 
 void StronaInternetowa::setAdres(string a) {
-
+    adres = a;
 }
 
 bool StronaInternetowa::logowanie(string l, string h, string ip) {
+    Sesja* currentSession = getSesja(ip);
 
+    if (currentSession == nullptr){
+        cout << "Nie znalieziono sesji o ip " << ip << ", proces logowania przerwano\n";
+        return false;
+    }
+
+    if (currentSession->getCzyJestZablokowana()) {
+        time_t currentTime = time(nullptr);
+
+        if (currentTime < currentSession->getZablokowanaDo()) {
+            long long left = currentSession->getZablokowanaDo() - currentTime;
+            cout << "Sesja zablokowana, " << left << " sekund kary\n";
+            return false;
+        }
+        else {
+            currentSession->setCzyJestZablokowana(false);
+            currentSession->setProby(0);
+            cout << "Blokada minela, mozesz sprobowac ponownie\n";
+        }
+    }
+
+    Konto* foundKonto = nullptr;
+    vector<Konto*>::iterator it;
+
+    for (it = konta.begin(); it != konta.end(); it++){
+        if ((*it)->getLogin() == l){
+            foundKonto = (*it);
+            break;
+        }
+    }
+
+    if (foundKonto == nullptr){
+        cout << "Nie znaleziono uzytkownika o loginie " << l << " , czy chcesz zarejestrowac uzytkownika o takim loginie?\n";
+        return false;
+    }
+
+    if (foundKonto->autentykacja(h)){
+        cout << "Zalogowanie na strone " << adres << " udalo sie\n";
+        return true;
+    }
+    else {
+        if (currentSession->getProby() >= 5){
+            cout << "Przekroczony limit prob, musimy zablokowac sesje o ip " << currentSession->getIpAdres() << " na 15 minut, prosze sprobowac pozniej\n";
+
+            currentSession->setCzyJestZablokowana(true);
+            currentSession->setZablokowanaDo(time(nullptr) + 15 * 60);
+        }
+
+        currentSession->setProby(currentSession->getProby() + 1);
+
+        cout << "Niepoprawne haslo dla uzytkownika o loginie " << l << ", sprobuj ponownie, zostalo " << 5 - currentSession->getProby() << " prob\n";
+
+        return false;
+    }
 }
 
 bool StronaInternetowa::rejestracja(string l, string h, string ip) {
+    Sesja* currentSession = getSesja(ip);
 
+    if (currentSession == nullptr){
+        cout << "Nie znalieziono sesji o ip " << ip << ", proces logowania przerwano\n";
+        return false;
+    }
+
+    Konto* foundKonto = nullptr;
+    vector<Konto*>::iterator it;
+
+    Konto* userToCheck = new Konto(l, h);
+
+    if (sprawdzCzyUzytkownikIstnieje(userToCheck)){
+        cout << "Niestety uzytkownik o loginie " << l << " juz istnieje w systemie, prosze wymyslec sobie inney login uzytkownika\n";
+        delete userToCheck;
+
+        return false;
+    }
+
+    delete userToCheck;
+
+    string input = "";
+    cout << "Konto jakiego typu chcesz stwrozyc: student, administrator, wykladowca?:\n";
+
+    cin >> input;
+
+    while (input != "student" && input != "administrator" && input != "wykladowca"){
+        cout << "Nieprawidlowy input, prosze sprobowac ponownie\n";
+
+        cin >> input;
+    }
+
+    string passwordCheck = "";
+    cout << "Prosze podtwierdzic haslo:\n";
+    cin >> passwordCheck;
+
+    if (passwordCheck == h){
+        cout << "Rejestracja udana, dodajemy uzytkownika o loginie " << l << " do systemu...\n";
+
+        Konto* toAdd = nullptr;
+
+        if (input == "student"){
+            string grupa = "";
+            cout << "Wprowadz swoja grupe\n";
+
+            cin >> grupa;
+
+            toAdd = new Student(l, h, grupa);
+        }
+        else if (input == "administrator"){
+            toAdd = new Admin(l, h);
+        }
+        else if (input == "wykladowca"){
+            toAdd = new Wykladowca(l, h);
+        }
+
+        attachKonto(toAdd);
+
+        cout << "Prosze teraz zalogowac sie do systemu\n";
+        return true;
+    }
+    else {
+        cout << "Podtwierdzone haslo niestety nie zgadza sie z poprzednim haslem, prosze sprobowac ponownie\n";
+        return false;
+    }
+
+    return false;
 }
 
-void StronaInternetowa::wykonajAkcjeUzytkownika() {
+void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
+    Konto* foundKonto = getKonto(login);
 
+    if (foundKonto == nullptr){
+        cout << "Konta o loginie " << login << " nie ma w systemie, sprobuj ponownie\n";
+        return;
+    }
+
+    if (typeid(*foundKonto) == typeid(Student)){
+        Student* student = dynamic_cast<Student*> (foundKonto);
+
+        string input = "";
+        cout << "Czy chcesz dodac material do rewizji albo pozyskac material? (Wpisz dodac lub pozyskac ponizej:)\n";
+
+        cin >> input;
+
+        while (input != "dodac" && input != "pozyskac"){
+            cout << "Nieprawidlowy input, prosze sprobowac ponownie\n";
+
+            cin >> input;
+        }
+
+        if (input == "dodac"){
+            string studentInput = "";
+            cout << "Wprowadz przedmiot, do ktorego chcesz dodac material:\n";
+
+            Przedmiot* foundPrzedmiot = nullptr;
+
+            while (true){
+                cin >> studentInput;
+                foundPrzedmiot = getPrzedmiot(studentInput);
+                    if (foundPrzedmiot != nullptr){
+                        break;
+                    }
+
+                cout << "Nie znaleziono przedmiotu " << studentInput << " w systemie, sprobuj ponownie\n";
+            }
+
+            string title = "";
+
+            cout << "Wproawdz tytul:\n";
+            cin >> title;
+
+            string attachment = "";
+
+            cout << "Wprowadz zalacznik:\n";
+            cin >> attachment;
+
+            string csvStudentInput = title + "," + attachment;
+
+            student->zaproponujMaterial(csvStudentInput);
+        }
+        else {
+            string studentInput = "";
+            string materialMadeBy = "";
+
+            cout << "Od kogo chcesz pozyksac material? (wykladowca = od wykladowcow, student = od studentow)\n";
+
+            cin >> materialMadeBy;
+
+            while (materialMadeBy != "wykladowca" && materialMadeBy != "student"){
+                cout << "Nieprawidlowy input, sprobuj ponownie\n";
+                cin >> materialMadeBy;
+            }
+
+            string name = "";
+            cout << "Prosze wprowadzic nazwe przedmiotu:\n";
+            cin >> name;
+
+            Przedmiot* przedmiotFound = getPrzedmiot(name);
+
+            while (przedmiotFound == nullptr){
+                cout << "Przedmiotu " << name << " nie znalieziono w systmie, sprobuj ponownie\n";
+
+                cin >> name;
+
+                przedmiotFound = getPrzedmiot(name);
+            }
+
+            if (przedmiotFound->getGrupa() != student->getGrupa()){
+                cout << "Nie jestes przypisany do grupy " << przedmiotFound->getGrupa() << " przedmiotu " << przedmiotFound->getNazwa() << "\n";
+                return;
+            }
+
+            string title = "";
+            cout << "Prosze wprowadzic tytul materialu:\n";
+            cin >> title;
+
+            Material* material = przedmiotFound->znajdzMaterial(title);
+
+            while (material == nullptr) {
+                cout << "Nie znaleziono materialu o tytulu " << title << " dla przedmiotu " << przedmiotFound->getNazwa() << " , sprobuj wprowadzic inny tytul materialu\n";
+
+                cin >> title;
+                material = przedmiotFound->znajdzMaterial(title);
+            }
+
+            if (materialMadeBy == "student") {
+                if (!material->getMaterialOdWykladowcy()){
+                    cout << "Zalacznik do pobrania meterialu przygotowanego przez studentow:\n";
+                    cout << material->getZalacznik();
+                }
+                else {
+                    cout << "Material o tytulu " << material->getTytul() << " nie byl przygotowany przez studentow, sprobuj sprawdzic materialy od prowadzacych\n";
+                    return;
+                }
+            }
+            else {
+                if (material->getMaterialOdWykladowcy()){
+                    cout << "Zalacznik do pobrania meterialu przygotowanego przez wykladowcow:\n";
+                    cout << material->getZalacznik();
+                }
+                else {
+                    cout << "Material o tytulu " << material->getTytul() << " nie byl przygotowany przez wykladowcow, sprobuj sprawdzic materialy od studentow\n";
+                    return;
+                }
+            }
+        }
+    }
+    else if (typeid(*foundKonto) == typeid(Wykladowca)){
+        Wykladowca* teacher = dynamic_cast<Wykladowca*>(foundKonto);
+
+        string teacherInput = "";
+
+        if (teacher->getAktywnaWeryfikacja()){
+            cout << "Uwaga! W tej chwili masz aktywna sugestie studenta do sprawdzenia. Wprowadz \"sprawdz\", jesli chcesz sprawdzic natychmiastowo, lub nacsinij enter (lub wpisz cokolwiek) jesli chcesz to zrobic pozniej\n";
+
+            cin >> teacherInput;
+
+            if (teacherInput == "sprawdz"){
+                teacher->zweryfikujSugestieStudenta();
+            }
+        }
+
+            cout << "Czy chcesz sprawdzic sugestie studenta (jesli teraz jest aktywna w systemie), dodac material lub dodac przedmiot? (sprawdzic = sprawdzic sugestie, material = dodac material, przedmiot = dodac przedmiot do systemu)\n";
+
+            cin >> teacherInput;
+
+            while (teacherInput != "sprawdzic" && teacherInput != "material" && teacherInput != "przedmiot"){
+                cout << "Nieprawidlowy input, sprobuj ponownie\n";
+
+                cin >> teacherInput;
+            }
+
+            if (teacherInput == "sprawdzic"){
+                teacher->zweryfikujSugestieStudenta();
+            }
+            else if (teacherInput == "material"){
+                string name = "";
+                cout << "Wprowadz nazwe przedmiotu do ktorego chcesz dodac material:\n";
+
+                cin >> name;
+
+                Przedmiot* przedmiotFound = getPrzedmiot(name);
+
+                while (przedmiotFound == nullptr){
+                    cout << "Nie znaleziono przedmiotu " << name << " w systemie, prosze sprobowac ponownie\n";
+
+                    cin >> name;
+                    przedmiotFound = getPrzedmiot(name);
+                }
+
+                string title = "";
+                cout << "Wprowadz tytul materialu:\n";
+                cin >> title;
+
+                string attachment;
+                cout << "Wprowadz zalacznik:\n";
+                cin >> attachment;
+
+                Material* newMaterial = new Material(title, attachment, true);
+
+                przedmiotFound->attachMaterial(newMaterial);
+
+                cout << "Dodano material o tytulu " << title << " do przedmiotu " << przedmiotFound->getNazwa() << "\n";
+            }
+            else if (teacherInput == "przedmiot"){
+                string name = "";
+                cout << "Wprowadz nazwe przedmiotu:\n";
+
+                cin >> name;
+
+                Przedmiot* przedmiotFound = getPrzedmiot(name);
+
+                while (przedmiotFound != nullptr){
+                    cout << "Przedmiot o nazwie " << name << " juz istnieje w systemie, prosze sprobowac ponownie\n";
+
+                    cin >> name;
+                    przedmiotFound = getPrzedmiot(name);
+                }
+
+                string description = "";
+                cout << "Wprowadz opis przedmiotu:\n";
+
+                cin >> description;
+
+                string contact = "";
+                cout << "Wprowadz kontakt do koordynatora przedmiotu:\n";
+                cin >> contact;
+
+                string group = "";
+                cout << "Wprowadz grupe studentow, ktora bedzie miala dostep do przedmiotu:\n";
+                cin >> group;
+
+                przedmiotFound = new Przedmiot(name, description, contact, group);
+                attachPrzedmiot(przedmiotFound);
+
+                cout << "Przedmiot " << przedmiotFound->getNazwa() << " dodano do systemu\n";
+
+                cout << "Czy chcesz dodac innych prowadzacych do tego przedmiotu? (Wprowadz tak lub nie)\n";
+
+                cin >> teacherInput;
+                while (teacherInput != "tak" && teacherInput != "nie"){
+                    cout << "Nieprawidlowy input, sprobuj ponownie\n";
+
+                    cin >> teacherInput;
+                }
+
+                while (teacherInput == "tak"){
+                    string teacherLogin = "";
+                    cout << "Wprowadz login wykladowcy:\n";
+
+                    cin >> teacherLogin;
+
+                    Wykladowca* foundTeacher = dynamic_cast<Wykladowca*>(getKonto(teacherLogin));
+
+                    while (foundTeacher == nullptr){
+                        string newTeacherInput = "";
+                        cout << "Wykladowcy o loginie " << teacherLogin << " nie znaleziono w systemie, sprobuj ponownie\n";
+
+                        cin >> newTeacherInput;
+
+                        if (newTeacherInput == "nie"){
+                            break;
+                        }
+
+                        teacherLogin = newTeacherInput;
+                        foundTeacher = dynamic_cast<Wykladowca*>(getKonto(teacherLogin));
+                    }
+
+                    if(foundTeacher != nullptr){
+                        przedmiotFound->attachWykladowca(foundTeacher);
+
+                        cout << "Wykladowca o loginie " << foundTeacher->getLogin() << " zostal dodany\n";
+                    }
+
+                    cout << "Czy chcesz dodac innego prowadzacego? (Wprowadz tak lub nie)\n";
+
+                    cin >> teacherInput;
+                }
+
+            }
+    }
+    else if (typeid(*foundKonto) == typeid(Admin)){
+        Admin* admin = dynamic_cast<Admin*> (foundKonto);
+
+        if (admin->getAktywneDodanie()){
+            cout << "Masz teraz material do dodania, przystap do pracy w wolnej chwili\n";
+
+            admin->dodajZweryfkikowanyMaterial();
+        }
+    }
 }
 
 void StronaInternetowa::attachPrzedmiot(Przedmiot* p) {
-
+    przedmioty.push_back(p);
 }
 
 void StronaInternetowa::detachPrzedmiot(string n) {
+    vector<Przedmiot*>::iterator it;
 
+    Przedmiot* foundPrzedmiot = nullptr;
+
+    for (it = przedmioty.begin(); it != przedmioty.end(); it++){
+        if ((*it)->getNazwa() == n){
+            foundPrzedmiot = (*it);
+
+            przedmioty.erase(it);
+            break;
+        }
+    }
+
+    if (foundPrzedmiot == nullptr){
+        cout << "Nie znaleziono przedmiotu " << n << " w systemie\n";
+    }
 }
 
 Przedmiot* StronaInternetowa::getPrzedmiot(string n) {
+    vector<Przedmiot*>::iterator it;
 
+    Przedmiot* foundPrzedmiot = nullptr;
+
+    for (it = przedmioty.begin(); it != przedmioty.end(); it++){
+        if ((*it)->getNazwa() == n){
+            foundPrzedmiot = (*it);
+            break;
+        }
+    }
+
+    return foundPrzedmiot;
 }
 
 bool StronaInternetowa::sprawdzCzyUzytkownikIstnieje(Konto* k) {
+    vector<Konto*>::iterator it;
 
+    for (it = konta.begin(); it != konta.end(); it++){
+        if ((*it)->getLogin() == k->getLogin()){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+Konto* StronaInternetowa::getKonto(string l) {
+    vector<Konto*>::iterator it;
+
+    Konto* foundKonto = nullptr;
+
+    for (it = konta.begin(); it != konta.end(); it++){
+        if ((*it)->getLogin() == l){
+            foundKonto = (*it);
+            break;
+        }
+    }
+
+    return foundKonto;
+}
+
+Sesja* StronaInternetowa::getSesja(string i) {
+    vector<Sesja*>::iterator it;
+
+    Sesja* foundSesja = nullptr;
+
+    for (it = sesje.begin(); it != sesje.end(); it++){
+        if ((*it)->getIpAdres() == i){
+            foundSesja = (*it);
+            break;
+        }
+    }
+
+    if (foundSesja == nullptr){
+        cout << "Sesji o adresie ip " << i << " nie znaleziono w systemie\n";
+    }
+
+    return foundSesja;
 }
 
 StronaInternetowa::StronaInternetowa(string a, string n) {
-
+    adres = a;
+    nazwa = n;
 }
 
 StronaInternetowa::~StronaInternetowa() {
-
+    cout << "Strona internetowa " << nazwa << " o adresie " << adres << " zostala zniszczona\n";
 }
 

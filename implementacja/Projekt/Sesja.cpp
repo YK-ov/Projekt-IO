@@ -5,7 +5,7 @@
 //  @ Project : Untitled
 //  @ File Name : Sesja.cpp
 //  @ Date : 16.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
@@ -13,50 +13,55 @@
 #include "Sesja.h"
 
 Sesja::Sesja(string i) {
+    ipAdres = i;
 
+    proby = 0;
+    czyJestZablokowana = false;
+    zablokowanaDo = 0;
+    konto = nullptr;
 }
 
 Sesja::~Sesja() {
-
+    cout << "Sesja o adresie ip " << ipAdres << " zostala zniszczona\n";
 }
 
 string Sesja::getIpAdres() {
-
+    return ipAdres;
 }
 
 int Sesja::getProby() {
-
+    return proby;
 }
 
 bool Sesja::getCzyJestZablokowana() {
-
+    return czyJestZablokowana;
 }
 
 time_t Sesja::getZablokowanaDo() {
-
+    return zablokowanaDo;
 }
 
 Konto* Sesja::getKonto() {
-
+    return konto;
 }
 
 void Sesja::setIpAdres(string i) {
-
+    ipAdres = i;
 }
 
 void Sesja::setProby(int p) {
-
+    proby = p;
 }
 
 void Sesja::setCzyJestZablokowana(bool b) {
-
+    czyJestZablokowana = b;
 }
 
 void Sesja::setZablokowanaDo(time_t t) {
-
+    zablokowanaDo = t;
 }
 
 void Sesja::setKonto(Konto* k) {
-
+    konto = k;
 }
 

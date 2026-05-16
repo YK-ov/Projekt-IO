@@ -5,14 +5,14 @@
 //  @ Project : Untitled
 //  @ File Name : Konto.cpp
 //  @ Date : 16.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
 
 #include "Konto.h"
 
-bool Konto::autentykacja() {
+bool Konto::autentykacja(string haslo) {
 
 }
 

@@ -14,19 +14,20 @@
 #define _KONTO_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 
 class Konto {
 public:
-	bool autentykacja();
+	bool autentykacja(string haslo);
 	string getLogin();
 	string getHaslo();
 	void setLogin(string l);
 	void setHaslo(string h);
 	Konto(string l, string h);
-	~Konto();
+	virtual ~Konto();
 private:
 	string login;
 	string haslo;

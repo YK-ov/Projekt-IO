@@ -32,3 +32,11 @@ Wykladowca::~Wykladowca() {
 
 }
 
+bool Wykladowca::getAktywnaWeryfikacja() {
+
+}
+
+void Wykladowca::setAktywnaWeryfikacja(bool b) {
+
+}
+

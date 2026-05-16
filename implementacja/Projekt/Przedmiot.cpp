@@ -5,14 +5,14 @@
 //  @ Project : Untitled
 //  @ File Name : Przedmiot.cpp
 //  @ Date : 16.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
 
 #include "Przedmiot.h"
 
-Przedmiot::Przedmiot(string n, string o, string k) {
+Przedmiot::Przedmiot(string n, string o, string k, string g) {
 
 }
 
@@ -71,4 +71,38 @@ void Przedmiot::detachStudent(string l) {
 Material* Przedmiot::znajdzMaterial(string tytul) {
 
 }
+
+string Przedmiot::getGrupa() {
+
+}
+
+void Przedmiot::setGrupa(string g) {
+
+}
+
+
+Material* Przedmiot::getMaterialDoWeryfikacji(string t){
+
+}
+
+Material* Przedmiot::getMaterialDoDodania(string t){
+
+}
+
+void Przedmiot::attachMaterialDoWeryfikacji(Material* m) {
+
+}
+
+void Przedmiot::detachMaterialDoWeryfikacji(string t) {
+
+}
+
+void Przedmiot::attachMaterialDoDodania(Material* m) {
+
+}
+
+void Przedmiot::detachMaterialDoDodania(string t) {
+
+}
+
 

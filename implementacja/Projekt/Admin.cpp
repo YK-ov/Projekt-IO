@@ -12,7 +12,7 @@
 
 #include "Admin.h"
 
-void Admin::dodajZweryfkikowanyMaterial(string tytul) {
+void Admin::dodajZweryfkikowanyMaterial() {
 
 }
 
@@ -21,6 +21,14 @@ Admin::Admin(string l, string h) : Konto(l, h) {
 }
 
 Admin::~Admin() {
+
+}
+
+bool Admin::getAktywneDodanie() {
+
+}
+
+void Admin::setAktywneDodanie(bool b) {
 
 }
 

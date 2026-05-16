@@ -14,6 +14,7 @@
 #define _SESJA_H
 
 #include <string>
+#include <iostream>
 #include "Konto.h"
 
 using namespace std;
@@ -36,8 +37,8 @@ public:
 private:
 	string ipAdres;
 	int proby;
-	bool czyJestZablokowana();
-	time_t zablokowanaDo();
+	bool czyJestZablokowana;
+	time_t zablokowanaDo;
 	Konto* konto;
 };
 

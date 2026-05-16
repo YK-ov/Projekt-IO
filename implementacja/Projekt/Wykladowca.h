@@ -5,7 +5,7 @@
 //  @ Project : Untitled
 //  @ File Name : Wykladowca.h
 //  @ Date : 16.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
@@ -22,6 +22,10 @@ public:
 	void dodajPrzedmiot(string nazwa, string opis, string kontakt);
 	Wykladowca(string l, string h);
 	~Wykladowca();
+	bool getAktywnaWeryfikacja();
+	void setAktywnaWeryfikacja(bool b);
+private:
+    bool aktywnaWeryfikacja;
 };
 
 #endif  //_WYKLADOWCA_H

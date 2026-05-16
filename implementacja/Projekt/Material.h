@@ -14,21 +14,25 @@
 #define _MATERIAL_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 
 class Material {
 public:
-	Material(string t, string z);
+	Material(string t, string z, bool matOd);
 	~Material();
 	string getTytul();
 	string getZalacznik();
 	void setTytul(string s);
 	void setZalacznik(string s);
+	bool getMaterialOdWykladowcy();
+	void setMaterialOdWykladowcy(bool b);
 private:
 	string tytul;
 	string zalacznik;
+	bool materialOdWykladowcy;
 };
 
 #endif  //_MATERIAL_H

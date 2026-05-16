@@ -20,11 +20,20 @@ bool Student::zaproponujMaterial(string dane) {
 
 }
 
-Student::Student(string l, string h) : Konto(l, h) {
-
+Student::Student(string l, string h, string g) : Konto(l, h) {
+    grupa = g;
 }
 
 Student::~Student() {
 
 }
+
+string Student::getGrupa() {
+
+}
+
+void Student::setGrupa(string g) {
+
+}
+
 

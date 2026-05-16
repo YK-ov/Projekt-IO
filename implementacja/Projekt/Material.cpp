@@ -5,14 +5,14 @@
 //  @ Project : Untitled
 //  @ File Name : Material.cpp
 //  @ Date : 16.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
 
 #include "Material.h"
 
-Material::Material(string t, string z) {
+Material::Material(string t, string z, bool matOd) {
 
 }
 
@@ -35,4 +35,14 @@ void Material::setTytul(string s) {
 void Material::setZalacznik(string s) {
 
 }
+
+bool Material::getMaterialOdWykladowcy() {
+
+}
+
+void Material::setMaterialOdWykladowcy(bool b) {
+
+}
+
+
 

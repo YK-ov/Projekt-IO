@@ -5,7 +5,7 @@
 //  @ Project : Untitled
 //  @ File Name : Student.h
 //  @ Date : 16.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
@@ -19,8 +19,10 @@ class Student : public Konto {
 public:
 	void pozyskajMaterial(string n, string tytul, string g);
 	bool zaproponujMaterial(string dane);
-	Student(string l, string h);
+	Student(string l, string h, string g);
 	~Student();
+	string getGrupa();
+	void setGrupa(string g);
 private:
 	string grupa;
 };

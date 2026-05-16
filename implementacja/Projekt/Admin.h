@@ -5,7 +5,7 @@
 //  @ Project : Untitled
 //  @ File Name : Admin.h
 //  @ Date : 16.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
@@ -17,9 +17,13 @@
 
 class Admin : public Konto {
 public:
-	void dodajZweryfkikowanyMaterial(string tytul);
+	void dodajZweryfkikowanyMaterial();
 	Admin(string l, string h);
 	~Admin();
+	bool getAktywneDodanie();
+	void setAktywneDodanie(bool b);
+private:
+    bool aktywneDodanie;
 };
 
 #endif  //_ADMIN_H
