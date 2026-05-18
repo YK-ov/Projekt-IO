@@ -13,35 +13,38 @@
 #include "Material.h"
 
 Material::Material(string t, string z, bool matOd) {
-
+    tytul = t;
+    zalacznik = z;
+    materialOdWykladowcy = matOd;
+    cout << "Utworzono material o tytule " << getTytul() << "\n";
 }
 
 Material::~Material() {
-
+    cout << "Zniszczono material o tytule " << getTytul() << "\n";
 }
 
 string Material::getTytul() {
-
+    return tytul;
 }
 
 string Material::getZalacznik() {
-
+    return zalacznik;
 }
 
 void Material::setTytul(string s) {
-
+    tytul = s;
 }
 
 void Material::setZalacznik(string s) {
-
+    zalacznik = s;
 }
 
 bool Material::getMaterialOdWykladowcy() {
-
+    return materialOdWykladowcy;
 }
 
 void Material::setMaterialOdWykladowcy(bool b) {
-
+    materialOdWykladowcy = b;
 }
 
 

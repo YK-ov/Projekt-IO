@@ -13,27 +13,28 @@
 #include "Konto.h"
 
 bool Konto::autentykacja(string haslo) {
-
+    return this->haslo == haslo;
 }
 
 string Konto::getLogin() {
-
+    return login;
 }
 
 string Konto::getHaslo() {
-
+    return haslo;
 }
 
 void Konto::setLogin(string l) {
-
+    login = l;
 }
 
 void Konto::setHaslo(string h) {
-
+    haslo = h;
 }
 
 Konto::Konto(string l, string h) {
-
+    login = l;
+    haslo = h;
 }
 
 Konto::~Konto() {
