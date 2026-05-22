@@ -9,7 +9,7 @@ int main()
     Sesja* sesja = new Sesja("192.0.2.1");
     strona->attachSesja(sesja);
 
-    strona->wczytajDaneZPliku("konta.csv");
+    strona->wczytajDaneZPliku("konta.csv", "przedmioty.csv");
 
     string login = "";
     string password = "";

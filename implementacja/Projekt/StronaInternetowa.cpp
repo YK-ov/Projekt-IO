@@ -13,6 +13,8 @@
 #include "StronaInternetowa.h"
 #include <fstream>
 #include <sstream>
+#include <ctime>
+#include <typeinfo>
 
 void StronaInternetowa::attachKonto(Konto* k) {
     konta.push_back(k);
@@ -580,7 +582,7 @@ Admin* StronaInternetowa::getAdmin() {
 
 }
 
-void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku) {
+void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPrzemiotow) {
     ifstream file;
 
     file.open(nazwaPliku, ios::in);
@@ -638,13 +640,152 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku) {
                 attachKonto(studentToAdd);
             }
         }
+    }
+        ifstream subjectFile;
 
+        subjectFile.open(nazwaPlikuPrzemiotow, ios::in);
+
+        vector<string> subjectRow;
+        string subjectLine = "";
+        string subjectWord = "";
+
+        string subjectName = "";
+        string subjectDescription = "";
+        string subjectContact = "";
+        string subjectGroup = "";
+
+        vector<Wykladowca*> teachersToAdd;
+        string currentName = "";
+
+        vector<Student*> studentsToAdd;
+        string currentStuddentName = "";
+
+        vector<Material*> materialsToAdd;
+
+
+    while (getline(subjectFile, subjectLine)){
+        stringstream sSubjet(subjectLine);
+
+        int subjectCounter = 0;
+
+        while(getline(sSubjet, subjectWord, ',')){
+            subjectCounter++;
+
+
+            //cout << subjectCounter << "=current counter\n";
+            //cout << subjectWord << "\n";
+
+            if (subjectCounter == 1){
+                subjectName = subjectWord;
+            }
+            else if (subjectCounter == 2){
+                subjectDescription = subjectWord;
+            }
+            else if (subjectCounter == 3){
+                subjectContact = subjectWord;
+            }
+            else if (subjectCounter == 4){
+                subjectGroup = subjectWord;
+            }
+            if (subjectWord == "WYKLADOWCY"){
+                while (subjectWord != "STUDENCI"){
+                    Wykladowca* teacherFound = dynamic_cast<Wykladowca*> (getKonto(subjectWord));
+
+                    teachersToAdd.push_back(teacherFound);
+                }
+            }
+
+            if (subjectWord == "STUDENCI"){
+                while (subjectWord != "MATERIALY"){
+                    Student* studentToAdd = dynamic_cast<Student*> (getKonto(subjectWord));
+
+                    studentsToAdd.push_back(studentToAdd);
+                }
+            }
+
+            int materialCounter = 0;
+            string materialTitle = "";
+            string materialAttachment = "";
+            bool fromTeacher = false;
+            bool verifiedByTeacher = false;
+            bool addedByAdmin = false;
+
+
+            if (subjectWord == "MATERIALY"){
+                materialCounter++;
+
+                if (materialCounter == 2){
+                    materialTitle = subjectWord;
+                }
+                else if (materialCounter == 3){
+                    materialAttachment = subjectWord;
+                }
+                else if (materialCounter == 4){
+                    if (subjectContact == "true"){
+                        fromTeacher = true;
+                    }
+                }
+                else if (materialCounter == 5){
+                    if (subjectWord == "true"){
+                        verifiedByTeacher = true;
+                    }
+                }
+                else if (materialCounter == 6){
+                    if (subjectWord == "true"){
+                        addedByAdmin = true;
+                    }
+                }
+
+                Material* materialToAdd = new Material(materialTitle, materialAttachment,fromTeacher);
+
+                cout << materialToAdd->getTytul();
+
+                materialToAdd->setCzyJestZweryfikowany(verifiedByTeacher);
+                materialToAdd->setCzyJestDodanyPrzezAdmina(addedByAdmin);
+
+                Przedmiot* currentSubject = new Przedmiot(subjectName, subjectDescription, subjectContact, subjectGroup);
+
+                vector<Wykladowca*>::iterator itT;
+
+                for (itT = teachersToAdd.begin(); itT != teachersToAdd.end(); itT++){
+                    currentSubject->attachWykladowca((*itT));
+                }
+
+                vector<Student*>::iterator itS;
+
+                for (itS = studentsToAdd.begin(); itS != studentsToAdd.end(); itS++){
+                    currentSubject->attachStudent((*itS));
+                }
+
+                vector<Material*>::iterator itM;
+
+                for (itM = materialsToAdd.begin(); itM != materialsToAdd.end(); itM++){
+                    currentSubject->attachMaterial((*itM));
+                }
+
+                attachPrzedmiot(currentSubject);
+
+            }
+
+
+        }
 
 
     }
 
-    file.close();
+    vector<Przedmiot*>::iterator it;
+
+    cout << przedmioty.size() << " size\n";
+
+    for (it = przedmioty.begin(); it != przedmioty.end(); it++){
+        cout << (*it)->getNazwa();
+    }
+
+
+       file.close();
+    subjectFile.close();
 }
+
 
 void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku) {
 

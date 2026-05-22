@@ -50,7 +50,7 @@ public:
 	void wyswietlPrzypisanePrzedmioty(string loginl);
 	void wyswietlProwadzonePrzedmioty(string login);
 	Admin* getAdmin();
-	void wczytajDaneZPliku(string nazwaPliku);
+	void wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
 	void zapiszDaneDoPliku(string nazwaPliku);
 private:
 	string adres;

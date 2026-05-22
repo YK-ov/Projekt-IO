@@ -13,7 +13,9 @@
 #include "Material.h"
 
 Material::Material(string t, string z, bool matOd) {
-
+    tytul = t;
+    zalacznik = z;
+    materialOdWykladowcy = matOd;
 }
 
 Material::~Material() {
@@ -21,42 +23,42 @@ Material::~Material() {
 }
 
 string Material::getTytul() {
-
+    return tytul;
 }
 
 string Material::getZalacznik() {
-
+    return zalacznik;
 }
 
 void Material::setTytul(string s) {
-
+    tytul = s;
 }
 
 void Material::setZalacznik(string s) {
-
+    zalacznik = s;
 }
 
 bool Material::getMaterialOdWykladowcy() {
-
+    return materialOdWykladowcy;
 }
 
 void Material::setMaterialOdWykladowcy(bool b) {
-
+    materialOdWykladowcy = b;
 }
 
 bool Material::getCzyJestZweryfikowany() {
-
+    return czyJestZweryfikowany;
 }
 
 bool Material::getCzyJestDodanyPrzezAdmina() {
-
+    return czyJestDodanyPrzezAdmina;
 }
 
 void Material::setCzyJestZweryfikowany(bool b) {
-
+    czyJestZweryfikowany = b;
 }
 
 void Material::setCzyJestDodanyPrzezAdmina(bool b) {
-
+    czyJestDodanyPrzezAdmina = b;
 }
 
