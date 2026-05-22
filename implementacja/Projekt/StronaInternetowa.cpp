@@ -4,13 +4,15 @@
 //
 //  @ Project : Untitled
 //  @ File Name : StronaInternetowa.cpp
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
 
 
 #include "StronaInternetowa.h"
+#include <fstream>
+#include <sstream>
 
 void StronaInternetowa::attachKonto(Konto* k) {
     konta.push_back(k);
@@ -124,14 +126,16 @@ bool StronaInternetowa::logowanie(string l, string h, string ip) {
 
         currentSession->setProby(currentSession->getProby() + 1);
 
-        cout << "Niepoprawne haslo dla uzytkownika o loginie " << l << ", sprobuj ponownie, zostalo " << 5 - currentSession->getProby() << " prob\n";
+        if (5 + 1 - currentSession->getProby() != 0){
+            cout << "Niepoprawne haslo dla uzytkownika o loginie " << l << ", sprobuj ponownie, zostalo " << 5 + 1 - currentSession->getProby() << " prob\n";
+        }
 
         return false;
     }
 }
 
 bool StronaInternetowa::rejestracja(string l, string h, string ip) {
-    Sesja* currentSession = getSesja(ip);
+     Sesja* currentSession = getSesja(ip);
 
     if (currentSession == nullptr){
         cout << "Nie znalieziono sesji o ip " << ip << ", proces logowania przerwano\n";
@@ -141,16 +145,11 @@ bool StronaInternetowa::rejestracja(string l, string h, string ip) {
     Konto* foundKonto = nullptr;
     vector<Konto*>::iterator it;
 
-    Konto* userToCheck = new Konto(l, h);
-
-    if (sprawdzCzyUzytkownikIstnieje(userToCheck)){
+    if (sprawdzCzyUzytkownikIstnieje(l)){
         cout << "Niestety uzytkownik o loginie " << l << " juz istnieje w systemie, prosze wymyslec sobie inney login uzytkownika\n";
-        delete userToCheck;
 
         return false;
     }
-
-    delete userToCheck;
 
     string input = "";
     cout << "Konto jakiego typu chcesz stwrozyc: student, administrator, wykladowca?:\n";
@@ -250,7 +249,7 @@ void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
 
             string csvStudentInput = title + "," + attachment;
 
-            student->zaproponujMaterial(csvStudentInput);
+            foundPrzedmiot->zaproponujMaterial(csvStudentInput);
         }
         else {
             string studentInput = "";
@@ -324,13 +323,13 @@ void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
 
         string teacherInput = "";
 
-        if (teacher->getAktywnaWeryfikacja()){
+        if (teacher->getLicznikMaterialowDoWeryfikacji() != 0){
             cout << "Uwaga! W tej chwili masz aktywna sugestie studenta do sprawdzenia. Wprowadz \"sprawdz\", jesli chcesz sprawdzic natychmiastowo, lub nacsinij enter (lub wpisz cokolwiek) jesli chcesz to zrobic pozniej\n";
 
             cin >> teacherInput;
 
             if (teacherInput == "sprawdz"){
-                teacher->zweryfikujSugestieStudenta();
+                zweryfikujSugestieStudenta(foundKonto->getLogin());
             }
         }
 
@@ -345,7 +344,7 @@ void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
             }
 
             if (teacherInput == "sprawdzic"){
-                teacher->zweryfikujSugestieStudenta();
+                zweryfikujSugestieStudenta(foundKonto->getLogin());
             }
             else if (teacherInput == "material"){
                 string name = "";
@@ -456,10 +455,10 @@ void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
     else if (typeid(*foundKonto) == typeid(Admin)){
         Admin* admin = dynamic_cast<Admin*> (foundKonto);
 
-        if (admin->getAktywneDodanie()){
+        if (admin->getLicznikMaterialowDoDodania() != 0){
             cout << "Masz teraz material do dodania, przystap do pracy w wolnej chwili\n";
 
-            admin->dodajZweryfkikowanyMaterial();
+            dodajZweryfkikowanyMaterial(foundKonto->getLogin());
         }
     }
 }
@@ -488,7 +487,7 @@ void StronaInternetowa::detachPrzedmiot(string n) {
 }
 
 Przedmiot* StronaInternetowa::getPrzedmiot(string n) {
-    vector<Przedmiot*>::iterator it;
+     vector<Przedmiot*>::iterator it;
 
     Przedmiot* foundPrzedmiot = nullptr;
 
@@ -502,11 +501,11 @@ Przedmiot* StronaInternetowa::getPrzedmiot(string n) {
     return foundPrzedmiot;
 }
 
-bool StronaInternetowa::sprawdzCzyUzytkownikIstnieje(Konto* k) {
+bool StronaInternetowa::sprawdzCzyUzytkownikIstnieje(string l) {
     vector<Konto*>::iterator it;
 
     for (it = konta.begin(); it != konta.end(); it++){
-        if ((*it)->getLogin() == k->getLogin()){
+        if ((*it)->getLogin() == l){
             return true;
         }
     }
@@ -555,5 +554,99 @@ StronaInternetowa::StronaInternetowa(string a, string n) {
 
 StronaInternetowa::~StronaInternetowa() {
     cout << "Strona internetowa " << nazwa << " o adresie " << adres << " zostala zniszczona\n";
+}
+
+void StronaInternetowa::dodajZweryfkikowanyMaterial(string login) {
+
+}
+
+bool StronaInternetowa::zweryfikujSugestieStudenta(string login) {
+
+}
+
+void StronaInternetowa::dodajPrzedmiot(string nazwa, string opis, string kontakt, string login) {
+
+}
+
+void StronaInternetowa::wyswietlPrzypisanePrzedmioty(string loginl) {
+
+}
+
+void StronaInternetowa::wyswietlProwadzonePrzedmioty(string login) {
+
+}
+
+Admin* StronaInternetowa::getAdmin() {
+
+}
+
+void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku) {
+    ifstream file;
+
+    file.open(nazwaPliku, ios::in);
+
+    vector<string> row;
+    string line = "";
+    string word = "";
+
+    while (getline(file, line)){
+        stringstream s(line);
+        int counter = 0;
+
+        string accountType = "";
+        string loginFromCsv = "";
+        string passwordFromCsv = "";
+        string studentGroupFromCsv = "";
+
+        while (getline(s, word, ',')){
+            counter++;
+            if (counter == 1){
+                accountType = word;
+                //cout << accountType << "\n";
+            }
+            else if (counter == 2){
+                loginFromCsv = word;
+                //cout << loginFromCsv << "\n";
+            }
+            else if (counter == 3){
+                passwordFromCsv = word;
+                //cout << passwordFromCsv << "\n";
+
+                if (accountType == "Admin"){
+                    //cout << "creating\n";
+                    Admin* adminToAdd = new Admin(loginFromCsv, passwordFromCsv);
+
+                    //cout << adminToAdd->getLogin() << " login \n";
+
+                    attachKonto(adminToAdd);
+                }
+                else if (accountType == "Wykladowca"){
+                    Wykladowca* teacherToAdd = new Wykladowca(loginFromCsv, passwordFromCsv);
+
+                    //cout << teacherToAdd->getLogin() << "\n";
+
+                    attachKonto(teacherToAdd);
+                }
+            }
+            else if (counter == 4){
+                studentGroupFromCsv = word;
+
+                Student* studentToAdd = new Student(loginFromCsv, passwordFromCsv, studentGroupFromCsv);
+
+                //cout << studentToAdd->getLogin() << "\n";
+
+                attachKonto(studentToAdd);
+            }
+        }
+
+
+
+    }
+
+    file.close();
+}
+
+void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku) {
+
 }
 

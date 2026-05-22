@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Material.h
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -29,10 +29,16 @@ public:
 	void setZalacznik(string s);
 	bool getMaterialOdWykladowcy();
 	void setMaterialOdWykladowcy(bool b);
+	bool getCzyJestZweryfikowany();
+	bool getCzyJestDodanyPrzezAdmina();
+	void setCzyJestZweryfikowany(bool b);
+	void setCzyJestDodanyPrzezAdmina(bool b);
 private:
 	string tytul;
 	string zalacznik;
 	bool materialOdWykladowcy;
+	bool czyJestZweryfikowany;
+	bool czyJestDodanyPrzezAdmina;
 };
 
 #endif  //_MATERIAL_H

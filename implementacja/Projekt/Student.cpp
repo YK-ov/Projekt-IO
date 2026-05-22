@@ -4,21 +4,13 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Student.cpp
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
 
 
 #include "Student.h"
-
-void Student::pozyskajMaterial(string n, string tytul, string g) {
-
-}
-
-bool Student::zaproponujMaterial(string dane) {
-
-}
 
 Student::Student(string l, string h, string g) : Konto(l, h) {
     grupa = g;
@@ -36,4 +28,7 @@ void Student::setGrupa(string g) {
 
 }
 
+void Student::witaj() {
+
+}
 

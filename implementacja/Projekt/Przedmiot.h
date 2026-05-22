@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Przedmiot.h
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -13,12 +13,12 @@
 #if !defined(_PRZEDMIOT_H)
 #define _PRZEDMIOT_H
 
-#include <string>
-#include <vector>
-#include <iostream>
 #include "Material.h"
 #include "Wykladowca.h"
 #include "Student.h"
+#include <string>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -42,22 +42,19 @@ public:
 	Material* znajdzMaterial(string tytul);
 	string getGrupa();
 	void setGrupa(string g);
-    Material* getMaterialDoWeryfikacji(string t);
-	Material* getMaterialDoDodania(string t);
-	void attachMaterialDoWeryfikacji(Material* m);
-	void detachMaterialDoWeryfikacji(string t);
-	void attachMaterialDoDodania(Material* m);
-	void detachMaterialDoDodania(string t);
+	void pozyskajMaterial(string n, string tytul, string materialOd, string gr);
+	bool zaproponujMaterial(string dane);
+	void dodajMaterial(string n, string t, string z);
+	Student* getStudent(string login);
+	Wykladowca* getWykladowca(string login);
 private:
 	string nazwa;
 	vector<Material*> materialy;
 	vector<Wykladowca*> wykladowcy;
 	string opis;
 	string kontakt;
-	vector<Student*> studenty;
+	vector<Student*> studenci;
 	string grupa;
-	vector<Material*> materialyDoWeryfikacji;
-	vector<Material*> materialyDoDodania;
 };
 
 #endif  //_PRZEDMIOT_H

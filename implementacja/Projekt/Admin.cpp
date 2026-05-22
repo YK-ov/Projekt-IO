@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Admin.cpp
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -12,23 +12,23 @@
 
 #include "Admin.h"
 
-void Admin::dodajZweryfkikowanyMaterial() {
-
-}
-
 Admin::Admin(string l, string h) : Konto(l, h) {
-
+    licznikMaterialowDoDodania = 0;
 }
 
 Admin::~Admin() {
 
 }
 
-bool Admin::getAktywneDodanie() {
+int Admin::getLicznikMaterialowDoDodania() {
 
 }
 
-void Admin::setAktywneDodanie(bool b) {
+void Admin::setLicznikMaterialowDoDodania(int i) {
+
+}
+
+void Admin::witaj() {
 
 }
 

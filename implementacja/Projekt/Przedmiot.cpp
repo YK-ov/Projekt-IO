@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Przedmiot.cpp
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -59,7 +59,7 @@ void Przedmiot::attachWykladowca(Wykladowca* w) {
 }
 
 void Przedmiot::detachWykladowca(string l) {
-    vector<Wykladowca*>::iterator it;
+     vector<Wykladowca*>::iterator it;
 
     Wykladowca* foundWykladowca = nullptr;
 
@@ -93,7 +93,7 @@ void Przedmiot::setKontakt(string l) {
 }
 
 void Przedmiot::attachStudent(Student* s) {
-    studenty.push_back(s);
+    studenci.push_back(s);
 }
 
 void Przedmiot::detachStudent(string l) {
@@ -101,10 +101,10 @@ void Przedmiot::detachStudent(string l) {
 
     Student* foundStudent = nullptr;
 
-    for (it = studenty.begin(); it != studenty.end(); it++) {
+    for (it = studenci.begin(); it != studenci.end(); it++) {
         if ((*it)->getLogin() == l) {
             foundStudent = (*it);
-            studenty.erase(it);
+            studenci.erase(it);
             break;
         }
     }
@@ -134,67 +134,23 @@ void Przedmiot::setGrupa(string g) {
     grupa = g;
 }
 
+void Przedmiot::pozyskajMaterial(string n, string tytul, string materialOd, string gr) {
 
-Material* Przedmiot::getMaterialDoWeryfikacji(string t){
-    for(auto it = materialyDoWeryfikacji.begin(); it != materialyDoWeryfikacji.end(); ++it) {
-        if ((*it)->getTytul() == t) {
-            return *it;
-        }
-    }
-    return nullptr;
 }
 
-Material* Przedmiot::getMaterialDoDodania(string t){
-    for(auto it = materialyDoDodania.begin(); it != materialyDoDodania.end(); ++it) {
-        if((*it)->getTytul() == t) {
-            return *it;
-        }
-    }
-    return nullptr;
+bool Przedmiot::zaproponujMaterial(string dane) {
+    cout << dane << "\n";
 }
 
-void Przedmiot::attachMaterialDoWeryfikacji(Material* m) {
-    materialyDoWeryfikacji.push_back(m);
+void Przedmiot::dodajMaterial(string n, string t, string z) {
+
 }
 
-void Przedmiot::detachMaterialDoWeryfikacji(string t) {
-    vector<Material*>::iterator it;
+Student* Przedmiot::getStudent(string login) {
 
-    Material* foundMaterial= nullptr;
-
-    for (it = materialyDoWeryfikacji.begin(); it != materialyDoWeryfikacji.end(); it++) {
-        if ((*it)->getTytul() == t) {
-            foundMaterial = (*it);
-            materialyDoWeryfikacji.erase(it);
-            break;
-        }
-    }
-
-    if (foundMaterial == nullptr) {
-        cout << "Materialu do weryfikacji o tytule " << t << " nie znaleziono w systemie\n";
-    }
 }
 
-void Przedmiot::attachMaterialDoDodania(Material* m) {
-    materialyDoDodania.push_back(m);
+Wykladowca* Przedmiot::getWykladowca(string login) {
+
 }
-
-void Przedmiot::detachMaterialDoDodania(string t) {
-    vector<Material*>::iterator it;
-
-    Material* foundMaterial = nullptr;
-
-    for (it = materialyDoDodania.begin(); it != materialyDoDodania.end(); it++) {
-        if ((*it)->getTytul() == t) {
-            foundMaterial = (*it);
-            materialyDoDodania.erase(it);
-            break;
-        }
-    }
-
-    if (foundMaterial == nullptr) {
-        cout << "Materialu do dodania o tytule " << t << " nie znaleziono w systemie\n";
-    }
-}
-
 

@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Konto.cpp
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -13,7 +13,12 @@
 #include "Konto.h"
 
 bool Konto::autentykacja(string haslo) {
-    return this->haslo == haslo;
+    if (this->haslo == haslo){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 string Konto::getLogin() {
@@ -21,15 +26,15 @@ string Konto::getLogin() {
 }
 
 string Konto::getHaslo() {
-    return haslo;
+
 }
 
 void Konto::setLogin(string l) {
-    login = l;
+
 }
 
 void Konto::setHaslo(string h) {
-    haslo = h;
+
 }
 
 Konto::Konto(string l, string h) {

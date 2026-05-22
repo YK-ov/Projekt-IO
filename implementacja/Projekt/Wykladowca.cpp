@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Wykladowca.cpp
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -12,31 +12,23 @@
 
 #include "Wykladowca.h"
 
-bool Wykladowca::zweryfikujSugestieStudenta() {
-
-}
-
-void Wykladowca::dodajMaterial(string n, string t, string z) {
-
-}
-
-void Wykladowca::dodajPrzedmiot(string nazwa, string opis, string kontakt) {
-
-}
-
 Wykladowca::Wykladowca(string l, string h) : Konto(l, h) {
-
+    licznikMaterialowDoWeryfikacji = 0;
 }
 
 Wykladowca::~Wykladowca() {
 
 }
 
-bool Wykladowca::getAktywnaWeryfikacja() {
+int Wykladowca::getLicznikMaterialowDoWeryfikacji() {
 
 }
 
-void Wykladowca::setAktywnaWeryfikacja(bool b) {
+void Wykladowca::setLicznikMaterialowDoWeryfikacji(int i) {
+
+}
+
+void Wykladowca::witaj() {
 
 }
 

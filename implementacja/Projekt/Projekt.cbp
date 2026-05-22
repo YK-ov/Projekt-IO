@@ -48,7 +48,9 @@
 		<Unit filename="Student.h" />
 		<Unit filename="Wykladowca.cpp" />
 		<Unit filename="Wykladowca.h" />
+		<Unit filename="konta.csv" />
 		<Unit filename="main.cpp" />
+		<Unit filename="przedmioty.csv" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : StronaInternetowa.h
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -14,13 +14,13 @@
 #define _STRONAINTERNETOWA_H
 
 #include "Konto.h"
+#include "Admin.h"
 #include "Sesja.h"
 #include "Przedmiot.h"
-#include "Admin.h"
-#include "Student.h"
-#include "Wykladowca.h"
-
 #include <iostream>
+
+using namespace std;
+
 
 
 class StronaInternetowa {
@@ -39,11 +39,19 @@ public:
 	void attachPrzedmiot(Przedmiot* p);
 	void detachPrzedmiot(string n);
 	Przedmiot* getPrzedmiot(string n);
-	bool sprawdzCzyUzytkownikIstnieje(Konto* k);
+	bool sprawdzCzyUzytkownikIstnieje(string l);
 	Konto* getKonto(string l);
 	Sesja* getSesja(string i);
 	StronaInternetowa(string a, string n);
 	~StronaInternetowa();
+	void dodajZweryfkikowanyMaterial(string login);
+	bool zweryfikujSugestieStudenta(string login);
+	void dodajPrzedmiot(string nazwa, string opis, string kontakt, string login);
+	void wyswietlPrzypisanePrzedmioty(string loginl);
+	void wyswietlProwadzonePrzedmioty(string login);
+	Admin* getAdmin();
+	void wczytajDaneZPliku(string nazwaPliku);
+	void zapiszDaneDoPliku(string nazwaPliku);
 private:
 	string adres;
 	string nazwa;

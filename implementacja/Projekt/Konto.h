@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Konto.h
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -12,7 +12,6 @@
 
 #if !defined(_KONTO_H)
 #define _KONTO_H
-
 #include <string>
 #include <iostream>
 
@@ -27,7 +26,8 @@ public:
 	void setLogin(string l);
 	void setHaslo(string h);
 	Konto(string l, string h);
-	virtual ~Konto();
+	~Konto();
+	virtual void witaj() = 0;
 private:
 	string login;
 	string haslo;

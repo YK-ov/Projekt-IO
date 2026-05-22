@@ -1,63 +1,68 @@
 # depslib dependency file v1.0
-1743445502 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
+1779386975 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
+	"StronaInternetowa.h"
 	<iostream>
 
-1778947126 source:c:\users\user\projekt-io\implementacja\projekt\konto.cpp
+1779386880 source:c:\users\user\projekt-io\implementacja\projekt\konto.cpp
 	"Konto.h"
 
-1778962312 c:\users\user\projekt-io\implementacja\projekt\konto.h
+1779361724 c:\users\user\projekt-io\implementacja\projekt\konto.h
 	<string>
 	<iostream>
 
-1778955035 source:c:\users\user\projekt-io\implementacja\projekt\material.cpp
+1779361935 source:c:\users\user\projekt-io\implementacja\projekt\material.cpp
 	"Material.h"
 
-1778954003 c:\users\user\projekt-io\implementacja\projekt\material.h
+1779361928 c:\users\user\projekt-io\implementacja\projekt\material.h
 	<string>
 	<iostream>
 
-1778959158 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
+1779381675 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
 	"Przedmiot.h"
 
-1778959152 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
-	<string>
-	<vector>
-	<iostream>
+1779362039 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
 	"Material.h"
 	"Wykladowca.h"
 	"Student.h"
+	<string>
+	<vector>
+	<iostream>
 
-1778952338 c:\users\user\projekt-io\implementacja\projekt\wykladowca.h
+1779364394 c:\users\user\projekt-io\implementacja\projekt\wykladowca.h
 	"Konto.h"
 
-1778950739 c:\users\user\projekt-io\implementacja\projekt\student.h
+1779361678 c:\users\user\projekt-io\implementacja\projekt\student.h
 	"Konto.h"
 
-1778943191 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
+1779386549 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
 	"StronaInternetowa.h"
+	<fstream>
+	<sstream>
 
-1778943728 c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.h
+1779381559 c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.h
 	"Konto.h"
+	"Admin.h"
 	"Sesja.h"
 	"Przedmiot.h"
+	<iostream>
 
-1778946408 c:\users\user\projekt-io\implementacja\projekt\sesja.h
+1779361947 c:\users\user\projekt-io\implementacja\projekt\sesja.h
+	"Konto.h"
 	<string>
 	<iostream>
-	"Konto.h"
 
-1778945709 source:c:\users\user\projekt-io\implementacja\projekt\sesja.cpp
+1779386808 source:c:\users\user\projekt-io\implementacja\projekt\sesja.cpp
 	"Sesja.h"
 
-1778952418 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
+1779364335 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
 	"Wykladowca.h"
 
-1778956966 source:c:\users\user\projekt-io\implementacja\projekt\admin.cpp
+1779364273 source:c:\users\user\projekt-io\implementacja\projekt\admin.cpp
 	"Admin.h"
 
-1778956959 c:\users\user\projekt-io\implementacja\projekt\admin.h
+1779364192 c:\users\user\projekt-io\implementacja\projekt\admin.h
 	"Konto.h"
 
-1778952354 source:c:\users\user\projekt-io\implementacja\projekt\student.cpp
+1779362013 source:c:\users\user\projekt-io\implementacja\projekt\student.cpp
 	"Student.h"
 

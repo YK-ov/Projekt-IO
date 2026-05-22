@@ -4,7 +4,7 @@
 //
 //  @ Project : Untitled
 //  @ File Name : Wykladowca.h
-//  @ Date : 16.05.2026
+//  @ Date : 21.05.2026
 //  @ Author :
 //
 //
@@ -17,15 +17,13 @@
 
 class Wykladowca : public Konto {
 public:
-	bool zweryfikujSugestieStudenta();
-	void dodajMaterial(string n, string t, string z);
-	void dodajPrzedmiot(string nazwa, string opis, string kontakt);
 	Wykladowca(string l, string h);
 	~Wykladowca();
-	bool getAktywnaWeryfikacja();
-	void setAktywnaWeryfikacja(bool b);
+	int getLicznikMaterialowDoWeryfikacji();
+	void setLicznikMaterialowDoWeryfikacji(int i);
+	void witaj();
 private:
-    bool aktywnaWeryfikacja;
+	int licznikMaterialowDoWeryfikacji;
 };
 
 #endif  //_WYKLADOWCA_H
