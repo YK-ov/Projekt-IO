@@ -99,18 +99,34 @@ bool StronaInternetowa::logowanie(string l, string h, string ip) {
         }
     }
 
-    Konto* foundKonto = nullptr;
-    vector<Konto*>::iterator it;
-
-    for (it = konta.begin(); it != konta.end(); it++){
-        if ((*it)->getLogin() == l){
-            foundKonto = (*it);
-            break;
-        }
-    }
+    Konto* foundKonto = getKonto(l); // changed here
 
     if (foundKonto == nullptr){
-        cout << "Nie znaleziono uzytkownika o loginie " << l << " , czy chcesz zarejestrowac uzytkownika o takim loginie?\n";
+        string userRegisterInput = "";
+
+        cout << "Nie znaleziono uzytkownika o loginie " << l << " , czy chcesz zarejestrowac uzytkownika o takim loginie? (tak / nie)\n";
+        cin >> userRegisterInput;
+
+        if (userRegisterInput == "tak"){
+            string registerLogin = "";
+            string registerPassword = "";
+
+            cout << "Wprowadz login do rejestracji:\n";
+            cin >> registerLogin;
+            cout << "Wprowadz haslo do rejestracji:\n";
+            cin >> registerPassword;
+
+            rejestracja(registerLogin, registerPassword, ip);
+        }
+        else if (userRegisterInput == "nie"){
+            cout << "Anulowanie rejestracji... powrot do logowania ";
+            return false;
+        }
+        else {
+            cout << "Nieprawdilowy input, sprobuj ponownie\n";
+            return false;
+        }
+
         return false;
     }
 
@@ -183,9 +199,11 @@ bool StronaInternetowa::rejestracja(string l, string h, string ip) {
         }
         else if (input == "administrator"){
             toAdd = new Admin(l, h);
+            dynamic_cast<Admin*> (toAdd)->setLicznikMaterialowDoDodania(0);
         }
         else if (input == "wykladowca"){
             toAdd = new Wykladowca(l, h);
+            dynamic_cast<Wykladowca*> (toAdd)->setLicznikMaterialowDoWeryfikacji(0);
         }
 
         attachKonto(toAdd);
@@ -378,80 +396,7 @@ void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
                 cout << "Dodano material o tytulu " << title << " do przedmiotu " << przedmiotFound->getNazwa() << "\n";
             }
             else if (teacherInput == "przedmiot"){
-                string name = "";
-                cout << "Wprowadz nazwe przedmiotu:\n";
-
-                cin >> name;
-
-                Przedmiot* przedmiotFound = getPrzedmiot(name);
-
-                while (przedmiotFound != nullptr){
-                    cout << "Przedmiot o nazwie " << name << " juz istnieje w systemie, prosze sprobowac ponownie\n";
-
-                    cin >> name;
-                    przedmiotFound = getPrzedmiot(name);
-                }
-
-                string description = "";
-                cout << "Wprowadz opis przedmiotu:\n";
-
-                cin >> description;
-
-                string contact = "";
-                cout << "Wprowadz kontakt do koordynatora przedmiotu:\n";
-                cin >> contact;
-
-                string group = "";
-                cout << "Wprowadz grupe studentow, ktora bedzie miala dostep do przedmiotu:\n";
-                cin >> group;
-
-                przedmiotFound = new Przedmiot(name, description, contact, group);
-                attachPrzedmiot(przedmiotFound);
-
-                cout << "Przedmiot " << przedmiotFound->getNazwa() << " dodano do systemu\n";
-
-                cout << "Czy chcesz dodac innych prowadzacych do tego przedmiotu? (Wprowadz tak lub nie)\n";
-
-                cin >> teacherInput;
-                while (teacherInput != "tak" && teacherInput != "nie"){
-                    cout << "Nieprawidlowy input, sprobuj ponownie\n";
-
-                    cin >> teacherInput;
-                }
-
-                while (teacherInput == "tak"){
-                    string teacherLogin = "";
-                    cout << "Wprowadz login wykladowcy:\n";
-
-                    cin >> teacherLogin;
-
-                    Wykladowca* foundTeacher = dynamic_cast<Wykladowca*>(getKonto(teacherLogin));
-
-                    while (foundTeacher == nullptr){
-                        string newTeacherInput = "";
-                        cout << "Wykladowcy o loginie " << teacherLogin << " nie znaleziono w systemie, sprobuj ponownie\n";
-
-                        cin >> newTeacherInput;
-
-                        if (newTeacherInput == "nie"){
-                            break;
-                        }
-
-                        teacherLogin = newTeacherInput;
-                        foundTeacher = dynamic_cast<Wykladowca*>(getKonto(teacherLogin));
-                    }
-
-                    if(foundTeacher != nullptr){
-                        przedmiotFound->attachWykladowca(foundTeacher);
-
-                        cout << "Wykladowca o loginie " << foundTeacher->getLogin() << " zostal dodany\n";
-                    }
-
-                    cout << "Czy chcesz dodac innego prowadzacego? (Wprowadz tak lub nie)\n";
-
-                    cin >> teacherInput;
-                }
-
+                dodajPrzedmiot(login);
             }
     }
     else if (typeid(*foundKonto) == typeid(Admin)){
@@ -562,12 +507,224 @@ void StronaInternetowa::dodajZweryfkikowanyMaterial(string login) {
 
 }
 
-bool StronaInternetowa::zweryfikujSugestieStudenta(string login) {
+void StronaInternetowa::zweryfikujSugestieStudenta(string login) {
+    Wykladowca* teacherFound = dynamic_cast<Wykladowca*> (getKonto(login));
 
+    if (teacherFound->getLicznikMaterialowDoWeryfikacji() != 0){
+        vector<Przedmiot*>::iterator it;
+
+        for (it = przedmioty.begin(); it != przedmioty.end(); it++){
+            if ((*it)->getWykladowca(login) != nullptr){  // wykladowca nalezy do przedmiotu
+                int materialSize = (*it)->getIloscMaterialow();
+
+                for (int i = materialSize - 1; i >= 0; i--){
+                    Material* currentMaterial = (*it)->getMaterial(i);
+
+                    if (currentMaterial->getCzyJestZweryfikowany() == false && currentMaterial->getCzyJestDodanyPrzezAdmina() == false){
+                        string first = "";
+                        string second = "";
+                        string third = "";
+
+
+                        cout << "Material " << currentMaterial->getTytul() << " oczekuje na weryfikacje\n";
+                        cout << "Zalacznik do materialu : "<< currentMaterial->getZalacznik() << " , prosze pobrac material i ocenic go wedlug ponizszych kryteriow:\n";
+
+                        cout << "Kryterium 1: czy material jest zgodny z tematem? (tak / nie):\n";
+
+                        cin >> first;
+
+                        while (first != "tak" && first != "nie"){
+                            cout << "Nieprawidlowy input, sprobuj ponownie\n";
+                            cin >> first;
+                        }
+
+                        cout << "Kryterium 2: czy material ma charakter edukacyjny?: (tak / nie)\n";
+
+                        cin >> second;
+
+                        while (second != "tak" && second != "nie"){
+                            cout << "Nieprawidlowy input, sprobuj ponownie\n";
+                            cin >> second;
+                        }
+
+                        cout << "Kryterium 3: czy material spelnia standardy akademickie? (tak / nie)\n";
+
+                        cin >> third;
+
+                        while (third != "tak" && third != "nie"){
+                            cout << "Nieprawidlowy input, sprobuj ponownie\n";
+                            cin >> third;
+                        }
+
+                        if (first == "tak" && second == "tak" && third == "tak"){
+                            currentMaterial->setCzyJestZweryfikowany(true);
+
+                            Admin* admin = getAdmin();
+                            admin->setLicznikMaterialowDoDodania(admin->getLicznikMaterialowDoDodania() + 1);
+                        }
+                        else {
+                            cout << "Sugestia zostala odrzucona, nie wszystkie kryteria sa spelnione. Proces usuniecia z systemu...\n";
+
+                            (*it)->detachMaterial(currentMaterial->getTytul());
+
+                            delete currentMaterial;
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+
+    }
+    else {
+        cout << "Nie masz w tej chwili materialow do weryfikacji, sproboj pozniej\n";
+    }
 }
 
-void StronaInternetowa::dodajPrzedmiot(string nazwa, string opis, string kontakt, string login) {
+void StronaInternetowa::dodajPrzedmiot(string login) {
+    string subjectName = "";
+    string subjectDescription = "";
+    string subjectContact = "";
+    string subjectGroup = "";
 
+    bool nameExists = true;
+
+        while(nameExists){
+        bool found = false;
+        cout << "Prosze wpisac nazwe przedmiotu:\n";
+        cin >> ws;
+        getline(cin, subjectName);
+
+        vector<Przedmiot*>::iterator it;
+
+        for (it = przedmioty.begin(); it != przedmioty.end(); it++){
+            if ((*it)->getNazwa() == subjectName){
+                found = true;
+            }
+        }
+
+        if (!found){
+            nameExists = false;
+        }
+    }
+
+    cout << "Prosze wpisac kontakt do koordynatora przedmiotu:\n";
+    cin >> subjectContact;
+
+
+    bool descriptionIsTooLong = true;
+
+    while (descriptionIsTooLong){
+        cout << "Prosze wpisac opis przedmiotu:\n";
+        cin >> ws;
+        getline(cin, subjectDescription);
+
+        if (subjectDescription.size() > 256){
+            cout << "Opis przedmiotu nie moze przekraczac 256 znakow\n";
+        }
+        else {
+            descriptionIsTooLong = false;
+        }
+    }
+
+    cout << "Prosze wpisac grupe przypisana do przedmiotu\n";
+    cin >> subjectGroup;
+
+    Przedmiot* subjectToAdd = new Przedmiot(subjectName, subjectDescription, subjectContact, subjectGroup);
+
+    string teacherInput = "";
+
+    cout << "Czy chcesz dodac wiecej wykladowcow do nowego przedmiotu " << subjectToAdd->getNazwa() << "? (tak / nie)\n";
+    cin >> teacherInput;
+
+    while (teacherInput != "tak" && teacherInput != "nie"){
+        cout << "Nieprawdilowy input, prosze sprobowac ponownie\n";
+        cin >> teacherInput;
+    }
+
+    vector<Wykladowca*> teachersAdded;
+
+    Wykladowca* firstTeacher = dynamic_cast<Wykladowca*> (getKonto(login));
+    teachersAdded.push_back(firstTeacher);
+
+    while (teacherInput == "tak"){
+        string newTeacherLogin = "";
+
+        cout << "Prosze wpisac login wykladowcy\n";
+        cin >> newTeacherLogin;
+
+        Wykladowca* teacherFound = dynamic_cast<Wykladowca*> (getKonto(newTeacherLogin));
+
+        while (teacherFound == nullptr){
+            cout << "Wykladowca nie istnieje w systemie\n";
+            cout << "Prosze wpisac login wykladowcy\n";
+
+            cin >> newTeacherLogin;
+
+            teacherFound = dynamic_cast<Wykladowca*> (getKonto(newTeacherLogin));
+        }
+
+        bool alreadyAdded = true;
+
+        while(alreadyAdded){
+            vector<Wykladowca*>::iterator wIt;
+            bool found = false;
+
+            for (wIt = teachersAdded.begin(); wIt != teachersAdded.end(); wIt++){
+                if ((*wIt)->getLogin() == teacherFound->getLogin()){
+                    found = true;
+                }
+            }
+
+            if (!found){
+                break;
+            }
+
+            cout << "Wykladowca o loginie " << teacherFound->getLogin() << " juz jest przypisany do przedmiotu\n";
+
+            cout << "Prosze wpisac login wykladowcy\n";
+            cin >> newTeacherLogin;
+
+            teacherFound = dynamic_cast<Wykladowca*> (getKonto(newTeacherLogin));
+
+            while (teacherFound == nullptr){
+            cout << "Wykladowca nie istnieje w systemie\n";
+            cout << "Prosze wpisac login wykladowcy\n";
+
+            cin >> newTeacherLogin;
+
+            teacherFound = dynamic_cast<Wykladowca*> (getKonto(newTeacherLogin));
+            }
+        }
+
+        teachersAdded.push_back(teacherFound);
+
+        cout << "Czy chcesz dodac wiecej wykladowcow do nowego przedmiotu " << subjectToAdd->getNazwa() << "? (tak / nie)\n";
+        cin >> teacherInput;
+    }
+
+    vector<Wykladowca*>::iterator wIt;
+
+    for (wIt = teachersAdded.begin(); wIt != teachersAdded.end(); wIt++){
+        subjectToAdd->attachWykladowca((*wIt));
+    }
+
+    vector<Konto*>::iterator it;
+
+    for (it = konta.begin(); it != konta.end(); it++){
+        if (typeid(**it) == typeid(Student)){
+            if (dynamic_cast<Student*>(*it)->getGrupa() == subjectToAdd->getGrupa()){
+                subjectToAdd->attachStudent(dynamic_cast<Student*>(*it));
+            }
+        }
+    }
+
+    attachPrzedmiot(subjectToAdd);
+
+    cout << "Przedmiot " << subjectToAdd->getNazwa() << " zostal pomyslnie dodany do systemu\n";
+    zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
 }
 
 void StronaInternetowa::wyswietlPrzypisanePrzedmioty(string loginl) {
@@ -579,7 +736,17 @@ void StronaInternetowa::wyswietlProwadzonePrzedmioty(string login) {
 }
 
 Admin* StronaInternetowa::getAdmin() {
+    vector<Konto*>::iterator it;
 
+    Admin* admin = nullptr;
+
+    for (it = konta.begin(); it != konta.end(); it++){
+        if (typeid(**it) == typeid(Admin)){
+            admin = dynamic_cast<Admin*> ((*it));
+        }
+    }
+
+    return admin;
 }
 
 void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPrzemiotow) {
@@ -587,7 +754,6 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPr
 
     file.open(nazwaPliku, ios::in);
 
-    vector<string> row;
     string line = "";
     string word = "";
 
@@ -598,49 +764,47 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPr
         string accountType = "";
         string loginFromCsv = "";
         string passwordFromCsv = "";
-        string studentGroupFromCsv = "";
+        string lastColumn = "";
 
         while (getline(s, word, ',')){
             counter++;
             if (counter == 1){
                 accountType = word;
-                //cout << accountType << "\n";
             }
+
             else if (counter == 2){
                 loginFromCsv = word;
-                //cout << loginFromCsv << "\n";
             }
+
             else if (counter == 3){
                 passwordFromCsv = word;
-                //cout << passwordFromCsv << "\n";
-
-                if (accountType == "Admin"){
-                    //cout << "creating\n";
-                    Admin* adminToAdd = new Admin(loginFromCsv, passwordFromCsv);
-
-                    //cout << adminToAdd->getLogin() << " login \n";
-
-                    attachKonto(adminToAdd);
-                }
-                else if (accountType == "Wykladowca"){
-                    Wykladowca* teacherToAdd = new Wykladowca(loginFromCsv, passwordFromCsv);
-
-                    //cout << teacherToAdd->getLogin() << "\n";
-
-                    attachKonto(teacherToAdd);
-                }
             }
+
             else if (counter == 4){
-                studentGroupFromCsv = word;
-
-                Student* studentToAdd = new Student(loginFromCsv, passwordFromCsv, studentGroupFromCsv);
-
-                //cout << studentToAdd->getLogin() << "\n";
+                lastColumn = word;
+            }
+        }
+            if (accountType == "Student"){
+                Student* studentToAdd = new Student(loginFromCsv, passwordFromCsv, lastColumn);
 
                 attachKonto(studentToAdd);
             }
+            else if (accountType == "Wykladowca"){
+                Wykladowca* teacherToAdd = new Wykladowca(loginFromCsv, passwordFromCsv);
+
+                teacherToAdd->setLicznikMaterialowDoWeryfikacji(stoi(lastColumn));
+                attachKonto(teacherToAdd);
+            }
+            else if (accountType == "Admin"){
+                Admin* adminToAdd = new Admin(loginFromCsv, passwordFromCsv);
+
+                adminToAdd->setLicznikMaterialowDoDodania(stoi(lastColumn));
+                attachKonto(adminToAdd);
+            }
+
         }
-    }
+        file.close();
+
         ifstream subjectFile;
 
         subjectFile.open(nazwaPlikuPrzemiotow, ios::in);
@@ -648,6 +812,10 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPr
         vector<string> subjectRow;
         string subjectLine = "";
         string subjectWord = "";
+
+
+    while (getline(subjectFile, subjectLine)){
+        stringstream sSubjet(subjectLine);
 
         string subjectName = "";
         string subjectDescription = "";
@@ -662,18 +830,25 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPr
 
         vector<Material*> materialsToAdd;
 
+        string teacherString = "";
+        string studentString = "";
 
-    while (getline(subjectFile, subjectLine)){
-        stringstream sSubjet(subjectLine);
+        bool teachersStarted = false;
+        bool studentsStarted = false;
+        bool materialsStarted = false;
+
+        string materialTitle = "";
+        string materialAttachment = "";
+        bool isByTeacher = false;
+        bool isVerified = false;
+        bool isAddedByAdmin = false;
+
 
         int subjectCounter = 0;
+        int materialCounter = 0;
 
         while(getline(sSubjet, subjectWord, ',')){
             subjectCounter++;
-
-
-            //cout << subjectCounter << "=current counter\n";
-            //cout << subjectWord << "\n";
 
             if (subjectCounter == 1){
                 subjectName = subjectWord;
@@ -687,107 +862,292 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPr
             else if (subjectCounter == 4){
                 subjectGroup = subjectWord;
             }
-            if (subjectWord == "WYKLADOWCY"){
-                while (subjectWord != "STUDENCI"){
-                    Wykladowca* teacherFound = dynamic_cast<Wykladowca*> (getKonto(subjectWord));
-
-                    teachersToAdd.push_back(teacherFound);
+            else {
+                if (subjectWord == "WYKLADOWCY"){
+                    teachersStarted = true;
+                    studentsStarted = false;
+                    materialsStarted = false;
+                    continue;
                 }
-            }
 
-            if (subjectWord == "STUDENCI"){
-                while (subjectWord != "MATERIALY"){
-                    Student* studentToAdd = dynamic_cast<Student*> (getKonto(subjectWord));
-
-                    studentsToAdd.push_back(studentToAdd);
+                if (subjectWord == "STUDENCI"){
+                    teachersStarted = false;
+                    studentsStarted = true;
+                    materialsStarted = false;
+                    continue;
                 }
-            }
 
-            int materialCounter = 0;
-            string materialTitle = "";
-            string materialAttachment = "";
-            bool fromTeacher = false;
-            bool verifiedByTeacher = false;
-            bool addedByAdmin = false;
+                if (subjectWord == "MATERIALY"){
+                    teachersStarted = false;
+                    studentsStarted = false;
+                    materialsStarted = true;
+                    continue;
+                }
 
+                if (teachersStarted && subjectWord != "brak"){
+                    teacherString = subjectWord;
 
-            if (subjectWord == "MATERIALY"){
-                materialCounter++;
-
-                if (materialCounter == 2){
-                    materialTitle = subjectWord;
-                }
-                else if (materialCounter == 3){
-                    materialAttachment = subjectWord;
-                }
-                else if (materialCounter == 4){
-                    if (subjectContact == "true"){
-                        fromTeacher = true;
-                    }
-                }
-                else if (materialCounter == 5){
-                    if (subjectWord == "true"){
-                        verifiedByTeacher = true;
-                    }
-                }
-                else if (materialCounter == 6){
-                    if (subjectWord == "true"){
-                        addedByAdmin = true;
+                    Wykladowca* teacherToAdd = dynamic_cast<Wykladowca*> (getKonto(teacherString));
+                    if (teacherToAdd != nullptr){
+                        teachersToAdd.push_back(teacherToAdd);
                     }
                 }
 
-                Material* materialToAdd = new Material(materialTitle, materialAttachment,fromTeacher);
+                else if (studentsStarted && subjectWord != "brak"){
+                    studentString = subjectWord;
 
-                cout << materialToAdd->getTytul();
-
-                materialToAdd->setCzyJestZweryfikowany(verifiedByTeacher);
-                materialToAdd->setCzyJestDodanyPrzezAdmina(addedByAdmin);
-
-                Przedmiot* currentSubject = new Przedmiot(subjectName, subjectDescription, subjectContact, subjectGroup);
-
-                vector<Wykladowca*>::iterator itT;
-
-                for (itT = teachersToAdd.begin(); itT != teachersToAdd.end(); itT++){
-                    currentSubject->attachWykladowca((*itT));
+                    Student* studentToAdd = dynamic_cast<Student*> (getKonto(studentString));
+                    if (studentToAdd != nullptr){
+                        studentsToAdd.push_back(studentToAdd);
+                    }
                 }
 
-                vector<Student*>::iterator itS;
+                else if (materialsStarted && subjectWord != "brak"){
+                    materialCounter++;
 
-                for (itS = studentsToAdd.begin(); itS != studentsToAdd.end(); itS++){
-                    currentSubject->attachStudent((*itS));
+                    if (materialCounter == 1){
+                        materialTitle = subjectWord;
+                    }
+                    else if (materialCounter == 2){
+                        materialAttachment = subjectWord;
+                    }
+                    else if (materialCounter == 3){
+                        if (subjectWord == "true"){
+                            isByTeacher = true;
+                        }
+                        else {
+                            isByTeacher = false;
+                        }
+                    }
+                    else if (materialCounter == 4){
+                        if (subjectWord == "true"){
+                            isVerified = true;
+                        }
+                        else {
+                            isVerified = false;
+                        }
+                    }
+                    else if (materialCounter == 5){
+                        if (subjectWord == "true"){
+                            isAddedByAdmin = true;
+                        }
+                        else{
+                            isAddedByAdmin = false;
+                        }
+
+                        Material* materialToAdd = new Material(materialTitle, materialAttachment, isByTeacher);
+                        materialToAdd->setCzyJestZweryfikowany(isVerified);
+                        materialToAdd->setCzyJestDodanyPrzezAdmina(isAddedByAdmin);;
+
+                        materialsToAdd.push_back(materialToAdd);
+
+                        materialCounter = 0;
+                    }
                 }
-
-                vector<Material*>::iterator itM;
-
-                for (itM = materialsToAdd.begin(); itM != materialsToAdd.end(); itM++){
-                    currentSubject->attachMaterial((*itM));
-                }
-
-                attachPrzedmiot(currentSubject);
-
             }
-
-
         }
 
 
+    Przedmiot* subjectToAdd = new Przedmiot(subjectName, subjectDescription, subjectContact, subjectGroup);
+
+    vector<Wykladowca*>::iterator wIt;
+
+    for (wIt = teachersToAdd.begin(); wIt != teachersToAdd.end(); wIt++){
+        subjectToAdd->attachWykladowca((*wIt));
     }
 
-    vector<Przedmiot*>::iterator it;
+    vector<Student*>::iterator sIt;
 
-    cout << przedmioty.size() << " size\n";
-
-    for (it = przedmioty.begin(); it != przedmioty.end(); it++){
-        cout << (*it)->getNazwa();
+    for (sIt = studentsToAdd.begin(); sIt != studentsToAdd.end(); sIt++){
+        subjectToAdd->attachStudent((*sIt));
     }
 
+    vector<Material*>::iterator mIt;
 
-       file.close();
+    for (mIt = materialsToAdd.begin(); mIt != materialsToAdd.end(); mIt++){
+        subjectToAdd->attachMaterial((*mIt));
+    }
+
+    attachPrzedmiot(subjectToAdd);
+
+    }
+
     subjectFile.close();
 }
 
 
-void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku) {
+void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow) {
+    vector<Konto*>::iterator it;
+
+    ofstream accountFile(nazwaPliku);
+
+    if (!accountFile.is_open()){
+        cout << "Nie otwiera sie plik z kontami\n";
+        return;
+    }
+
+    for (it = konta.begin(); it != konta.end(); it++){
+        string accountType = "";
+        string accountLogin = "";
+        string accountPassword = "";
+        string studentGroup = "";
+        string teacherAmountOfMaterialsToVerify = "";
+        string adminAmountOfMaterialsToAdd = "";
+
+
+        if (typeid(**it) == typeid(Student)){
+            accountType = "Student";
+
+            accountLogin = (*it)->getLogin();
+
+            accountPassword = (*it)->getHaslo();
+            studentGroup = dynamic_cast<Student*> (*it)->getGrupa();
+
+            accountFile << accountType << "," << accountLogin << "," << accountPassword << "," << studentGroup;
+            accountFile << "\n";
+        }
+        else if (typeid(**it) == typeid(Wykladowca)){
+            accountType = "Wykladowca";
+            accountLogin = (*it)->getLogin();
+            accountPassword = (*it)->getHaslo();
+            teacherAmountOfMaterialsToVerify = to_string(dynamic_cast<Wykladowca*> (*it)->getLicznikMaterialowDoWeryfikacji());
+
+            accountFile << accountType << "," << accountLogin << "," << accountPassword << "," << teacherAmountOfMaterialsToVerify;
+            accountFile << "\n";
+        }
+        else if (typeid(**it) == typeid(Admin)){
+            accountType = "Admin";
+            accountLogin = (*it)->getLogin();
+            accountPassword = (*it)->getHaslo();
+            adminAmountOfMaterialsToAdd = to_string(dynamic_cast<Admin*> (*it)->getLicznikMaterialowDoDodania());
+
+            accountFile << accountType << "," << accountLogin << "," << accountPassword << "," << adminAmountOfMaterialsToAdd;
+            accountFile << "\n";
+        }
+    }
+
+    accountFile.close();
+
+    ofstream subjectFile(nazwaPlikuPrzedmiotow);
+
+    if (!subjectFile.is_open()){
+        cout << "Nie otwiera sie plik z przedmiotami\n";
+        return;
+    }
+
+    vector<Przedmiot*>::iterator pIt;
+
+    for (pIt = przedmioty.begin(); pIt != przedmioty.end(); pIt++){
+        string subjectName = "";
+        string subjectDescription = "";
+        string subjectContact = "";
+        string subjectGroup = "";
+
+        subjectName = (*pIt)->getNazwa();
+        subjectDescription = (*pIt)->getOpis();
+        subjectContact = (*pIt)->getKontakt();
+        subjectGroup = (*pIt)->getGrupa();
+
+        subjectFile << subjectName << "," << subjectDescription << "," << subjectContact << "," << subjectGroup;
+        subjectFile << ",WYKLADOWCY";
+
+        vector<Konto*>::iterator accIterator;
+
+        for (accIterator = konta.begin(); accIterator != konta.end(); accIterator++){
+            if (typeid(**accIterator) == typeid(Wykladowca)){
+                if ((*pIt)->getWykladowca((*accIterator)->getLogin()) != nullptr){
+                    subjectFile << "," << ((*accIterator)->getLogin());
+                }
+            }
+        }
+
+        subjectFile << ",STUDENCI";
+
+        bool hasStudents = false;
+
+        for (accIterator = konta.begin(); accIterator != konta.end(); accIterator++){
+            if (typeid(**accIterator) == typeid(Student)){
+                if ((*pIt)->getStudent((*accIterator)->getLogin()) != nullptr){
+                    subjectFile << "," << ((*accIterator)->getLogin());
+                    hasStudents = true;
+                }
+            }
+        }
+
+        if (!hasStudents){
+            subjectFile << ",brak";
+        }
+
+        subjectFile << ",MATERIALY";
+
+        int materialSize = (*pIt)->getIloscMaterialow();
+
+        if (materialSize == 0){
+            subjectFile << ",brak";
+        }
+            else {
+            for (int i = 0; i < materialSize; i++){
+                string currentTitle = "";
+                string currentAttachment = "";
+                string fromTeacher = "";
+                string isVerified = "";
+                string isAddedByAdmin = "";
+
+                Material* currentMaterial = (*pIt)->getMaterial(i);
+
+                if (currentMaterial != nullptr){
+                    subjectFile << "," << currentMaterial->getTytul() << "," << currentMaterial->getZalacznik();
+
+                    if (currentMaterial->getMaterialOdWykladowcy()){
+                        fromTeacher = "true";
+                    }
+                    else{
+                        fromTeacher = "false";
+                    }
+
+                    if (currentMaterial->getCzyJestZweryfikowany()){
+                        isVerified = "true";
+                    }
+                    else {
+                        isVerified = "false";
+                    }
+
+                    if (currentMaterial->getCzyJestDodanyPrzezAdmina()){
+                        isAddedByAdmin = "true";
+                    }
+                    else {
+                        isAddedByAdmin = "false";
+                    }
+
+                    subjectFile << "," << fromTeacher << "," << isVerified << "," << isAddedByAdmin;
+
+                }
+            }
+        }
+        subjectFile << "\n";
+    }
+}
+
+void StronaInternetowa::debugPrintAllUsers(){
+    vector<Konto*>::iterator it;
+
+    for (it = konta.begin(); it != konta.end(); it++){
+        if (typeid(**it) == typeid(Admin)){
+            cout << "admin amount : " << dynamic_cast<Admin*>(*it)->getLicznikMaterialowDoDodania();
+        }
+
+        cout << (*it)->getLogin() << " ";
+    }
+
+    cout << "przedmioty:\n";
+
+    vector<Przedmiot*>::iterator itT;
+
+    for (itT = przedmioty.begin(); itT != przedmioty.end(); itT++){
+        cout << (*itT)->getNazwa() << " ";
+    }
+
+    cout << "\n";
 
 }
 

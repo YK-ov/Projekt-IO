@@ -21,11 +21,11 @@ Admin::~Admin() {
 }
 
 int Admin::getLicznikMaterialowDoDodania() {
-
+    return licznikMaterialowDoDodania;
 }
 
 void Admin::setLicznikMaterialowDoDodania(int i) {
-
+    licznikMaterialowDoDodania = i;
 }
 
 void Admin::witaj() {

@@ -26,15 +26,15 @@ string Konto::getLogin() {
 }
 
 string Konto::getHaslo() {
-
+    return haslo;
 }
 
 void Konto::setLogin(string l) {
-
+    login = l;
 }
 
 void Konto::setHaslo(string h) {
-
+    haslo = h;
 }
 
 Konto::Konto(string l, string h) {

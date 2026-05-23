@@ -21,11 +21,11 @@ Student::~Student() {
 }
 
 string Student::getGrupa() {
-
+    return grupa;
 }
 
 void Student::setGrupa(string g) {
-
+    grupa = g;
 }
 
 void Student::witaj() {

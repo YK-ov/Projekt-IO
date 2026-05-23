@@ -1,26 +1,26 @@
 # depslib dependency file v1.0
-1779386975 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
+1779546957 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
 	"StronaInternetowa.h"
 	<iostream>
 
-1779386880 source:c:\users\user\projekt-io\implementacja\projekt\konto.cpp
+1779474626 source:c:\users\user\projekt-io\implementacja\projekt\konto.cpp
 	"Konto.h"
 
-1779361724 c:\users\user\projekt-io\implementacja\projekt\konto.h
+1779536748 c:\users\user\projekt-io\implementacja\projekt\konto.h
 	<string>
 	<iostream>
 
-1779361935 source:c:\users\user\projekt-io\implementacja\projekt\material.cpp
+1779446273 source:c:\users\user\projekt-io\implementacja\projekt\material.cpp
 	"Material.h"
 
 1779361928 c:\users\user\projekt-io\implementacja\projekt\material.h
 	<string>
 	<iostream>
 
-1779381675 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
+1779530738 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
 	"Przedmiot.h"
 
-1779362039 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
+1779522241 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
 	"Material.h"
 	"Wykladowca.h"
 	"Student.h"
@@ -34,12 +34,14 @@
 1779361678 c:\users\user\projekt-io\implementacja\projekt\student.h
 	"Konto.h"
 
-1779386549 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
+1779550234 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
 	"StronaInternetowa.h"
 	<fstream>
 	<sstream>
+	<ctime>
+	<typeinfo>
 
-1779381559 c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.h
+1779549836 c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.h
 	"Konto.h"
 	"Admin.h"
 	"Sesja.h"
@@ -54,16 +56,16 @@
 1779386808 source:c:\users\user\projekt-io\implementacja\projekt\sesja.cpp
 	"Sesja.h"
 
-1779364335 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
+1779536899 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
 	"Wykladowca.h"
 
-1779364273 source:c:\users\user\projekt-io\implementacja\projekt\admin.cpp
+1779536877 source:c:\users\user\projekt-io\implementacja\projekt\admin.cpp
 	"Admin.h"
 
 1779364192 c:\users\user\projekt-io\implementacja\projekt\admin.h
 	"Konto.h"
 
-1779362013 source:c:\users\user\projekt-io\implementacja\projekt\student.cpp
+1779475547 source:c:\users\user\projekt-io\implementacja\projekt\student.cpp
 	"Student.h"
 
 1779429859 source:c:\users\bubka\projekt-io\implementacja\projekt\admin.cpp

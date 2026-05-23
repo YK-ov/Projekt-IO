@@ -21,11 +21,11 @@ Wykladowca::~Wykladowca() {
 }
 
 int Wykladowca::getLicznikMaterialowDoWeryfikacji() {
-
+    return licznikMaterialowDoWeryfikacji;
 }
 
 void Wykladowca::setLicznikMaterialowDoWeryfikacji(int i) {
-
+    licznikMaterialowDoWeryfikacji = i;
 }
 
 void Wykladowca::witaj() {

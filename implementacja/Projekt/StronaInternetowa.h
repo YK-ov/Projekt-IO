@@ -45,13 +45,14 @@ public:
 	StronaInternetowa(string a, string n);
 	~StronaInternetowa();
 	void dodajZweryfkikowanyMaterial(string login);
-	bool zweryfikujSugestieStudenta(string login);
-	void dodajPrzedmiot(string nazwa, string opis, string kontakt, string login);
+	void zweryfikujSugestieStudenta(string login);
+	void dodajPrzedmiot(string login);
 	void wyswietlPrzypisanePrzedmioty(string loginl);
 	void wyswietlProwadzonePrzedmioty(string login);
 	Admin* getAdmin();
 	void wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
-	void zapiszDaneDoPliku(string nazwaPliku);
+	void zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
+	void debugPrintAllUsers();
 private:
 	string adres;
 	string nazwa;

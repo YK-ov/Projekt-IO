@@ -13,6 +13,12 @@ int main()
 
     string login = "";
     string password = "";
+    string registerInput = "";
+
+    //cout << "users right after running\n";
+    //strona->debugPrintAllUsers();
+
+
 
     while (true){
         cout << "Wprowadz login:\n";
@@ -27,6 +33,16 @@ int main()
         }
     }
 
+    //strona->debugPrintAllUsers();
+
+    while (true){
+        strona->wykonajAkcjeUzytkownika(login);
+        //strona->wykonajAkcjeUzytkownika(login);
+    }
+
+
+
+    strona->zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
 
     return 0;
 }

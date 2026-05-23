@@ -47,6 +47,8 @@ public:
 	void dodajMaterial(string n, string t, string z);
 	Student* getStudent(string login);
 	Wykladowca* getWykladowca(string login);
+	int getIloscMaterialow();
+	Material* getMaterial(int i);
 private:
 	string nazwa;
 	vector<Material*> materialy;

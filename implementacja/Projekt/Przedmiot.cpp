@@ -17,11 +17,11 @@ Przedmiot::Przedmiot(string n, string o, string k, string g) {
     opis = o;
     kontakt = k;
     grupa = g;
-    cout << "Utworzono przedmiot o nazwie" << getNazwa() << "\n";
+    cout << "Utworzono przedmiot o nazwie " << getNazwa() << "\n";
 }
 
 Przedmiot::~Przedmiot() {
-    cout << "Zniszczono przedmiot o nazwie" << getNazwa() << "\n";
+    cout << "Zniszczono przedmiot o nazwie " << getNazwa() << "\n";
 }
 
 void Przedmiot::attachMaterial(Material* m) {
@@ -147,10 +147,44 @@ void Przedmiot::dodajMaterial(string n, string t, string z) {
 }
 
 Student* Przedmiot::getStudent(string login) {
+    vector<Student*>::iterator it;
 
+    Student* studentFound = nullptr;
+
+    for (it = studenci.begin(); it != studenci.end(); it++){
+        if ((*it)->getLogin() == login){
+            studentFound = (*it);
+
+            break;
+        }
+    }
+
+    return studentFound;
 }
 
 Wykladowca* Przedmiot::getWykladowca(string login) {
+    vector<Wykladowca*>::iterator it;
 
+    Wykladowca* wykladowcaFound = nullptr;
+
+    for (it = wykladowcy.begin(); it != wykladowcy.end(); it++){
+        if ((*it)->getLogin() == login){
+            wykladowcaFound = (*it);
+
+            break;
+        }
+    }
+
+    return wykladowcaFound;
+}
+
+int Przedmiot::getIloscMaterialow(){
+    int size = materialy.size();
+
+    return size;
+}
+
+Material* Przedmiot::getMaterial(int i){
+    return materialy[i];
 }
 
