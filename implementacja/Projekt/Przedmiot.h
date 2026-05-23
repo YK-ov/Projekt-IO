@@ -43,8 +43,8 @@ public:
 	string getGrupa();
 	void setGrupa(string g);
 	void pozyskajMaterial(string n, string tytul, string materialOd, string gr);
-	bool zaproponujMaterial(string dane);
-	void dodajMaterial(string n, string t, string z);
+	void zaproponujMaterial(string tytul, string zalacznik, string login);
+	void dodajMaterial(string t, string z, string login);
 	Student* getStudent(string login);
 	Wykladowca* getWykladowca(string login);
 	int getIloscMaterialow();

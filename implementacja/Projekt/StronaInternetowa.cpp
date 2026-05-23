@@ -242,36 +242,42 @@ void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
         }
 
         if (input == "dodac"){
-            string studentInput = "";
-            cout << "Wprowadz przedmiot, do ktorego chcesz dodac material:\n";
+            string studentInput = ""; //comeback
+            //cout << "Wprowadz przedmiot, do ktorego chcesz dodac material:\n";
 
-            Przedmiot* foundPrzedmiot = nullptr;
+            wyswietlPrzypisanePrzedmioty(login);
 
-            while (true){
-                cin >> studentInput;
-                foundPrzedmiot = getPrzedmiot(studentInput);
-                    if (foundPrzedmiot != nullptr){
-                        break;
-                    }
+            string subjectInput = "";
 
-                cout << "Nie znaleziono przedmiotu " << studentInput << " w systemie, sprobuj ponownie\n";
+            cout << "Wprowadz nazwe przedmiotu do ktorego chcesz zaproponowac material:\n";
+            cin >> ws;
+            getline(cin, subjectInput);
+
+            Przedmiot* subjectFound = getPrzedmiot(subjectInput);
+
+            if (subjectFound == nullptr){
+                cout << "Przedmiotu o nazwie " << subjectInput << " nie znaleziono w systemie, prosze sprobowac ponownie\n";
+                return;
             }
 
             string title = "";
-
-            cout << "Wproawdz tytul:\n";
-            cin >> title;
-
             string attachment = "";
 
-            cout << "Wprowadz zalacznik:\n";
-            cin >> attachment;
+            cout << "Wprowadz tytul materialu, ktory chcesz zaproponowac:\n";
+            cin >> ws;
+            getline(cin, title);
 
-            string csvStudentInput = title + "," + attachment;
+            cout << "Wklej zalacznik materialu, ktory chcesz zaproponowac:\n";
+            cin >> ws;
+            getline(cin, attachment);
 
-            foundPrzedmiot->zaproponujMaterial(csvStudentInput);
+            subjectFound->zaproponujMaterial(title, attachment, login);
+            zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
         }
         else {
+            wyswietlPrzypisanePrzedmioty(login);
+
+
             string studentInput = "";
             string materialMadeBy = "";
 
@@ -350,6 +356,7 @@ void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
 
             if (teacherInput == "sprawdz"){
                 zweryfikujSugestieStudenta(foundKonto->getLogin());
+                zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
             }
         }
 
@@ -367,36 +374,40 @@ void StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
                 zweryfikujSugestieStudenta(foundKonto->getLogin());
             }
             else if (teacherInput == "material"){
-                string name = "";
-                cout << "Wprowadz nazwe przedmiotu do ktorego chcesz dodac material:\n";
+                wyswietlProwadzonePrzedmioty(login);
 
-                cin >> name;
+                string subjectInput = "";
 
-                Przedmiot* przedmiotFound = getPrzedmiot(name);
+                cout << "Wybierz przedmiot z listy, zeby dodac do niego material:\n";
 
-                while (przedmiotFound == nullptr){
-                    cout << "Nie znaleziono przedmiotu " << name << " w systemie, prosze sprobowac ponownie\n";
+                cin >> ws;
+                getline(cin, subjectInput);
 
-                    cin >> name;
-                    przedmiotFound = getPrzedmiot(name);
-                }
-
+                cout << "Prosze wpisac tytul materialowi:\n";
                 string title = "";
-                cout << "Wprowadz tytul materialu:\n";
-                cin >> title;
+                cin >> ws;
+                getline(cin, title);
 
-                string attachment;
-                cout << "Wprowadz zalacznik:\n";
-                cin >> attachment;
+                cout << "Prosze dodac zalacznik:\n";
+                string attachment = "";
+                cin >> ws;
+                getline(cin, attachment);
 
-                Material* newMaterial = new Material(title, attachment, true);
+                Przedmiot* subjectFound = getPrzedmiot(subjectInput);
 
-                przedmiotFound->attachMaterial(newMaterial);
+                if (subjectFound != nullptr){
+                    subjectFound->dodajMaterial(title, attachment, login);
 
-                cout << "Dodano material o tytulu " << title << " do przedmiotu " << przedmiotFound->getNazwa() << "\n";
+                    zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+                }
+                else {
+                    cout << "Nie znaleziono przedmiotu " << subjectInput << " w systemie, sprobuj ponownie\n";
+                }
             }
             else if (teacherInput == "przedmiot"){
                 dodajPrzedmiot(login);
+
+                zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
             }
     }
     else if (typeid(*foundKonto) == typeid(Admin)){
@@ -560,7 +571,22 @@ void StronaInternetowa::zweryfikujSugestieStudenta(string login) {
                             currentMaterial->setCzyJestZweryfikowany(true);
 
                             Admin* admin = getAdmin();
-                            admin->setLicznikMaterialowDoDodania(admin->getLicznikMaterialowDoDodania() + 1);
+                            admin->setLicznikMaterialowDoDodania(admin->getLicznikMaterialowDoDodania() + 1);;
+
+                            vector<Konto*>::iterator kIt;
+
+                            for (kIt = konta.begin(); kIt != konta.end(); kIt++){
+                                if (typeid(**kIt) == typeid(Wykladowca)){
+                                    Wykladowca* currentTeacher = dynamic_cast<Wykladowca*> (*kIt);
+
+                                    if ((*it)->getWykladowca(currentTeacher->getLogin()) != nullptr){
+                                        if (currentTeacher->getLicznikMaterialowDoWeryfikacji() > 0){
+                                            currentTeacher->setLicznikMaterialowDoWeryfikacji(currentTeacher->getLicznikMaterialowDoWeryfikacji() - 1);
+                                        }
+                                    }
+                                }
+                            }
+                            cout << "Material o tytule " << currentMaterial->getTytul() << " zostal zweryfikowany\n";
                         }
                         else {
                             cout << "Sugestia zostala odrzucona, nie wszystkie kryteria sa spelnione. Proces usuniecia z systemu...\n";
@@ -578,6 +604,7 @@ void StronaInternetowa::zweryfikujSugestieStudenta(string login) {
 
 
     }
+
     else {
         cout << "Nie masz w tej chwili materialow do weryfikacji, sproboj pozniej\n";
     }
@@ -724,15 +751,56 @@ void StronaInternetowa::dodajPrzedmiot(string login) {
     attachPrzedmiot(subjectToAdd);
 
     cout << "Przedmiot " << subjectToAdd->getNazwa() << " zostal pomyslnie dodany do systemu\n";
-    zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+    //zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
 }
 
 void StronaInternetowa::wyswietlPrzypisanePrzedmioty(string loginl) {
+        cout << "Przedmioty, do ktorych jestes przypisany:\n";
 
+        bool atLeastOne = false;
+        vector<Przedmiot*>::iterator it;
+
+        for (it = przedmioty.begin(); it != przedmioty.end(); it++){
+            Student* currentStudent = (*it)->getStudent(loginl);
+
+            if (currentStudent != nullptr){
+                atLeastOne = true;
+
+                cout << (*it)->getNazwa() << " ";
+            }
+        }
+
+        if (!atLeastOne){
+            cout << "Niestety nie jestes przypisany pod zadny przedmiot w tej chwili, prosze sprobowac ponownie\n";
+            return;
+        }
+
+        cout << "\n";
 }
 
 void StronaInternetowa::wyswietlProwadzonePrzedmioty(string login) {
+        cout << "Przedmioty, ktore prowadzisz:\n";
 
+        bool atLeastOne = false;
+        vector<Przedmiot*>::iterator it;
+
+        for (it = przedmioty.begin(); it != przedmioty.end(); it++){
+            Wykladowca* currentTeacher = (*it)->getWykladowca(login);
+            int subjectCounter = 0;
+
+            if (currentTeacher != nullptr){
+                atLeastOne = true;
+
+                cout << (*it)->getNazwa() << " ";
+                }
+            }
+            cout << "\n";
+
+            if (!atLeastOne){
+                cout << "Nie prowadzisz w tej chwili zednego przedmiotu\n";
+
+                return;
+            }
 }
 
 Admin* StronaInternetowa::getAdmin() {

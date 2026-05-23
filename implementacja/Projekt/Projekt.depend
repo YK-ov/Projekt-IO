@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1779546957 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
+1779561393 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
 	"StronaInternetowa.h"
 	<iostream>
 
@@ -17,10 +17,10 @@
 	<string>
 	<iostream>
 
-1779530738 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
+1779564836 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
 	"Przedmiot.h"
 
-1779522241 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
+1779564056 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
 	"Material.h"
 	"Wykladowca.h"
 	"Student.h"
@@ -34,7 +34,7 @@
 1779361678 c:\users\user\projekt-io\implementacja\projekt\student.h
 	"Konto.h"
 
-1779550234 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
+1779567016 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
 	"StronaInternetowa.h"
 	<fstream>
 	<sstream>

@@ -42,7 +42,7 @@ int main()
 
 
 
-    strona->zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+    //strona->zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
 
     return 0;
 }

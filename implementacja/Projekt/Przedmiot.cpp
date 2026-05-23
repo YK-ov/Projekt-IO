@@ -138,12 +138,91 @@ void Przedmiot::pozyskajMaterial(string n, string tytul, string materialOd, stri
 
 }
 
-bool Przedmiot::zaproponujMaterial(string dane) {
-    cout << dane << "\n";
+void Przedmiot::zaproponujMaterial(string tytul, string zalacznik, string login) {
+    if (getStudent(login) == nullptr){
+        cout << "Nie mozesz proponowac materialu do przedmiotu, do ktorego nie jestes przypisany, sprobuj ponownie\n";
+    }
+
+    Material* materialToAdd = new Material(tytul, zalacznik, false);
+    attachMaterial(materialToAdd);
+    materialToAdd->setCzyJestZweryfikowany(false);
+    materialToAdd->setCzyJestDodanyPrzezAdmina(false);
+
+    vector<Wykladowca*>::iterator it;
+
+    for (it = wykladowcy.begin(); it != wykladowcy.end(); it++){
+        (*it)->setLicznikMaterialowDoWeryfikacji((*it)->getLicznikMaterialowDoWeryfikacji() + 1);
+    }
+
+
+
+    cout << "Sugestia materialu zostala wyslana, prosze poczekac az wykladowca ja sprawdzi\n";
+    return;
 }
 
-void Przedmiot::dodajMaterial(string n, string t, string z) {
+void Przedmiot::dodajMaterial(string t, string z, string login) {
+    if (getWykladowca(login) == nullptr){
+        cout << "Nie prowadzisz przedmiotu " << nazwa << " , prosze sprobowac ponownie\n";
+        return;
+    }
 
+
+    while (t.size() > 64){
+        cout << "Tytul materialu nie moze przekraczac 64 znaki\n";
+        cin >> ws;
+        getline(cin, t);
+    }
+
+
+
+    string ending = "";
+
+    for (int i = z.size() - 1; i >= 0; i--){
+        if (z[i] == '.'){
+            ending = ending + z[i];
+            break;
+        }
+        ending = ending + z[i];
+    }
+
+    string normalEnding = "";
+
+    for (int i = ending.size() - 1; i >= 0; i--){
+        if (ending[i] != ' '){
+            normalEnding = normalEnding + ending[i];
+        }
+    }
+
+    while (normalEnding != ".pdf" && normalEnding != ".DOC" && normalEnding != ".tex" && normalEnding != ".cpp" && normalEnding != ".py" && normalEnding != ".java" && normalEnding != ".csv"
+        && normalEnding != ".xlsx" && normalEnding != ".c"){
+            cout << "Format " << normalEnding << " nie jest obslugiwany, prosze wpisac nowy zalacznik\n";
+            cin >> ws;
+            getline(cin, z);
+
+            for (int i = z.size() - 1; i >= 0; i--){
+                if (z[i] == '.'){
+                    ending = ending + z[i];
+                    break;
+                }
+                ending = ending + z[i];
+            }
+
+            string normalEnding = "";
+
+            for (int i = ending.size() - 1; i >= 0; i--){
+            if (ending[i] != ' '){
+                normalEnding = normalEnding + ending[i];
+            }
+        }
+
+    }
+
+    Material* materialToAdd = new Material(t, z, true);
+
+    materialToAdd->setCzyJestZweryfikowany(true);
+    materialToAdd->setCzyJestDodanyPrzezAdmina(true);
+
+    attachMaterial(materialToAdd);
 }
 
 Student* Przedmiot::getStudent(string login) {
