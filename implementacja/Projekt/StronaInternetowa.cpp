@@ -1228,26 +1228,3 @@ void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPr
     }
 }
 
-void StronaInternetowa::debugPrintAllUsers(){
-    vector<Konto*>::iterator it;
-
-    for (it = konta.begin(); it != konta.end(); it++){
-        if (typeid(**it) == typeid(Admin)){
-            cout << "admin amount : " << dynamic_cast<Admin*>(*it)->getLicznikMaterialowDoDodania();
-        }
-
-        cout << (*it)->getLogin() << " ";
-    }
-
-    cout << "przedmioty:\n";
-
-    vector<Przedmiot*>::iterator itT;
-
-    for (itT = przedmioty.begin(); itT != przedmioty.end(); itT++){
-        cout << (*itT)->getNazwa() << " ";
-    }
-
-    cout << "\n";
-
-}
-

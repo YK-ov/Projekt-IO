@@ -52,7 +52,6 @@ public:
 	Admin* getAdmin();
 	void wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
 	void zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
-	void debugPrintAllUsers();
 private:
 	string adres;
 	string nazwa;
