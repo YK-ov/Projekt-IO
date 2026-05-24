@@ -17,7 +17,7 @@ Wykladowca::Wykladowca(string l, string h) : Konto(l, h) {
 }
 
 Wykladowca::~Wykladowca() {
-
+    cout << "Zniszczono konto wykladowcy o loginie " << getLogin() << "\n";
 }
 
 int Wykladowca::getLicznikMaterialowDoWeryfikacji() {
@@ -29,6 +29,6 @@ void Wykladowca::setLicznikMaterialowDoWeryfikacji(int i) {
 }
 
 void Wykladowca::witaj() {
-
+    cout << "Witamy w systemie, wykladowco " << getLogin() << "\n";
 }
 

@@ -17,7 +17,7 @@ Admin::Admin(string l, string h) : Konto(l, h) {
 }
 
 Admin::~Admin() {
-
+    cout << "Zniszczono konto administratora o loginie " << getLogin() << "\n";
 }
 
 int Admin::getLicznikMaterialowDoDodania() {
@@ -29,6 +29,6 @@ void Admin::setLicznikMaterialowDoDodania(int i) {
 }
 
 void Admin::witaj() {
-
+    cout << "Witamy w systemie, administratorze " << getLogin() << "\n";
 }
 

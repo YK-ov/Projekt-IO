@@ -25,8 +25,8 @@ public:
 	string getHaslo();
 	void setLogin(string l);
 	void setHaslo(string h);
-	Konto(string l, string h);
-	~Konto();
+    Konto(string l, string h);
+	virtual ~Konto();
 	virtual void witaj() = 0;
 private:
 	string login;

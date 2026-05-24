@@ -35,7 +35,7 @@ public:
 	void setAdres(string a);
 	bool logowanie(string l, string h, string ip);
 	bool rejestracja(string l, string h, string ip);
-	void wykonajAkcjeUzytkownika(string login);
+	bool wykonajAkcjeUzytkownika(string login);
 	void attachPrzedmiot(Przedmiot* p);
 	void detachPrzedmiot(string n);
 	Przedmiot* getPrzedmiot(string n);

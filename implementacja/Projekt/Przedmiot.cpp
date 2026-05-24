@@ -22,6 +22,14 @@ Przedmiot::Przedmiot(string n, string o, string k, string g) {
 
 Przedmiot::~Przedmiot() {
     cout << "Zniszczono przedmiot o nazwie " << getNazwa() << "\n";
+
+    vector<Material*>::iterator it;
+
+    for (it = materialy.begin(); it != materialy.end(); it++){
+        delete (*it);
+    }
+
+    materialy.clear();
 }
 
 void Przedmiot::attachMaterial(Material* m) {
@@ -134,8 +142,90 @@ void Przedmiot::setGrupa(string g) {
     grupa = g;
 }
 
-void Przedmiot::pozyskajMaterial(string n, string tytul, string materialOd, string gr) {
+void Przedmiot::pozyskajMaterial(string login) {
+    if (getStudent(login) == nullptr){
+        cout << "Nie masz dostepu do przedmiotu " << nazwa << " , nie jestes przypisany do tego przedmiotu\n";
+        return;
+    }
 
+    bool fromTeacher = false;
+
+    string studentInput = "";
+    cout << "Wprowadz typ materialu, ktory chcesz pozyskac - od wykladowcy lub od studentow (wpisz: wykladowcy / studenci)\n";
+
+    cin >> studentInput;
+
+    while (studentInput != "wykladowcy" && studentInput != "studenci"){
+        cout << "Nieprawidlowy input, sprobuj ponownie\n";
+        cin >> studentInput;
+    }
+
+    if (studentInput == "wykladowcy"){
+        fromTeacher = true;
+
+        cout << "Lista materialow dodanych przez wykladowcow:\n";
+        vector<Material*>::iterator it;
+        bool atLeastOne = false;
+
+        for (it = materialy.begin(); it != materialy.end(); it++){
+            if ((*it)->getMaterialOdWykladowcy() && (*it)->getCzyJestZweryfikowany() && (*it)->getCzyJestDodanyPrzezAdmina()){
+                atLeastOne = true;
+                cout << (*it)->getTytul() << " ";
+            }
+        }
+
+        if (!atLeastOne){
+            cout << "Przedmiot o nazwie " << nazwa << " jeszcze nie ma materialow dodanych przez wykladowcow, prosze sprobowac pozniej\n";
+            return;
+        }
+    }
+    else {
+        cout << "Lista materialow dodanych przez studentow:\n";
+        vector<Material*>::iterator it;
+        bool atLeastOne = false;
+
+        for (it = materialy.begin(); it != materialy.end(); it++){
+            if (!(*it)->getMaterialOdWykladowcy() && (*it)->getCzyJestZweryfikowany() && (*it)->getCzyJestDodanyPrzezAdmina()){
+                atLeastOne = true;
+                cout << (*it)->getTytul() << " ";
+            }
+        }
+
+        if (!atLeastOne){
+            cout << "Przedmiot o nazwie " << nazwa << " jeszcze nie ma materialow dodanych przez studentow, prosze sprobowac ponownie\n";
+            return;
+        }
+
+    }
+
+    cout << "\n";
+
+    Material* foundMaterial = nullptr;
+    string materialInput = "";
+
+    while (true){
+        cout << "Wpisz tytul materialu ktory chcesz pozyskac:\n";
+
+        cin >> ws;
+        getline(cin, materialInput);
+
+        foundMaterial = getMaterialPoTytule(materialInput);
+
+        if (foundMaterial == nullptr){
+            cout << "Material o wprowadzonym tytule nie istnieje w systemie, prosze sprobowac ponownie\n";
+            continue;
+        }
+
+        if (foundMaterial->getMaterialOdWykladowcy() != fromTeacher || !foundMaterial->getCzyJestZweryfikowany() ||
+            !foundMaterial->getCzyJestDodanyPrzezAdmina()){
+                cout << "Niezgodnosc wpisanego materialu z wybranym typem, prosze sprobowac ponownie\n";
+                continue;
+            }
+
+            break;
+    }
+
+    cout << "Zalacznik do pobrania materialu: " << foundMaterial->getZalacznik() << "\n";
 }
 
 void Przedmiot::zaproponujMaterial(string tytul, string zalacznik, string login) {
@@ -257,13 +347,26 @@ Wykladowca* Przedmiot::getWykladowca(string login) {
     return wykladowcaFound;
 }
 
-int Przedmiot::getIloscMaterialow(){
+int Przedmiot::getIloscMaterialow() {
     int size = materialy.size();
 
     return size;
 }
 
-Material* Przedmiot::getMaterial(int i){
+Material* Przedmiot::getMaterial(int i) {
     return materialy[i];
+}
+
+Material* Przedmiot::getMaterialPoTytule(string t) {
+    vector<Material*>::iterator it;
+    Material* foundMaterial = nullptr;
+
+    for (it = materialy.begin(); it != materialy.end(); it++){
+        if ((*it)->getTytul() == t){
+            foundMaterial = (*it);
+        }
+    }
+
+    return foundMaterial;
 }
 

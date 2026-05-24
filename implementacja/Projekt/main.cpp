@@ -15,11 +15,6 @@ int main()
     string password = "";
     string registerInput = "";
 
-    //cout << "users right after running\n";
-    //strona->debugPrintAllUsers();
-
-
-
     while (true){
         cout << "Wprowadz login:\n";
         cin >> login;
@@ -33,16 +28,16 @@ int main()
         }
     }
 
-    //strona->debugPrintAllUsers();
-
     while (true){
-        strona->wykonajAkcjeUzytkownika(login);
-        //strona->wykonajAkcjeUzytkownika(login);
+        bool userIsActive = strona->wykonajAkcjeUzytkownika(login);
+
+        if (!userIsActive){
+            break;
+        }
     }
 
-
-
-    //strona->zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+    delete sesja;
+    delete strona;
 
     return 0;
 }

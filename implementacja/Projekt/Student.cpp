@@ -17,7 +17,7 @@ Student::Student(string l, string h, string g) : Konto(l, h) {
 }
 
 Student::~Student() {
-
+    cout << "Zniszczono konto studenta o loginie " << getLogin() << "\n";
 }
 
 string Student::getGrupa() {
@@ -29,6 +29,6 @@ void Student::setGrupa(string g) {
 }
 
 void Student::witaj() {
-
+    cout << "Witamy w systemie, studencie " << getLogin() << "\n";
 }
 

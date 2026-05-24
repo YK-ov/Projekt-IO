@@ -1,4 +1,4 @@
-Admin,sysadmin,sysadmin123,1
+Admin,sysadmin,sysadmin123,0
 Wykladowca,Jan,Jan123,0
 Wykladowca,Robert,Robert123,0
 Wykladowca,Marcin,Marcin123,0
@@ -9,3 +9,5 @@ Student,Krzysio,Krzysio123,10
 Student,user,user123,5
 Student,Ignacy,Ignacy123,5
 Student,login,login123,5
+Wykladowca,newUser123,newUser123,0
+Student,testUser,testUser123,5

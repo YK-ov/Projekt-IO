@@ -19,7 +19,7 @@ Material::Material(string t, string z, bool matOd) {
 }
 
 Material::~Material() {
-
+    cout << "Zniszczono material o tytule " << tytul << "\n";
 }
 
 string Material::getTytul() {

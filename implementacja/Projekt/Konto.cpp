@@ -43,6 +43,6 @@ Konto::Konto(string l, string h) {
 }
 
 Konto::~Konto() {
-
+    cout << "Zniszczono konto o loginie " << login << "\n";
 }
 

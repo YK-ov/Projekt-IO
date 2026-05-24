@@ -42,13 +42,14 @@ public:
 	Material* znajdzMaterial(string tytul);
 	string getGrupa();
 	void setGrupa(string g);
-	void pozyskajMaterial(string n, string tytul, string materialOd, string gr);
+	void pozyskajMaterial(string login);
 	void zaproponujMaterial(string tytul, string zalacznik, string login);
 	void dodajMaterial(string t, string z, string login);
 	Student* getStudent(string login);
 	Wykladowca* getWykladowca(string login);
 	int getIloscMaterialow();
 	Material* getMaterial(int i);
+	Material* getMaterialPoTytule(string t);
 private:
 	string nazwa;
 	vector<Material*> materialy;
