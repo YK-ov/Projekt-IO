@@ -5,7 +5,7 @@
 //  @ Project : Untitled
 //  @ File Name : Student.h
 //  @ Date : 21.05.2026
-//  @ Author : 
+//  @ Author :
 //
 //
 
@@ -21,9 +21,12 @@ public:
 	~Student();
 	string getGrupa();
 	void setGrupa(string g);
+	string getIndeksStudenta();
+	void setIndeksStudenta(string i);
 	void witaj();
 private:
 	string grupa;
+	string indeksStudenta;
 };
 
 #endif  //_STUDENT_H

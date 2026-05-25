@@ -28,6 +28,14 @@ void Wykladowca::setLicznikMaterialowDoWeryfikacji(int i) {
     licznikMaterialowDoWeryfikacji = i;
 }
 
+string Wykladowca::getIndeksWykladowcy(){
+    return indeksWykladowcy;
+}
+
+void Wykladowca::setIndeksWykladowcy(string i) {
+    indeksWykladowcy = i;
+}
+
 void Wykladowca::witaj() {
     cout << "Witamy w systemie, wykladowco " << getLogin() << "\n";
 }

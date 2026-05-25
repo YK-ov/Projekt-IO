@@ -28,6 +28,14 @@ void Student::setGrupa(string g) {
     grupa = g;
 }
 
+string Student::getIndeksStudenta() {
+    return indeksStudenta;
+}
+
+void Student::setIndeksStudenta(string i) {
+    indeksStudenta = i;
+}
+
 void Student::witaj() {
     cout << "Witamy w systemie, studencie " << getLogin() << "\n";
 }

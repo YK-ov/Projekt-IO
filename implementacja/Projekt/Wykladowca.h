@@ -21,9 +21,12 @@ public:
 	~Wykladowca();
 	int getLicznikMaterialowDoWeryfikacji();
 	void setLicznikMaterialowDoWeryfikacji(int i);
+	string getIndeksWykladowcy();
+	void setIndeksWykladowcy(string i);
 	void witaj();
 private:
 	int licznikMaterialowDoWeryfikacji;
+	string indeksWykladowcy;
 };
 
 #endif  //_WYKLADOWCA_H
