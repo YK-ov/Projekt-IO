@@ -5,6 +5,7 @@
 		<Option title="Projekt" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="Test/" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/Projekt" prefix_auto="1" extension_auto="1" />
@@ -48,9 +49,14 @@
 		<Unit filename="Student.h" />
 		<Unit filename="Wykladowca.cpp" />
 		<Unit filename="Wykladowca.h" />
+		<Unit filename="indeksy.csv" />
 		<Unit filename="konta.csv" />
 		<Unit filename="main.cpp" />
 		<Unit filename="przedmioty.csv" />
+		<Unit filename="testyJednostkowe.cpp">
+			<Option virtualFolder="Test/" />
+		</Unit>
+		<Unit filename="testyJednostkowe.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
