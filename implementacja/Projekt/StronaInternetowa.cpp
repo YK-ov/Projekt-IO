@@ -864,6 +864,7 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPr
         string accountType = "";
         string loginFromCsv = "";
         string passwordFromCsv = "";
+        string preLastColumn = "";
         string lastColumn = "";
 
         while (getline(s, word, ',')){
@@ -881,24 +882,29 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPr
             }
 
             else if (counter == 4){
+                preLastColumn = word;
+            }
+            else if (counter == 5){
                 lastColumn = word;
             }
         }
             if (accountType == "Student"){
-                Student* studentToAdd = new Student(loginFromCsv, passwordFromCsv, lastColumn);
+                Student* studentToAdd = new Student(loginFromCsv, passwordFromCsv, preLastColumn);
+                studentToAdd->setIndeksStudenta(lastColumn);
 
                 attachKonto(studentToAdd);
             }
             else if (accountType == "Wykladowca"){
                 Wykladowca* teacherToAdd = new Wykladowca(loginFromCsv, passwordFromCsv);
+                teacherToAdd->setIndeksWykladowcy(lastColumn);
 
-                teacherToAdd->setLicznikMaterialowDoWeryfikacji(stoi(lastColumn));
+                teacherToAdd->setLicznikMaterialowDoWeryfikacji(stoi(preLastColumn));
                 attachKonto(teacherToAdd);
             }
             else if (accountType == "Admin"){
                 Admin* adminToAdd = new Admin(loginFromCsv, passwordFromCsv);
 
-                adminToAdd->setLicznikMaterialowDoDodania(stoi(lastColumn));
+                adminToAdd->setLicznikMaterialowDoDodania(stoi(preLastColumn));
                 attachKonto(adminToAdd);
             }
 
@@ -1093,6 +1099,7 @@ void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPr
         string studentGroup = "";
         string teacherAmountOfMaterialsToVerify = "";
         string adminAmountOfMaterialsToAdd = "";
+        string index = "";
 
 
         if (typeid(**it) == typeid(Student)){
@@ -1102,8 +1109,9 @@ void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPr
 
             accountPassword = (*it)->getHaslo();
             studentGroup = dynamic_cast<Student*> (*it)->getGrupa();
+            index = dynamic_cast<Student*> (*it)->getIndeksStudenta();
 
-            accountFile << accountType << "," << accountLogin << "," << accountPassword << "," << studentGroup;
+            accountFile << accountType << "," << accountLogin << "," << accountPassword << "," << studentGroup << "," << index;
             accountFile << "\n";
         }
         else if (typeid(**it) == typeid(Wykladowca)){
@@ -1111,8 +1119,9 @@ void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPr
             accountLogin = (*it)->getLogin();
             accountPassword = (*it)->getHaslo();
             teacherAmountOfMaterialsToVerify = to_string(dynamic_cast<Wykladowca*> (*it)->getLicznikMaterialowDoWeryfikacji());
+            index = dynamic_cast<Wykladowca*> (*it)->getIndeksWykladowcy();
 
-            accountFile << accountType << "," << accountLogin << "," << accountPassword << "," << teacherAmountOfMaterialsToVerify;
+            accountFile << accountType << "," << accountLogin << "," << accountPassword << "," << teacherAmountOfMaterialsToVerify << "," << index;
             accountFile << "\n";
         }
         else if (typeid(**it) == typeid(Admin)){
@@ -1226,5 +1235,73 @@ void StronaInternetowa::zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPr
         }
         subjectFile << "\n";
     }
+}
+
+bool StronaInternetowa::zweryfikujIndeks(string indeks, string typKonta, string nazwaPliku) {
+    ifstream file;
+
+    file.open(nazwaPliku, ios::in);
+
+    string line = "";
+    string word = "";
+
+    while (getline(file, line)){
+        stringstream s(line);
+        int counter = 0;
+
+        string currentIndex = "";
+        string currentAccountType = "";
+        string currentLogin = "";
+
+        while(getline(s, word, ',')){
+            counter++;
+
+            if (counter == 1){
+                currentIndex = word;
+            }
+            else if (counter == 2){
+                currentAccountType = word;
+            }
+            else if (counter == 3){
+                currentLogin = word;
+            }
+        }
+
+        if (currentAccountType == typKonta && indeks == currentIndex){
+            if (currentLogin == "brak"){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    file.close();
+
+    return false;
+}
+
+
+void StronaInternetowa::zaktualizujIndeks(string indeks, string login, string nazwaPliku) {
+
+
+}
+
+void StronaInternetowa::debugPrintAllUsers(){
+    vector<Konto*>::iterator it;
+
+    for (it = konta.begin(); it != konta.end(); it++){
+        cout << (*it)->getLogin() << " ";
+
+        if (typeid(**it) == typeid(Student)){
+            cout << dynamic_cast<Student*> (*it)->getIndeksStudenta() << " ";
+        }
+        else if (typeid(**it) == typeid(Wykladowca)){
+            cout << dynamic_cast<Wykladowca*> (*it)->getIndeksWykladowcy() << " ";
+        }
+    }
+    cout << "\n";
+
 }
 
