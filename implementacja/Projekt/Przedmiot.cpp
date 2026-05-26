@@ -151,16 +151,19 @@ void Przedmiot::pozyskajMaterial(string login) {
     bool fromTeacher = false;
 
     string studentInput = "";
-    cout << "Wprowadz typ materialu, ktory chcesz pozyskac - od wykladowcy lub od studentow (wpisz: wykladowcy / studenci)\n";
+    cout << "Wprowadz typ materialu, ktory chcesz pozyskac - od wykladowcy lub od studentow\n";
+    cout << "Wpisz jedno z nastepujacych polecen:\n";
+    cout << "1)Wykladowcy\n";
+    cout << "2)Studenci\n";
 
     cin >> studentInput;
 
-    while (studentInput != "wykladowcy" && studentInput != "studenci"){
+    while (studentInput != "Wykladowcy" && studentInput != "Studenci"){
         cout << "Nieprawidlowy input, sprobuj ponownie\n";
         cin >> studentInput;
     }
 
-    if (studentInput == "wykladowcy"){
+    if (studentInput == "Wykladowcy"){
         fromTeacher = true;
 
         cout << "Lista materialow dodanych przez wykladowcow:\n";
@@ -231,6 +234,7 @@ void Przedmiot::pozyskajMaterial(string login) {
 void Przedmiot::zaproponujMaterial(string tytul, string zalacznik, string login) {
     if (getStudent(login) == nullptr){
         cout << "Nie mozesz proponowac materialu do przedmiotu, do ktorego nie jestes przypisany, sprobuj ponownie\n";
+        return;
     }
 
     Material* materialToAdd = new Material(tytul, zalacznik, false);
@@ -265,45 +269,32 @@ void Przedmiot::dodajMaterial(string t, string z, string login) {
 
 
 
-    string ending = "";
-
-    for (int i = z.size() - 1; i >= 0; i--){
-        if (z[i] == '.'){
-            ending = ending + z[i];
-            break;
-        }
-        ending = ending + z[i];
-    }
-
     string normalEnding = "";
 
-    for (int i = ending.size() - 1; i >= 0; i--){
-        if (ending[i] != ' '){
-            normalEnding = normalEnding + ending[i];
+    for (int i = z.size() - 1; i >= 0; i--) {
+        if (z[i] != ' '){
+            normalEnding = z[i] + normalEnding;
+        }
+        if (z[i] == '.'){
+            break;
         }
     }
 
     while (normalEnding != ".pdf" && normalEnding != ".DOC" && normalEnding != ".tex" && normalEnding != ".cpp" && normalEnding != ".py" && normalEnding != ".java" && normalEnding != ".csv"
-        && normalEnding != ".xlsx" && normalEnding != ".c"){
+        && normalEnding != ".xlsx" && normalEnding != ".c" && normalEnding != ".jpg"){
             cout << "Format " << normalEnding << " nie jest obslugiwany, prosze wpisac nowy zalacznik\n";
             cin >> ws;
             getline(cin, z);
 
-            for (int i = z.size() - 1; i >= 0; i--){
+            normalEnding = "";
+              for (int i = z.size() - 1; i >= 0; i--) {
+                if (z[i] != ' '){
+                    normalEnding = z[i] + normalEnding;
+                }
                 if (z[i] == '.'){
-                    ending = ending + z[i];
                     break;
                 }
-                ending = ending + z[i];
             }
-
-            string normalEnding = "";
-
-            for (int i = ending.size() - 1; i >= 0; i--){
-            if (ending[i] != ' '){
-                normalEnding = normalEnding + ending[i];
-            }
-        }
 
     }
 

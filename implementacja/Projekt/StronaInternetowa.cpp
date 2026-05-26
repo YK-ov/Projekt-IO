@@ -186,6 +186,40 @@ bool StronaInternetowa::rejestracja(string l, string h, string ip) {
     cin >> passwordCheck;
 
     if (passwordCheck == h){
+    string indexInput = "";
+
+        if (input == "student"){
+            cout << "Wprowadz numer indeksu, ktory zostal ci przydzielony przez uczelnie\n";
+            cin >> indexInput;
+
+            bool isValid = zweryfikujIndeks(indexInput, "STUDENT", "indeksy.csv");
+
+            if (isValid){
+                zaktualizujIndeks(indexInput, l, "indeksy.csv");
+                cout << "Przypisujemy twojemu nowemu kontu numer indeksu studenta...";
+            }
+            else {
+                cout << "Niestety wprowadzony numer indeksu " << indexInput << " nie istnieje w systemie, albo jest zajety przez innego studenta\n";
+                return false;
+            }
+        }
+        else if (input == "wykladowca") {
+            cout << "Wprowadz numer indeksu, ktory zostal ci przydzielony przez uczelnie jako pracownikowi\n";
+            cin >> indexInput;
+
+            bool isValid = zweryfikujIndeks(indexInput, "WYKLADOWCA", "indeksy.csv");
+
+            if (isValid){
+                zaktualizujIndeks(indexInput, l, "indeksy.csv");
+                cout << "Przypisujemy twojemu nowemu kontu numer indeksu wykladowcy...";
+            }
+            else {
+                cout << "Niestety wprowadzony numer indeksu " << indexInput << " nie istnieje w systemie, albo jest zajety przez innego wykladowce\n";
+                return false;
+            }
+        }
+
+
         cout << "Rejestracja udana, dodajemy uzytkownika o loginie " << l << " do systemu...\n";
 
         Konto* toAdd = nullptr;
@@ -196,14 +230,19 @@ bool StronaInternetowa::rejestracja(string l, string h, string ip) {
 
             cin >> grupa;
 
-            toAdd = new Student(l, h, grupa);
+            toAdd = new Student(l, h, grupa, indexInput);
         }
         else if (input == "wykladowca"){
-            toAdd = new Wykladowca(l, h);
+            toAdd = new Wykladowca(l, h, indexInput);
             dynamic_cast<Wykladowca*> (toAdd)->setLicznikMaterialowDoWeryfikacji(0);
         }
 
         attachKonto(toAdd);
+
+        if (input == "student"){
+            przypiszStudentaDoPrzedmiotuPoGrupie(l);
+        }
+
         zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
 
         cout << "Prosze teraz zalogowac sie do systemu\n";
@@ -229,22 +268,27 @@ bool StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
         Student* student = dynamic_cast<Student*> (foundKonto);
 
         string input = "";
-        cout << "Czy chcesz dodac material do rewizji, pozyskac material lub wylogowac sie? (Wpisz dodac, pozyskac, lub wyloguj ponizej):\n";
+        cout << "Czy chcesz dodac material do rewizji, pozyskac material lub zakonczyc dzialanie programu?\n";
+        cout << "Wpisz jedno z nastepujacych polecen:\n";
+        cout << "1)Dodac\n";
+        cout << "2)Pozyskac\n";
+        cout << "3)Zakoncz dzialanie\n";
 
-        cin >> input;
+        cin >> ws;
+        getline(cin, input);
 
-        while (input != "dodac" && input != "pozyskac" && input != "wyloguj"){
+        while (input != "Dodac" && input != "Pozyskac" && input != "Zakoncz dzialanie"){
             cout << "Nieprawidlowy input, prosze sprobowac ponownie\n";
 
             cin >> input;
         }
 
-        if (input == "wyloguj"){
-            cout << "Proces wylogowania uzytkownika o loginie " << login << " ...\n";
+        if (input == "Zakoncz dzialanie"){
+            cout << "Trwa proces zamykania programu...\n";
             return false;
         }
 
-        if (input == "dodac"){
+        if (input == "Dodac"){
             string studentInput = "";
 
             wyswietlPrzypisanePrzedmioty(login);
@@ -307,36 +351,52 @@ bool StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
         string teacherInput = "";
 
         if (teacher->getLicznikMaterialowDoWeryfikacji() != 0){
-            cout << "Uwaga! W tej chwili masz aktywna sugestie studenta do sprawdzenia. Wprowadz \"sprawdz\", jesli chcesz sprawdzic natychmiastowo, lub nacsinij enter (lub wpisz cokolwiek) jesli chcesz to zrobic pozniej\n";
+            cout << "Uwaga! W tej chwili masz aktywna sugestie studenta do sprawdzenia\n";
+            cout << "Wpisz jedno z nastepujacych polecen:\n";
+            cout << "1)Sprawdz\n";
+            cout << "2)Potem\n";
 
             cin >> teacherInput;
 
-            if (teacherInput == "sprawdz"){
+            while (teacherInput != "Sprawdz" && teacherInput != "Potem"){
+                cout << "Nieprawidlowy input, prosze sprobowac ponownie\n";
+                cin >> teacherInput;
+            }
+
+            if (teacherInput == "Sprawdz"){
                 zweryfikujSugestieStudenta(foundKonto->getLogin());
                 zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
             }
         }
 
-            cout << "Czy chcesz sprawdzic sugestie studenta (jesli teraz jest aktywna w systemie), dodac material, dodac przedmiot lub wylogowac sie? (sprawdzic = sprawdzic sugestie, material = dodac material, przedmiot = dodac przedmiot do systemu, wyloguj = wylogowanie)\n";
+            cout << "Czy chcesz sprawdzic sugestie studenta (jesli teraz jest aktywna w systemie), dodac material, dodac przedmiot lub zakonczyc dzialanie?\n";
+            cout << "Wpisz jedno z nastepujacych polecen:\n";
+            cout << "1)Sprawdz\n";
+            cout << "2)Material\n";
+            cout << "3)Przedmiot\n";
+            cout << "4)Zakoncz dzialanie\n";
 
-            cin >> teacherInput;
 
-            while (teacherInput != "sprawdzic" && teacherInput != "material" && teacherInput != "przedmiot" && teacherInput != "wyloguj"){
+            cin >> ws;
+            getline(cin, teacherInput);
+
+            while (teacherInput != "Sprawdz" && teacherInput != "Material" && teacherInput != "Przedmiot" && teacherInput != "Zakoncz dzialanie"){
                 cout << "Nieprawidlowy input, sprobuj ponownie\n";
 
-                cin >> teacherInput;
+                cin >> ws;
+                getline(cin, teacherInput);
             }
 
-            if (teacherInput == "wyloguj"){
-                cout << "Proces wylogowania uzytkownika o loginie " << login << " ...\n";
+            if (teacherInput == "Zakoncz dzialanie"){
+                cout << "Trwa zamykanie programu...\n";
                 return false;
             }
 
-            if (teacherInput == "sprawdzic"){
+            if (teacherInput == "Sprawdz"){
                 zweryfikujSugestieStudenta(foundKonto->getLogin());
                 zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
             }
-            else if (teacherInput == "material"){
+            else if (teacherInput == "Material"){
                 wyswietlProwadzonePrzedmioty(login);
 
                 string subjectInput = "";
@@ -367,7 +427,7 @@ bool StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
                     cout << "Nie znaleziono przedmiotu " << subjectInput << " w systemie, sprobuj ponownie\n";
                 }
             }
-            else if (teacherInput == "przedmiot"){
+            else if (teacherInput == "Przedmiot"){
                 dodajPrzedmiot(login);
 
                 zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
@@ -386,15 +446,22 @@ bool StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
         }
         else {
             string adminInput = "";
-            cout << "Wpisz dodac, aby dodac materiale zweryfikowane przez wykladowcow, jesli takie istnieja lub wyloguj dla wylogowania\n";
+            cout << "Czy chcesz dodac mateiraly zweryfikowane przez wykladowcow, jesli takie istnieja lub zakonczyc dzialanie\n";
+            cout << "Wpisz jedno z nastepujacych polecen:\n";
+            cout << "1)Dodac\n";
+            cout << "2)Zakoncz dzialanie\n";
 
-            cin >> adminInput;
-            while (adminInput != "dodac" && adminInput != "wyloguj"){
+            cin >> ws;
+            getline(cin, adminInput);
+
+            while (adminInput != "Dodac" && adminInput != "Zakoncz dzialanie"){
                 cout << "Nieprawidlowy input, prosze sprobowac ponownie\n";
-                cin >> adminInput;
+
+                cin >> ws;
+                getline(cin, adminInput);
             }
-            if (adminInput == "wyloguj"){
-                cout << "Proces wylogowania uzytkownika o loginie " << login << " ...\n";
+            if (adminInput == "Zakoncz dzialanie"){
+                cout << "Trwa zamykanie programu...\n";
                 return false;
             }
             dodajZweryfkikowanyMaterial(login);
@@ -572,34 +639,43 @@ void StronaInternetowa::zweryfikujSugestieStudenta(string login) {
                         cout << "Material " << currentMaterial->getTytul() << " oczekuje na weryfikacje\n";
                         cout << "Zalacznik do materialu : "<< currentMaterial->getZalacznik() << " , prosze pobrac material i ocenic go wedlug ponizszych kryteriow:\n";
 
-                        cout << "Kryterium 1: czy material jest zgodny z tematem? (tak / nie):\n";
+                        cout << "Kryterium 1: czy material jest zgodny z tematem?\n";
+                        cout << "Wpisz jedno z nastepujacych polecen:\n";
+                        cout << "1)Tak\n";
+                        cout << "2)Nie\n";
 
                         cin >> first;
 
-                        while (first != "tak" && first != "nie"){
+                        while (first != "Tak" && first != "Nie"){
                             cout << "Nieprawidlowy input, sprobuj ponownie\n";
                             cin >> first;
                         }
 
-                        cout << "Kryterium 2: czy material ma charakter edukacyjny?: (tak / nie)\n";
+                        cout << "Kryterium 2: czy material ma charakter edukacyjny?\n";
+                        cout << "Wpisz jedno z nastepujacych polecen:\n";
+                        cout << "1)Tak\n";
+                        cout << "2)Nie\n";
 
                         cin >> second;
 
-                        while (second != "tak" && second != "nie"){
+                        while (second != "Tak" && second != "Nie"){
                             cout << "Nieprawidlowy input, sprobuj ponownie\n";
                             cin >> second;
                         }
 
-                        cout << "Kryterium 3: czy material spelnia standardy akademickie? (tak / nie)\n";
+                        cout << "Kryterium 3: czy material spelnia standardy akademickie?\n";
+                        cout << "Wpisz jedno z nastepujacych polecen:\n";
+                        cout << "1)Tak\n";
+                        cout << "2)Nie\n";
 
                         cin >> third;
 
-                        while (third != "tak" && third != "nie"){
+                        while (third != "Tak" && third != "Nie"){
                             cout << "Nieprawidlowy input, sprobuj ponownie\n";
                             cin >> third;
                         }
 
-                        if (first == "tak" && second == "tak" && third == "tak"){
+                        if (first == "Tak" && second == "Tak" && third == "Tak"){
                             currentMaterial->setCzyJestZweryfikowany(true);
 
                             Admin* admin = getAdmin();
@@ -695,10 +771,14 @@ void StronaInternetowa::dodajPrzedmiot(string login) {
 
     string teacherInput = "";
 
-    cout << "Czy chcesz dodac wiecej wykladowcow do nowego przedmiotu " << subjectToAdd->getNazwa() << "? (tak / nie)\n";
+    cout << "Czy chcesz dodac wiecej wykladowcow do nowego przedmiotu " << subjectToAdd->getNazwa() << "\n";
+    cout << "Wpisz jedno z nastepujacych polecen:\n";
+    cout << "1)Tak\n";
+    cout << "2)Nie\n";
+
     cin >> teacherInput;
 
-    while (teacherInput != "tak" && teacherInput != "nie"){
+    while (teacherInput != "Tak" && teacherInput != "Nie"){
         cout << "Nieprawdilowy input, prosze sprobowac ponownie\n";
         cin >> teacherInput;
     }
@@ -708,7 +788,7 @@ void StronaInternetowa::dodajPrzedmiot(string login) {
     Wykladowca* firstTeacher = dynamic_cast<Wykladowca*> (getKonto(login));
     teachersAdded.push_back(firstTeacher);
 
-    while (teacherInput == "tak"){
+    while (teacherInput == "Tak"){
         string newTeacherLogin = "";
 
         cout << "Prosze wpisac login wykladowcy\n";
@@ -760,7 +840,10 @@ void StronaInternetowa::dodajPrzedmiot(string login) {
 
         teachersAdded.push_back(teacherFound);
 
-        cout << "Czy chcesz dodac wiecej wykladowcow do nowego przedmiotu " << subjectToAdd->getNazwa() << "? (tak / nie)\n";
+        cout << "Czy chcesz dodac wiecej wykladowcow do nowego przedmiotu " << subjectToAdd->getNazwa() << "?\n";
+        cout << "Wpisz jedno z nastepujacych polecen:\n";
+        cout << "1)Tak\n";
+        cout << "2)Nie\n";
         cin >> teacherInput;
     }
 
@@ -889,13 +972,13 @@ void StronaInternetowa::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPr
             }
         }
             if (accountType == "Student"){
-                Student* studentToAdd = new Student(loginFromCsv, passwordFromCsv, preLastColumn);
+                Student* studentToAdd = new Student(loginFromCsv, passwordFromCsv, preLastColumn, lastColumn);
                 studentToAdd->setIndeksStudenta(lastColumn);
 
                 attachKonto(studentToAdd);
             }
             else if (accountType == "Wykladowca"){
-                Wykladowca* teacherToAdd = new Wykladowca(loginFromCsv, passwordFromCsv);
+                Wykladowca* teacherToAdd = new Wykladowca(loginFromCsv, passwordFromCsv, lastColumn);
                 teacherToAdd->setIndeksWykladowcy(lastColumn);
 
                 teacherToAdd->setLicznikMaterialowDoWeryfikacji(stoi(preLastColumn));
@@ -1284,24 +1367,61 @@ bool StronaInternetowa::zweryfikujIndeks(string indeks, string typKonta, string 
 
 
 void StronaInternetowa::zaktualizujIndeks(string indeks, string login, string nazwaPliku) {
+    ifstream in;
+    in.open(nazwaPliku, ios::in);
 
+    string line = "";
+    string word = "";
+    string contents = "";
 
+    while (getline(in, line)){
+        stringstream s(line);
+        int counter = 0;
+
+        string currentIndex = "";
+        string currentAccountType = "";
+        string currentLogin = "";
+
+        while (getline(s, word, ',')){
+            counter++;
+
+            if (counter == 1){
+                currentIndex = word;
+            }
+            else if (counter == 2){
+                currentAccountType = word;
+            }
+            else if (counter == 3){
+                currentLogin = word;
+            }
+        }
+
+        if (currentIndex == indeks){
+            currentLogin = login;
+        }
+
+        contents = contents + currentIndex + "," + currentAccountType + "," + currentLogin + "\n";
+    }
+
+    in.close();
+
+    ofstream out;
+    out.open(nazwaPliku, ios::out | ios::trunc);
+
+    out << contents;
+
+    out.close();
 }
 
-void StronaInternetowa::debugPrintAllUsers(){
-    vector<Konto*>::iterator it;
+void StronaInternetowa::przypiszStudentaDoPrzedmiotuPoGrupie(string login) {
+    Student* foundStudent = dynamic_cast<Student*> (getKonto(login));
+    vector<Przedmiot*>::iterator it;
 
-    for (it = konta.begin(); it != konta.end(); it++){
-        cout << (*it)->getLogin() << " ";
-
-        if (typeid(**it) == typeid(Student)){
-            cout << dynamic_cast<Student*> (*it)->getIndeksStudenta() << " ";
-        }
-        else if (typeid(**it) == typeid(Wykladowca)){
-            cout << dynamic_cast<Wykladowca*> (*it)->getIndeksWykladowcy() << " ";
+    for (it = przedmioty.begin(); it != przedmioty.end(); it++){
+        if ((*it)->getGrupa() == foundStudent->getGrupa()){
+            (*it)->attachStudent(foundStudent);
         }
     }
-    cout << "\n";
 
 }
 

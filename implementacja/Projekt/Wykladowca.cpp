@@ -12,8 +12,9 @@
 
 #include "Wykladowca.h"
 
-Wykladowca::Wykladowca(string l, string h) : Konto(l, h) {
+Wykladowca::Wykladowca(string l, string h, string iW) : Konto(l, h) {
     licznikMaterialowDoWeryfikacji = 0;
+    indeksWykladowcy = iW;
 }
 
 Wykladowca::~Wykladowca() {

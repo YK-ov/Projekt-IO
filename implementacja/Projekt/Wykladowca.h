@@ -17,7 +17,7 @@
 
 class Wykladowca : public Konto {
 public:
-	Wykladowca(string l, string h);
+	Wykladowca(string l, string h, string iW);
 	~Wykladowca();
 	int getLicznikMaterialowDoWeryfikacji();
 	void setLicznikMaterialowDoWeryfikacji(int i);

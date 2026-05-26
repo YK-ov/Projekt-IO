@@ -12,8 +12,6 @@ int main()
 
     strona->wczytajDaneZPliku("konta.csv", "przedmioty.csv");
 
-    strona->debugPrintAllUsers();
-
     string login = "";
     string password = "";
     string registerInput = "";

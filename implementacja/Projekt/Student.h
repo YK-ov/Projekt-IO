@@ -17,7 +17,7 @@
 
 class Student : public Konto {
 public:
-	Student(string l, string h, string g);
+	Student(string l, string h, string g, string iS);
 	~Student();
 	string getGrupa();
 	void setGrupa(string g);

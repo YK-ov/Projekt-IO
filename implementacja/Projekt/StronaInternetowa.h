@@ -54,7 +54,7 @@ public:
 	void zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
 	bool zweryfikujIndeks(string indeks, string typKonta, string nazwaPliku);
 	void zaktualizujIndeks(string indeks, string login, string nazwaPliku);
-	void debugPrintAllUsers();
+	void przypiszStudentaDoPrzedmiotuPoGrupie(string login);
 private:
 	string adres;
 	string nazwa;

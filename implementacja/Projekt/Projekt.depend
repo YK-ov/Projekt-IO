@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1779789057 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
+1779819013 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
 	"StronaInternetowa.h"
 	"testyJednostkowe.h"
 	<iostream>
@@ -18,7 +18,7 @@
 	<string>
 	<iostream>
 
-1779627711 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
+1779822812 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
 	"Przedmiot.h"
 
 1779627711 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
@@ -29,20 +29,20 @@
 	<vector>
 	<iostream>
 
-1779697852 c:\users\user\projekt-io\implementacja\projekt\wykladowca.h
+1779813603 c:\users\user\projekt-io\implementacja\projekt\wykladowca.h
 	"Konto.h"
 
-1779697957 c:\users\user\projekt-io\implementacja\projekt\student.h
+1779813590 c:\users\user\projekt-io\implementacja\projekt\student.h
 	"Konto.h"
 
-1779789036 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
+1779823287 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
 	"StronaInternetowa.h"
 	<fstream>
 	<sstream>
 	<ctime>
 	<typeinfo>
 
-1779790814 c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.h
+1779818977 c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.h
 	"Konto.h"
 	"Admin.h"
 	"Sesja.h"
@@ -57,7 +57,7 @@
 1779627711 source:c:\users\user\projekt-io\implementacja\projekt\sesja.cpp
 	"Sesja.h"
 
-1779697896 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
+1779813625 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
 	"Wykladowca.h"
 
 1779627711 source:c:\users\user\projekt-io\implementacja\projekt\admin.cpp
@@ -66,7 +66,7 @@
 1779627711 c:\users\user\projekt-io\implementacja\projekt\admin.h
 	"Konto.h"
 
-1779697993 source:c:\users\user\projekt-io\implementacja\projekt\student.cpp
+1779813660 source:c:\users\user\projekt-io\implementacja\projekt\student.cpp
 	"Student.h"
 
 1779429859 source:c:\users\bubka\projekt-io\implementacja\projekt\admin.cpp

@@ -12,8 +12,9 @@
 
 #include "Student.h"
 
-Student::Student(string l, string h, string g) : Konto(l, h) {
+Student::Student(string l, string h, string g, string iS) : Konto(l, h) {
     grupa = g;
+    indeksStudenta = iS;
 }
 
 Student::~Student() {
