@@ -1,7 +1,6 @@
 # depslib dependency file v1.0
-1779819013 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
+1779901295 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
 	"StronaInternetowa.h"
-	"testyJednostkowe.h"
 	<iostream>
 
 1779627711 source:c:\users\user\projekt-io\implementacja\projekt\konto.cpp
@@ -35,7 +34,7 @@
 1779813590 c:\users\user\projekt-io\implementacja\projekt\student.h
 	"Konto.h"
 
-1779823287 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
+1779901295 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
 	"StronaInternetowa.h"
 	<fstream>
 	<sstream>
