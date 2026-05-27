@@ -280,7 +280,7 @@ bool StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
         while (input != "Dodac" && input != "Pozyskac" && input != "Zakoncz dzialanie"){
             cout << "Nieprawidlowy input, prosze sprobowac ponownie\n";
 
-            cin >> input;
+            getline(cin, input);
         }
 
         if (input == "Zakoncz dzialanie"){

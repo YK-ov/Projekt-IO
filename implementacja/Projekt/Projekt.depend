@@ -69,36 +69,37 @@
 1779813660 source:c:\users\user\projekt-io\implementacja\projekt\student.cpp
 	"Student.h"
 
-1779429859 source:c:\users\bubka\projekt-io\implementacja\projekt\admin.cpp
+1779885288 source:c:\users\bubka\projekt-io\implementacja\projekt\admin.cpp
 	"Admin.h"
 
-1779429859 c:\users\bubka\projekt-io\implementacja\projekt\admin.h
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\admin.h
 	"Konto.h"
 
-1779429859 c:\users\bubka\projekt-io\implementacja\projekt\konto.h
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\konto.h
 	<string>
 	<iostream>
 
-1779429859 source:c:\users\bubka\projekt-io\implementacja\projekt\konto.cpp
+1779885288 source:c:\users\bubka\projekt-io\implementacja\projekt\konto.cpp
 	"Konto.h"
 
-1779431739 source:c:\users\bubka\projekt-io\implementacja\projekt\main.cpp
+1779885288 source:c:\users\bubka\projekt-io\implementacja\projekt\main.cpp
 	"StronaInternetowa.h"
+	"testyJednostkowe.h"
 	<iostream>
 
-1779431721 c:\users\bubka\projekt-io\implementacja\projekt\stronainternetowa.h
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\stronainternetowa.h
 	"Konto.h"
 	"Admin.h"
 	"Sesja.h"
 	"Przedmiot.h"
 	<iostream>
 
-1779429859 c:\users\bubka\projekt-io\implementacja\projekt\sesja.h
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\sesja.h
 	"Konto.h"
 	<string>
 	<iostream>
 
-1779429859 c:\users\bubka\projekt-io\implementacja\projekt\przedmiot.h
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\przedmiot.h
 	"Material.h"
 	"Wykladowca.h"
 	"Student.h"
@@ -106,32 +107,32 @@
 	<vector>
 	<iostream>
 
-1779429859 c:\users\bubka\projekt-io\implementacja\projekt\material.h
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\material.h
 	<string>
 	<iostream>
 
-1779429859 c:\users\bubka\projekt-io\implementacja\projekt\wykladowca.h
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\wykladowca.h
 	"Konto.h"
 
-1779429859 c:\users\bubka\projekt-io\implementacja\projekt\student.h
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\student.h
 	"Konto.h"
 
-1779438164 source:c:\users\bubka\projekt-io\implementacja\projekt\material.cpp
+1779885288 source:c:\users\bubka\projekt-io\implementacja\projekt\material.cpp
 	"Material.h"
 
-1779429859 source:c:\users\bubka\projekt-io\implementacja\projekt\przedmiot.cpp
+1779885288 source:c:\users\bubka\projekt-io\implementacja\projekt\przedmiot.cpp
 	"Przedmiot.h"
 
-1779429859 source:c:\users\bubka\projekt-io\implementacja\projekt\sesja.cpp
+1779885288 source:c:\users\bubka\projekt-io\implementacja\projekt\sesja.cpp
 	"Sesja.h"
 
-1779429859 source:c:\users\bubka\projekt-io\implementacja\projekt\student.cpp
+1779885288 source:c:\users\bubka\projekt-io\implementacja\projekt\student.cpp
 	"Student.h"
 
-1779429859 source:c:\users\bubka\projekt-io\implementacja\projekt\wykladowca.cpp
+1779885288 source:c:\users\bubka\projekt-io\implementacja\projekt\wykladowca.cpp
 	"Wykladowca.h"
 
-1779438011 source:c:\users\bubka\projekt-io\implementacja\projekt\stronainternetowa.cpp
+1779885774 source:c:\users\bubka\projekt-io\implementacja\projekt\stronainternetowa.cpp
 	"StronaInternetowa.h"
 	<fstream>
 	<sstream>
@@ -220,4 +221,6 @@
 1779782054 c:\users\student\projekt-io\implementacja\projekt\testyjednostkowe.h
 
 1779785939 c:\users\user\projekt-io\implementacja\projekt\testyjednostkowe.h
+
+1779885288 c:\users\bubka\projekt-io\implementacja\projekt\testyjednostkowe.h
 
