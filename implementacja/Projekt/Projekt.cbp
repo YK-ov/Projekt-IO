@@ -27,31 +27,106 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="Testy">
+				<Option output="bin/Testy/testy" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Admin.cpp" />
-		<Unit filename="Admin.h" />
-		<Unit filename="Konto.cpp" />
-		<Unit filename="Konto.h" />
-		<Unit filename="Material.cpp" />
-		<Unit filename="Material.h" />
-		<Unit filename="Przedmiot.cpp" />
-		<Unit filename="Przedmiot.h" />
-		<Unit filename="Sesja.cpp" />
-		<Unit filename="Sesja.h" />
-		<Unit filename="StronaInternetowa.cpp" />
-		<Unit filename="StronaInternetowa.h" />
-		<Unit filename="Student.cpp" />
-		<Unit filename="Student.h" />
-		<Unit filename="Wykladowca.cpp" />
-		<Unit filename="Wykladowca.h" />
-		<Unit filename="indeksy.csv" />
-		<Unit filename="konta.csv" />
-		<Unit filename="main.cpp" />
-		<Unit filename="przedmioty.csv" />
+		<Unit filename="Admin.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Admin.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Konto.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Konto.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Material.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Material.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Przedmiot.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Przedmiot.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Sesja.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Sesja.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="StronaInternetowa.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="StronaInternetowa.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Student.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Student.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="TestyJednostkowe.cpp">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="Wykladowca.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Wykladowca.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="catch.hpp">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="indeksy.csv">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="konta.csv">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="main.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="main_test.cpp">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="przedmioty.csv">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

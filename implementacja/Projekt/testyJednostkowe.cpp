@@ -1,50 +1,8 @@
-    #include <iostream>
-    #include <string>
-    #include <vector>
-    #include "StronaInternetowa.h"
-    #include "Konto.h"
-    #include "Przedmiot.h"
-    #include "Material.h"
-    #include "testyJednostkowe.h"
+#include "catch.hpp"
+#include "StronaInternetowa.h"
 
+TEST_CASE("Logowanie"){
+    StronaInternetowa st("adres", "nazwa");
 
-void testyJednostkowe::testujLogowanie(){
-    StronaInternetowa* st = new StronaInternetowa("adres", "nazwa");
-    bool result = st->logowanie("user", "user123", "192.105.202");
-    bool expectedResult = true;
-
-    assertEqualsBool(result, true);
-
-
-    delete st;
+    REQUIRE(st.logowanie("Adriana", "Adriana123", "192.220.105.100") == true);
 }
-
-bool testyJednostkowe::assertEqualsBool(bool a, bool b){
-    if (a == b){
-        passedTestCounter++;
-        return true;
-    }
-    else {
-        failedTestCounter++;
-        return false;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

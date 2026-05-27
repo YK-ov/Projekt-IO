@@ -1,5 +1,4 @@
 #include "StronaInternetowa.h"
-#include "testyJednostkowe.h"
 #include <iostream>
 
 using namespace std;
