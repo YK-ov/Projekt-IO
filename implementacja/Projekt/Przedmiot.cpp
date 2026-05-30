@@ -262,7 +262,7 @@ void Przedmiot::dodajMaterial(string t, string z, string login) {
 
 
     while (t.size() > 64){
-        cout << "Tytul materialu nie moze przekraczac 64 znaki\n";
+        cout << "Tytul materialu nie moze przekraczac 64 znaki, wprowadz tytul ponownie\n";
         cin >> ws;
         getline(cin, t);
     }
@@ -302,6 +302,8 @@ void Przedmiot::dodajMaterial(string t, string z, string login) {
 
     materialToAdd->setCzyJestZweryfikowany(true);
     materialToAdd->setCzyJestDodanyPrzezAdmina(true);
+
+    cout << "Material o tytule " << materialToAdd->getTytul() << " zostal dodany do systemu\n";
 
     attachMaterial(materialToAdd);
 }

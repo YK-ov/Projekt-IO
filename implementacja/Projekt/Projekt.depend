@@ -17,7 +17,7 @@
 	<string>
 	<iostream>
 
-1779822812 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
+1780079053 source:c:\users\user\projekt-io\implementacja\projekt\przedmiot.cpp
 	"Przedmiot.h"
 
 1779627711 c:\users\user\projekt-io\implementacja\projekt\przedmiot.h
@@ -34,7 +34,7 @@
 1779813590 c:\users\user\projekt-io\implementacja\projekt\student.h
 	"Konto.h"
 
-1779901295 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
+1780082741 source:c:\users\user\projekt-io\implementacja\projekt\stronainternetowa.cpp
 	"StronaInternetowa.h"
 	<fstream>
 	<sstream>

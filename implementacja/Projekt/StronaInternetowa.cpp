@@ -79,11 +79,6 @@ void StronaInternetowa::setAdres(string a) {
 bool StronaInternetowa::logowanie(string l, string h, string ip) {
     Sesja* currentSession = getSesja(ip);
 
-    if (currentSession == nullptr){
-        cout << "Nie znalieziono sesji o ip " << ip << ", proces logowania przerwano\n";
-        return false;
-    }
-
     if (currentSession->getCzyJestZablokowana()) {
         time_t currentTime = time(nullptr);
 
@@ -99,7 +94,7 @@ bool StronaInternetowa::logowanie(string l, string h, string ip) {
         }
     }
 
-    Konto* foundKonto = getKonto(l); // changed here
+    Konto* foundKonto = getKonto(l);
 
     if (foundKonto == nullptr){
         string userRegisterInput = "";
@@ -136,17 +131,16 @@ bool StronaInternetowa::logowanie(string l, string h, string ip) {
         return true;
     }
     else {
+        currentSession->setProby(currentSession->getProby() + 1);
+
         if (currentSession->getProby() >= 5){
             cout << "Przekroczony limit prob, musimy zablokowac sesje o ip " << currentSession->getIpAdres() << " na 15 minut, prosze sprobowac pozniej\n";
 
             currentSession->setCzyJestZablokowana(true);
             currentSession->setZablokowanaDo(time(nullptr) + 15 * 60);
         }
-
-        currentSession->setProby(currentSession->getProby() + 1);
-
-        if (5 + 1 - currentSession->getProby() != 0){
-            cout << "Niepoprawne haslo dla uzytkownika o loginie " << l << ", sprobuj ponownie, zostalo " << 5 + 1 - currentSession->getProby() << " prob\n";
+        else {
+            cout << "Niepoprawne haslo dla uzytkownika o loginie " << l << ", sprobuj ponownie, zostalo " << 5 - currentSession->getProby() << " prob\n";
         }
 
         return false;
@@ -334,10 +328,6 @@ bool StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
             if (subjectFound == nullptr){
                 cout << "Przedmiotu o nazwie " << subjectInput << " nie znaleziono w systemie, prosze sprobowac ponownie\n";
 
-                cin >> ws;
-                getline(cin, subjectInput);
-
-                subjectFound = getPrzedmiot(subjectInput);
                 return true;
             }
 
@@ -406,6 +396,13 @@ bool StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
                 cin >> ws;
                 getline(cin, subjectInput);
 
+                Przedmiot* subjectFound = getPrzedmiot(subjectInput);
+
+                if (subjectFound == nullptr){
+                    cout << "Nie znaleziono przedmiotu " << subjectInput << " w systemie\n";
+                    return true;
+                }
+
                 cout << "Prosze wpisac tytul materialowi:\n";
                 string title = "";
                 cin >> ws;
@@ -416,16 +413,8 @@ bool StronaInternetowa::wykonajAkcjeUzytkownika(string login) {
                 cin >> ws;
                 getline(cin, attachment);
 
-                Przedmiot* subjectFound = getPrzedmiot(subjectInput);
-
-                if (subjectFound != nullptr){
-                    subjectFound->dodajMaterial(title, attachment, login);
-
-                    zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
-                }
-                else {
-                    cout << "Nie znaleziono przedmiotu " << subjectInput << " w systemie, sprobuj ponownie\n";
-                }
+                subjectFound->dodajMaterial(title, attachment, login);
+                zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
             }
             else if (teacherInput == "Przedmiot"){
                 dodajPrzedmiot(login);
@@ -624,7 +613,7 @@ void StronaInternetowa::zweryfikujSugestieStudenta(string login) {
         vector<Przedmiot*>::iterator it;
 
         for (it = przedmioty.begin(); it != przedmioty.end(); it++){
-            if ((*it)->getWykladowca(login) != nullptr){  // wykladowca nalezy do przedmiotu
+            if ((*it)->getWykladowca(login) != nullptr){
                 int materialSize = (*it)->getIloscMaterialow();
 
                 for (int i = materialSize - 1; i >= 0; i--){
@@ -724,13 +713,12 @@ void StronaInternetowa::dodajPrzedmiot(string login) {
     string subjectContact = "";
     string subjectGroup = "";
 
-    bool nameExists = true;
+    cout << "Prosze wpisac nazwe przedmiotu:\n";
+    cin >> ws;
+    getline(cin, subjectName);
 
-        while(nameExists){
+        while(true){
         bool found = false;
-        cout << "Prosze wpisac nazwe przedmiotu:\n";
-        cin >> ws;
-        getline(cin, subjectName);
 
         vector<Przedmiot*>::iterator it;
 
@@ -741,8 +729,12 @@ void StronaInternetowa::dodajPrzedmiot(string login) {
         }
 
         if (!found){
-            nameExists = false;
+            break;
         }
+
+        cout << "Niepoprawna nazwa: przedmiot o nazwie " << subjectName << " juz istnieje w systemie, wprowadz inna nazwe:\n";
+        cin >> ws;
+        getline(cin, subjectName);
     }
 
     cout << "Prosze wpisac kontakt do koordynatora przedmiotu:\n";
@@ -866,7 +858,6 @@ void StronaInternetowa::dodajPrzedmiot(string login) {
     attachPrzedmiot(subjectToAdd);
 
     cout << "Przedmiot " << subjectToAdd->getNazwa() << " zostal pomyslnie dodany do systemu\n";
-    //zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
 }
 
 void StronaInternetowa::wyswietlPrzypisanePrzedmioty(string loginl) {
