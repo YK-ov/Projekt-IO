@@ -150,11 +150,6 @@ bool StronaInternetowa::logowanie(string l, string h, string ip) {
 bool StronaInternetowa::rejestracja(string l, string h, string ip) {
      Sesja* currentSession = getSesja(ip);
 
-    if (currentSession == nullptr){
-        cout << "Nie znalieziono sesji o ip " << ip << ", proces logowania przerwano\n";
-        return false;
-    }
-
     Konto* foundKonto = nullptr;
     vector<Konto*>::iterator it;
 
@@ -837,6 +832,17 @@ void StronaInternetowa::dodajPrzedmiot(string login) {
         cout << "1)Tak\n";
         cout << "2)Nie\n";
         cin >> teacherInput;
+    }
+
+    cout << "Wpisz nastepujace polecenie, aby zatwierdzic dodanie przedmiotu:\n";
+    cout << "1)Zatwierdz\n";
+
+    string confirmInput = "";
+    cin >> confirmInput;
+
+    while (confirmInput != "Zatwierdz"){
+        cout << "Nieprawidlowy input, prosze sprobowac ponownie\n";
+        cin >> confirmInput;
     }
 
     vector<Wykladowca*>::iterator wIt;
