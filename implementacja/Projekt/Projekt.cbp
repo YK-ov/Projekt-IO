@@ -48,10 +48,10 @@
 		<Unit filename="Przedmiot.h" />
 		<Unit filename="Sesja.cpp" />
 		<Unit filename="Sesja.h" />
-		<Unit filename="StronaInternetowa.cpp" />
-		<Unit filename="StronaInternetowa.h" />
 		<Unit filename="Student.cpp" />
 		<Unit filename="Student.h" />
+		<Unit filename="SystemEdukacyjny.cpp" />
+		<Unit filename="SystemEdukacyjny.h" />
 		<Unit filename="Wykladowca.cpp" />
 		<Unit filename="Wykladowca.h" />
 		<Unit filename="catch.hpp">
@@ -67,6 +67,7 @@
 			<Option target="Testy" />
 		</Unit>
 		<Unit filename="przedmioty.csv" />
+		<Unit filename="sesje.csv" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

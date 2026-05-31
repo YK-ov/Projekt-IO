@@ -22,14 +22,6 @@ Przedmiot::Przedmiot(string n, string o, string k, string g) {
 
 Przedmiot::~Przedmiot() {
     cout << "Zniszczono przedmiot o nazwie " << getNazwa() << "\n";
-
-    vector<Material*>::iterator it;
-
-    for (it = materialy.begin(); it != materialy.end(); it++){
-        delete (*it);
-    }
-
-    materialy.clear();
 }
 
 void Przedmiot::attachMaterial(Material* m) {
@@ -361,5 +353,9 @@ Material* Przedmiot::getMaterialPoTytule(string t) {
     }
 
     return foundMaterial;
+}
+
+vector<Material*>& Przedmiot::getMaterialy() {
+    return materialy;
 }
 

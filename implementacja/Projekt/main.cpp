@@ -34,6 +34,26 @@ int main()
         }
     }
 
+    vector<Przedmiot*>::iterator it;
+
+    for (it = system->getPrzedmioty().begin(); it != system->getPrzedmioty().end(); it++){
+        vector<Material*>::iterator mIt;
+        for (mIt = (*it)->getMaterialy().begin(); mIt != (*it)->getMaterialy().end(); mIt++){
+            delete (*mIt);
+        }
+        (*it)->getMaterialy().clear();
+
+        delete (*it);
+    }
+
+    vector<Konto*>::iterator kIt;
+    for (kIt = system->getKonta().begin(); kIt != system->getKonta().end(); kIt++){
+        delete (*kIt);
+    }
+
+    system->getKonta().clear();
+    system->getPrzedmioty().clear();
+
     delete system;
 
     return 0;

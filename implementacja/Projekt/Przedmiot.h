@@ -50,6 +50,7 @@ public:
 	int getIloscMaterialow();
 	Material* getMaterial(int i);
 	Material* getMaterialPoTytule(string t);
+    vector<Material*>& getMaterialy();
 private:
 	string nazwa;
 	vector<Material*> materialy;

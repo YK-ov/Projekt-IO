@@ -521,22 +521,6 @@ SystemEdukacyjny::~SystemEdukacyjny() {
     cout << "System edukacyjny o nazwie " << nazwa << " zostal zniszczony\n";
 
     delete aktywnaSesja;
-
-    vector<Konto*>::iterator it;
-
-    for (it = konta.begin(); it != konta.end(); it++){
-        delete (*it);
-    }
-
-    konta.clear();
-
-    vector<Przedmiot*>::iterator pIt;
-
-    for (pIt = przedmioty.begin(); pIt != przedmioty.end(); pIt++){
-        delete (*pIt);
-    }
-
-    przedmioty.clear();
 }
 
 void SystemEdukacyjny::dodajZweryfkikowanyMaterial(string login) {
@@ -1507,4 +1491,12 @@ void SystemEdukacyjny::zapiszSesje(string nazwaPlikuSesji) {
         out << contents;
         out.close();
     }
+}
+
+vector<Konto*>& SystemEdukacyjny::getKonta() {
+    return konta;
+}
+
+vector<Przedmiot*>& SystemEdukacyjny::getPrzedmioty() {
+    return przedmioty;
 }

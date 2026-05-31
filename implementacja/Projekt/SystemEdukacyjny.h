@@ -54,6 +54,8 @@ public:
 	void setDataSesja(string ip, int proby, bool czyJestZablokowana, time_t zablokowanaDo, time_t ostatniaProba);
 	void wczytajSesje(string nazwaPlikuSesji);
 	void zapiszSesje(string nazwaPlikuSesji);
+	vector<Konto*>& getKonta();
+    vector<Przedmiot*>& getPrzedmioty();
 private:
 	string nazwa;
 	vector<Konto*> konta;
