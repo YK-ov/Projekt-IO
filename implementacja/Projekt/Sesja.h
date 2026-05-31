@@ -28,18 +28,18 @@ public:
 	int getProby();
 	bool getCzyJestZablokowana();
 	time_t getZablokowanaDo();
-	Konto* getKonto();
 	void setIpAdres(string i);
 	void setProby(int p);
 	void setCzyJestZablokowana(bool b);
 	void setZablokowanaDo(time_t t);
-	void setKonto(Konto* k);
+	time_t getOstatniaProba();
+	void setOstatniaProba(time_t t);
 private:
 	string ipAdres;
 	int proby;
 	bool czyJestZablokowana;
 	time_t zablokowanaDo;
-	Konto* konto;
+	time_t ostatniaProba;
 };
 
 #endif  //_SESJA_H

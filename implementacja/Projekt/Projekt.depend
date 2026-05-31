@@ -1,6 +1,6 @@
 # depslib dependency file v1.0
-1779901295 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
-	"StronaInternetowa.h"
+1780230470 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
+	"SystemEdukacyjny.h"
 	<iostream>
 
 1779627711 source:c:\users\user\projekt-io\implementacja\projekt\konto.cpp
@@ -48,12 +48,12 @@
 	"Przedmiot.h"
 	<iostream>
 
-1779627711 c:\users\user\projekt-io\implementacja\projekt\sesja.h
+1780230553 c:\users\user\projekt-io\implementacja\projekt\sesja.h
 	"Konto.h"
 	<string>
 	<iostream>
 
-1779627711 source:c:\users\user\projekt-io\implementacja\projekt\sesja.cpp
+1780229746 source:c:\users\user\projekt-io\implementacja\projekt\sesja.cpp
 	"Sesja.h"
 
 1779813625 source:c:\users\user\projekt-io\implementacja\projekt\wykladowca.cpp
@@ -824,4 +824,18 @@
 	<algorithm>
 	<iomanip>
 	<cassert>
+
+1780229822 c:\users\user\projekt-io\implementacja\projekt\systemedukacyjny.h
+	"Konto.h"
+	"Admin.h"
+	"Sesja.h"
+	"Przedmiot.h"
+	<iostream>
+
+1780231129 source:c:\users\user\projekt-io\implementacja\projekt\systemedukacyjny.cpp
+	"SystemEdukacyjny.h"
+	<fstream>
+	<sstream>
+	<ctime>
+	<typeinfo>
 

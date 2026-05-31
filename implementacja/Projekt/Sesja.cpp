@@ -18,7 +18,6 @@ Sesja::Sesja(string i) {
     proby = 0;
     czyJestZablokowana = false;
     zablokowanaDo = 0;
-    konto = nullptr;
 }
 
 Sesja::~Sesja() {
@@ -41,10 +40,6 @@ time_t Sesja::getZablokowanaDo() {
     return zablokowanaDo;
 }
 
-Konto* Sesja::getKonto() {
-    return konto;
-}
-
 void Sesja::setIpAdres(string i) {
     ipAdres = i;
 }
@@ -61,7 +56,10 @@ void Sesja::setZablokowanaDo(time_t t) {
     zablokowanaDo = t;
 }
 
-void Sesja::setKonto(Konto* k) {
-    konto = k;
+time_t Sesja::getOstatniaProba() {
+    return ostatniaProba;
 }
 
+void Sesja::setOstatniaProba(time_t t) {
+    ostatniaProba = t;
+}

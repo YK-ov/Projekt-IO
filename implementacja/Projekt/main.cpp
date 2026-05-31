@@ -1,15 +1,13 @@
-#include "StronaInternetowa.h"
+#include "SystemEdukacyjny.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    StronaInternetowa* strona = new StronaInternetowa("https://docent.pl", "Docent - wirtualne repozytorium materialow studenckich");
-    Sesja* sesja = new Sesja("192.0.2.1");
-    strona->attachSesja(sesja);
+    SystemEdukacyjny* system = new SystemEdukacyjny("Docent - wirtualna platforma materialow studenckich");
 
-    strona->wczytajDaneZPliku("konta.csv", "przedmioty.csv");
+    system->wczytajDaneZPliku("konta.csv", "przedmioty.csv");
 
     string login = "";
     string password = "";
@@ -21,7 +19,7 @@ int main()
         cout << "Wprowadz haslo:\n";
         cin >> password;
 
-        bool isLogged = strona->logowanie(login, password, sesja->getIpAdres());
+        bool isLogged = system->logowanie(login, password);
 
         if (isLogged){
             break;
@@ -29,15 +27,14 @@ int main()
     }
 
     while (true){
-        bool userIsActive = strona->wykonajAkcjeUzytkownika(login);
+        bool userIsActive = system->wykonajAkcjeUzytkownika(login);
 
         if (!userIsActive){
             break;
         }
     }
 
-    delete sesja;
-    delete strona;
+    delete system;
 
     return 0;
 }
