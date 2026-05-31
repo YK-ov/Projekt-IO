@@ -7,7 +7,7 @@ int main()
 {
     SystemEdukacyjny* system = new SystemEdukacyjny("Docent - wirtualna platforma materialow studenckich");
 
-    system->wczytajDaneZPliku("konta.csv", "przedmioty.csv");
+    system->wczytajPrzedmiotyIKontaZPliku("konta.csv", "przedmioty.csv");
 
     string login = "";
     string password = "";

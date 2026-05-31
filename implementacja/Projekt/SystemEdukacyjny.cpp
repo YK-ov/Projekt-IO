@@ -220,7 +220,7 @@ bool SystemEdukacyjny::rejestracja(string l, string h) {
             przypiszStudentaDoPrzedmiotuPoGrupie(l);
         }
 
-        zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+        zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
 
         cout << "Prosze teraz zalogowac sie do systemu\n";
         return true;
@@ -295,7 +295,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
             getline(cin, attachment);
 
             subjectFound->zaproponujMaterial(title, attachment, login);
-            zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+            zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
         }
         else {
             wyswietlPrzypisanePrzedmioty(login);
@@ -338,7 +338,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
 
             if (teacherInput == "Sprawdz"){
                 zweryfikujSugestieStudenta(foundKonto->getLogin());
-                zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+                zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
             }
         }
 
@@ -367,7 +367,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
 
             if (teacherInput == "Sprawdz"){
                 zweryfikujSugestieStudenta(foundKonto->getLogin());
-                zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+                zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
             }
             else if (teacherInput == "Material"){
                 wyswietlProwadzonePrzedmioty(login);
@@ -397,12 +397,12 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
                 getline(cin, attachment);
 
                 subjectFound->dodajMaterial(title, attachment, login);
-                zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+                zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
             }
             else if (teacherInput == "Przedmiot"){
                 dodajPrzedmiot(login);
 
-                zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+                zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
             }
         return true;
     }
@@ -413,7 +413,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
             cout << "Masz teraz material do dodania, przystap do pracy w wolnej chwili\n";
 
             dodajZweryfkikowanyMaterial(foundKonto->getLogin());
-            zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+            zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
             return true;
         }
         else {
@@ -437,7 +437,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
                 return false;
             }
             dodajZweryfkikowanyMaterial(login);
-            zapiszDaneDoPliku("konta.csv", "przedmioty.csv");
+            zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
             return true;
         }
     }
@@ -552,7 +552,7 @@ void SystemEdukacyjny::dodajZweryfkikowanyMaterial(string login) {
 
                 if (currentMaterial->getCzyJestZweryfikowany() && !currentMaterial->getCzyJestDodanyPrzezAdmina()){
                     string adminInput = "";
-                    cout << "Material o tytule " << currentMaterial->getTytul() << " wpisz tak by zweryfikowany material\n";
+                    cout << "Material o tytule " << currentMaterial->getTytul() << " wpisz tak by dodac zweryfikowany material\n";
 
                     cin >> adminInput;
                     while (adminInput != "tak"){
@@ -903,7 +903,7 @@ Admin* SystemEdukacyjny::getAdmin() {
     return admin;
 }
 
-void SystemEdukacyjny::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPrzemiotow) {
+void SystemEdukacyjny::wczytajPrzedmiotyIKontaZPliku(string nazwaPliku, string nazwaPlikuPrzemiotow) {
     ifstream file;
 
     file.open(nazwaPliku, ios::in);
@@ -1136,7 +1136,7 @@ void SystemEdukacyjny::wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPrz
 }
 
 
-void SystemEdukacyjny::zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow) {
+void SystemEdukacyjny::zapiszPrzedmiotyIKontaDoPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow) {
     vector<Konto*>::iterator it;
 
     ofstream accountFile(nazwaPliku);

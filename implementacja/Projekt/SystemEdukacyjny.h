@@ -45,8 +45,8 @@ public:
 	void wyswietlPrzypisanePrzedmioty(string loginl);
 	void wyswietlProwadzonePrzedmioty(string login);
 	Admin* getAdmin();
-	void wczytajDaneZPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
-	void zapiszDaneDoPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
+	void wczytajPrzedmiotyIKontaZPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
+	void zapiszPrzedmiotyIKontaDoPliku(string nazwaPliku, string nazwaPlikuPrzedmiotow);
 	bool zweryfikujIndeks(string indeks, string typKonta, string nazwaPliku);
 	void zaktualizujIndeks(string indeks, string login, string nazwaPliku);
 	void przypiszStudentaDoPrzedmiotuPoGrupie(string login);
