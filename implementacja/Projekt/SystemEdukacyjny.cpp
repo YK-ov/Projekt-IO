@@ -46,7 +46,7 @@ void SystemEdukacyjny::setNazwa(string n) {
     nazwa = n;
 }
 
-bool SystemEdukacyjny::logowanie(string l, string h) {
+bool SystemEdukacyjny::logowanie(string l, string h, string plikZIndeksami) {
     wczytajSesje("sesje.csv");
 
     time_t currentTime = time(nullptr);
@@ -137,7 +137,7 @@ bool SystemEdukacyjny::logowanie(string l, string h) {
     }
 }
 
-bool SystemEdukacyjny::rejestracja(string l, string h) {
+bool SystemEdukacyjny::rejestracja(string l, string h, string plikZIndeksami) {
     Konto* foundKonto = nullptr;
     vector<Konto*>::iterator it;
 

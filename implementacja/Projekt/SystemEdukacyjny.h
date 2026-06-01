@@ -29,8 +29,8 @@ public:
 	void detachKonto(string login);
 	string getNazwa();
 	void setNazwa(string n);
-	bool logowanie(string l, string h);
-	bool rejestracja(string l, string h);
+	bool logowanie(string l, string h, string plikZIndeksami);
+	bool rejestracja(string l, string h, string plikZIndeksami);
 	bool wykonajAkcjeUzytkownika(string login);
 	void attachPrzedmiot(Przedmiot* p);
 	void detachPrzedmiot(string n);
