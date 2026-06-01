@@ -46,7 +46,7 @@ void SystemEdukacyjny::setNazwa(string n) {
     nazwa = n;
 }
 
-bool SystemEdukacyjny::logowanie(string l, string h, string plikZIndeksami) {
+bool SystemEdukacyjny::logowanie(string l, string h, string plikZIndeksami, string plikZKontami, string plikZPrzedmiotami) {
     wczytajSesje("sesje.csv");
 
     time_t currentTime = time(nullptr);
@@ -95,7 +95,7 @@ bool SystemEdukacyjny::logowanie(string l, string h, string plikZIndeksami) {
             cout << "Wprowadz haslo do rejestracji:\n";
             cin >> registerPassword;
 
-            rejestracja(registerLogin, registerPassword, plikZIndeksami);
+            rejestracja(registerLogin, registerPassword, plikZIndeksami, plikZKontami, plikZPrzedmiotami);
         }
         else if (userRegisterInput == "nie"){
             cout << "Anulowanie rejestracji... powrot do logowania ";
@@ -233,7 +233,7 @@ bool SystemEdukacyjny::rejestracja(string l, string h, string plikZIndeksami, st
     return false;
 }
 
-bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login, string plikZKontami, stirng plikZPrzedmiotami) {
+bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login, string plikZKontami, string plikZPrzedmiotami) {
     Konto* foundKonto = getKonto(login);
 
     if (foundKonto == nullptr){

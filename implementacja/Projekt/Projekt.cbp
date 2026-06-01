@@ -58,7 +58,13 @@
 			<Option target="Testy" />
 		</Unit>
 		<Unit filename="indeksy.csv" />
+		<Unit filename="indeksy_test.csv">
+			<Option target="Testy" />
+		</Unit>
 		<Unit filename="konta.csv" />
+		<Unit filename="konta_test.csv">
+			<Option target="Testy" />
+		</Unit>
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />
@@ -67,6 +73,9 @@
 			<Option target="Testy" />
 		</Unit>
 		<Unit filename="przedmioty.csv" />
+		<Unit filename="przedmioty_test.csv">
+			<Option target="Testy" />
+		</Unit>
 		<Unit filename="sesje.csv" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

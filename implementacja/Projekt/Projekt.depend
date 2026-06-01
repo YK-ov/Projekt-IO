@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1780336493 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
+1780339254 source:c:\users\user\projekt-io\implementacja\projekt\main.cpp
 	"SystemEdukacyjny.h"
 	<iostream>
 
@@ -826,7 +826,7 @@
 	<iomanip>
 	<cassert>
 
-1780336223 c:\users\user\projekt-io\implementacja\projekt\systemedukacyjny.h
+1780339234 c:\users\user\projekt-io\implementacja\projekt\systemedukacyjny.h
 	"Konto.h"
 	"Admin.h"
 	"Sesja.h"

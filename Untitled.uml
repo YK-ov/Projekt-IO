@@ -19300,24 +19300,34 @@
 <XPD:OBJ name="Operations[4]" type="UMLOperation" guid="Z/HvPtQgzUqgLNlad7H9JwAA">
 <XPD:ATTR name="Name" type="string">logowanie</XPD:ATTR>
 <XPD:REF name="Owner">O3DuLpOcpEyh2nxW+x6mgQAA</XPD:REF>
-<XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="//t5snH3SEej0m9h1SxdEQAA">
+<XPD:ATTR name="#Parameters" type="integer">6</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="wDFONB2WaEufFQpNV/VS9AAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">bool</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">Z/HvPtQgzUqgLNlad7H9JwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="H0FP2bRIxEOmCJDuSPtm1AAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="01iDpfrnXkOHYL0IjEGa7wAA">
 <XPD:ATTR name="Name" type="string">l</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">Z/HvPtQgzUqgLNlad7H9JwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="U3pjIkdmeUSGrAwjgu67IwAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="UjwV+XvWsUigvl17WJyp0AAA">
 <XPD:ATTR name="Name" type="string">h</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">Z/HvPtQgzUqgLNlad7H9JwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="UVBsxPzbhU2WphcOSWNxjwAA">
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="dUVonM+VGUGbK5qaYiWuxQAA">
 <XPD:ATTR name="Name" type="string">plikZIndeksami</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">Z/HvPtQgzUqgLNlad7H9JwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[4]" type="UMLParameter" guid="GYPy+ixE2UeDNjkTDHFRRAAA">
+<XPD:ATTR name="Name" type="string">plikZKontami</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">Z/HvPtQgzUqgLNlad7H9JwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[5]" type="UMLParameter" guid="Cq8oLnbH8UyM1jyNZJ33VAAA">
+<XPD:ATTR name="Name" type="string">plikZPrzedmiotami</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">Z/HvPtQgzUqgLNlad7H9JwAA</XPD:REF>
 </XPD:OBJ>
@@ -19328,24 +19338,34 @@
 <XPD:OBJ name="Operations[5]" type="UMLOperation" guid="qyg4b1PESUa+OR6m1DT7LAAA">
 <XPD:ATTR name="Name" type="string">rejestracja</XPD:ATTR>
 <XPD:REF name="Owner">O3DuLpOcpEyh2nxW+x6mgQAA</XPD:REF>
-<XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="lfMIQfILhUyS11uQJJ1z6wAA">
+<XPD:ATTR name="#Parameters" type="integer">6</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="zweUQyXmnEO7Zz/nEyiW3AAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">bool</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">qyg4b1PESUa+OR6m1DT7LAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="3wuf9hRnEU2gnROtLI5zOwAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="Wvhg7r+ud0KP9D8OPqQAjAAA">
 <XPD:ATTR name="Name" type="string">l</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">qyg4b1PESUa+OR6m1DT7LAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="7j0yPjd+XUefEsRFUyl6JgAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="fkyKqrc9UkqxhQpe2jYLQgAA">
 <XPD:ATTR name="Name" type="string">h</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">qyg4b1PESUa+OR6m1DT7LAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="jv05t1iJ40WmJaFTPQz1HgAA">
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="q7Z695mrT0Ktfu9jcfJIIwAA">
 <XPD:ATTR name="Name" type="string">plikZIndeksami</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">qyg4b1PESUa+OR6m1DT7LAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[4]" type="UMLParameter" guid="/CbKCq6XrkWpaytzWsklXAAA">
+<XPD:ATTR name="Name" type="string">plikZKontami</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">qyg4b1PESUa+OR6m1DT7LAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[5]" type="UMLParameter" guid="FneKkqQfzkOtCO5CyldjiwAA">
+<XPD:ATTR name="Name" type="string">plikZPrzedmiotami</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">qyg4b1PESUa+OR6m1DT7LAAA</XPD:REF>
 </XPD:OBJ>
@@ -25508,9 +25528,9 @@
 <XPD:REF name="Head">rj9esMWjpUe5KEbCC2R81QAA</XPD:REF>
 <XPD:REF name="Tail">NJwPwsmEwkKUXxTlR9MUOgAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="UVLkgiszA0CDZ9ljmCcukwAA">
-<XPD:ATTR name="Alpha" type="real">-4,63561720023105</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">13,0384048104053</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : rejestracja(l: string, h: string, plikZIndeksami: string): bool</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">0,111424673003983</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">143,892320851392</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : rejestracja(l: string, h: string, plikZIndeksami: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">LHzg7DbgTEKY/Ix3gcZf/QAA</XPD:REF>
 <XPD:REF name="HostEdge">8O6EdA+IzEq1BsuaQ8+S0QAA</XPD:REF>
 </XPD:OBJ>
@@ -26880,9 +26900,9 @@
 <XPD:REF name="Head">YxNx3cmX/0azFNtt3hVRrAAA</XPD:REF>
 <XPD:REF name="Tail">medZ1nxUmEShmETGS1NaZgAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="xpcYnvuCSE+gt7g9wy0/3QAA">
-<XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : logowanie(l: string, h: string, plikZIndeksami: string): bool</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">0,24828987575228</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">73,24616030892</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : logowanie(l: string, h: string, plikZIndeksami: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">n4jmL/BMFkK7prZmbTxmZgAA</XPD:REF>
 <XPD:REF name="HostEdge">IImFQGIiHkaESVXh5QkHoQAA</XPD:REF>
 </XPD:OBJ>

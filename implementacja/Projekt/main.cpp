@@ -19,7 +19,7 @@ int main()
         cout << "Wprowadz haslo:\n";
         cin >> password;
 
-        bool isLogged = system->logowanie(login, password, "indeksy.csv");
+        bool isLogged = system->logowanie(login, password, "indeksy.csv", "konta.csv", "przedmioty.csv");
 
         if (isLogged){
             break;
@@ -27,7 +27,7 @@ int main()
     }
 
     while (true){
-        bool userIsActive = system->wykonajAkcjeUzytkownika(login);
+        bool userIsActive = system->wykonajAkcjeUzytkownika(login, "konta.csv", "przedmioty.csv");
 
         if (!userIsActive){
             break;
