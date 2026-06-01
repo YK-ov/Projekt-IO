@@ -54,14 +54,79 @@
 		<Unit filename="SystemEdukacyjny.h" />
 		<Unit filename="Wykladowca.cpp" />
 		<Unit filename="Wykladowca.h" />
+		<Unit filename="bin/Testy/indeksy_funkcjonalne_brak.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/indeksy_integracja.csv" />
+		<Unit filename="bin/Testy/indeksy_test.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/konta_f4.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/konta_f5.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/konta_funkcjonalne.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/konta_funkcjonalne_brak.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/konta_funkcjonalne_logowanie.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/konta_integracja.csv" />
+		<Unit filename="bin/Testy/konta_test.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/przedmioty_f4.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/przedmioty_f5.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/przedmioty_funkcjonalne.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/przedmioty_funkcjonalne_brak.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/przedmioty_funkcjonalne_logowanie.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="bin/Testy/przedmioty_integracja.csv" />
+		<Unit filename="bin/Testy/przedmioty_test.csv">
+			<Option target="Testy" />
+		</Unit>
 		<Unit filename="catch.hpp">
 			<Option target="Testy" />
 		</Unit>
 		<Unit filename="indeksy.csv" />
+		<Unit filename="indeksy_funkcjonalne_brak.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="indeksy_integracja.csv" />
 		<Unit filename="indeksy_test.csv">
 			<Option target="Testy" />
 		</Unit>
 		<Unit filename="konta.csv" />
+		<Unit filename="konta_f4.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="konta_f5.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="konta_funkcjonalne.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="konta_funkcjonalne_brak.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="konta_funkcjonalne_logowanie.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="konta_integracja.csv" />
 		<Unit filename="konta_test.csv">
 			<Option target="Testy" />
 		</Unit>
@@ -73,6 +138,22 @@
 			<Option target="Testy" />
 		</Unit>
 		<Unit filename="przedmioty.csv" />
+		<Unit filename="przedmioty_f4.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="przedmioty_f5.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="przedmioty_funkcjonalne.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="przedmioty_funkcjonalne_brak.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="przedmioty_funkcjonalne_logowanie.csv">
+			<Option target="Testy" />
+		</Unit>
+		<Unit filename="przedmioty_integracja.csv" />
 		<Unit filename="przedmioty_test.csv">
 			<Option target="Testy" />
 		</Unit>

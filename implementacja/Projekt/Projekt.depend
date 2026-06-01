@@ -525,11 +525,13 @@
 	"catch.hpp"
 	"StronaInternetowa.h"
 
-1780334636 source:c:\users\user\projekt-io\implementacja\projekt\main_test.cpp
+1780345263 source:c:\users\user\projekt-io\implementacja\projekt\main_test.cpp
 	"catch.hpp"
 	"SystemEdukacyjny.h"
 	"Student.h"
 	<ctime>
+	<fstream>
+	<sstream>
 
 1779901295 c:\users\user\projekt-io\implementacja\projekt\catch.hpp
 	<TargetConditionals.h>
@@ -833,7 +835,7 @@
 	"Przedmiot.h"
 	<iostream>
 
-1780336746 source:c:\users\user\projekt-io\implementacja\projekt\systemedukacyjny.cpp
+1780339262 source:c:\users\user\projekt-io\implementacja\projekt\systemedukacyjny.cpp
 	"SystemEdukacyjny.h"
 	<fstream>
 	<sstream>
