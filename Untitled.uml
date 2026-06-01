@@ -19356,14 +19356,24 @@
 <XPD:OBJ name="Operations[6]" type="UMLOperation" guid="o/gaZ+EZ3kKw04AA/vfrNwAA">
 <XPD:ATTR name="Name" type="string">wykonajAkcjeUzytkownika</XPD:ATTR>
 <XPD:REF name="Owner">O3DuLpOcpEyh2nxW+x6mgQAA</XPD:REF>
-<XPD:ATTR name="#Parameters" type="integer">2</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="PuhIGKn6Gk+FYjTGACBbZAAA">
+<XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="9vN3W7Ikfke3sjDY0j31PQAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">bool</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">o/gaZ+EZ3kKw04AA/vfrNwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="boT4r9u9eU2JFmfEjBNS/AAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="bK1gIVGrHkO865sMxo7LCwAA">
 <XPD:ATTR name="Name" type="string">login</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">o/gaZ+EZ3kKw04AA/vfrNwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="23GcS+4wNk6VUI3L4UkC3wAA">
+<XPD:ATTR name="Name" type="string">plikZKontami</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">o/gaZ+EZ3kKw04AA/vfrNwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="quntroEDsE+yH7W1FWnysQAA">
+<XPD:ATTR name="Name" type="string">plikZPrzedmiotami</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">o/gaZ+EZ3kKw04AA/vfrNwAA</XPD:REF>
 </XPD:OBJ>
@@ -20816,7 +20826,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="KipMu8dl1k+3qpckck7psAAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">4 : rejestracja(l: string, h: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">4 : rejestracja(l: string, h: string, plikZIndeksami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">l89bcm2YFkyyry8YjDwICAAA</XPD:REF>
 <XPD:REF name="HostEdge">l6QdSNIWXku57okIrFPHTgAA</XPD:REF>
 </XPD:OBJ>
@@ -21106,7 +21116,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="cnFYo3XdMUuSH/VYxxUuUgAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">12 : logowanie(l: string, h: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">12 : logowanie(l: string, h: string, plikZIndeksami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">loOJ3K6sFUeX8uGN0Z+5lwAA</XPD:REF>
 <XPD:REF name="HostEdge">UgNd4H7Cz0KuZbGEZIvnRwAA</XPD:REF>
 </XPD:OBJ>
@@ -21434,7 +21444,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="TweYq/QubE+pZSVa2IVT3AAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">21 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">21 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">tbcn5ElkaUGoK0mSrJZMPwAA</XPD:REF>
 <XPD:REF name="HostEdge">aZXtIgdWRUeqQ7N81RI9cQAA</XPD:REF>
 </XPD:OBJ>
@@ -21688,7 +21698,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="hVr3CnC/70KbIChV+4wPkwAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">28 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">28 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">koQ4LVypaEK1MlaB2GYVAwAA</XPD:REF>
 <XPD:REF name="HostEdge">cVrphEXC3ES5Ivg4KSY8yAAA</XPD:REF>
 </XPD:OBJ>
@@ -21943,7 +21953,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="7yeFtQHTskml/TMUM7SnTwAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">35 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">35 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">nZCzxRPDu0inGxvMEqejiQAA</XPD:REF>
 <XPD:REF name="HostEdge">1gUpT7B7qEilKxE1BZp/nwAA</XPD:REF>
 </XPD:OBJ>
@@ -22453,7 +22463,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="V9NZBY5po0ycgHL/cr2yAgAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">49 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">49 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">KA6aS0W5Dk+LaQQMbTFgJQAA</XPD:REF>
 <XPD:REF name="HostEdge">ArEMzqpVikmlopDILVOhHAAA</XPD:REF>
 </XPD:OBJ>
@@ -22708,7 +22718,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="IkWxVGubHkynEai1YBNDgwAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">56 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">56 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">3NsYsiP/9Uyl5mrweeHT6AAA</XPD:REF>
 <XPD:REF name="HostEdge">8Q8QKfapYkComUongfcxqQAA</XPD:REF>
 </XPD:OBJ>
@@ -22853,7 +22863,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="FvoonqFJv0+9OwXcwUdh1QAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">60 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">60 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">NEuLCIawtk+ycsoPuucwvAAA</XPD:REF>
 <XPD:REF name="HostEdge">/dJ6YFxVIUyWg17Z3YjMpwAA</XPD:REF>
 </XPD:OBJ>
@@ -26872,7 +26882,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="xpcYnvuCSE+gt7g9wy0/3QAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : logowanie(l: string, h: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : logowanie(l: string, h: string, plikZIndeksami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">n4jmL/BMFkK7prZmbTxmZgAA</XPD:REF>
 <XPD:REF name="HostEdge">IImFQGIiHkaESVXh5QkHoQAA</XPD:REF>
 </XPD:OBJ>
@@ -28541,9 +28551,9 @@
 <XPD:REF name="Head">Fy/RB+sKb0adsU/Ubbrv1gAA</XPD:REF>
 <XPD:REF name="Tail">jv3k0qFfhkiqPYEbGoKF/gAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="aU0mSZ9BcUOsKgO7IU7CmAAA">
-<XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">0,213560408525549</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">84,9293824303462</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">SDsg5ejIIEaqqMb6j0ZEhQAA</XPD:REF>
 <XPD:REF name="HostEdge">bd23mBJIykyhLW4QKolXMAAA</XPD:REF>
 </XPD:OBJ>
@@ -29390,9 +29400,9 @@
 <XPD:REF name="Head">VbOJ6OWNrkilmNNRsGFruAAA</XPD:REF>
 <XPD:REF name="Tail">xDE4wenAyU+DpjHVdolmRgAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="UVs6ZugXxEuTYsVVNCmVhQAA">
-<XPD:ATTR name="Alpha" type="real">-4,44613712379801</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">11,4017542509914</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1,50422749930229</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">15,0332963783729</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">Q0hX1xkw9Eu69x+tCOhBlwAA</XPD:REF>
 <XPD:REF name="HostEdge">m9ogTfD+4E+xrOvtwr0i0AAA</XPD:REF>
 </XPD:OBJ>
@@ -29426,8 +29436,8 @@
 <XPD:REF name="Head">VbOJ6OWNrkilmNNRsGFruAAA</XPD:REF>
 <XPD:REF name="Tail">VbOJ6OWNrkilmNNRsGFruAAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="idonpwnJPUuT2eZE+ZX5XAAA">
-<XPD:ATTR name="Alpha" type="real">1,79345624711294</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">108,683025353548</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">1,5707953267949</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">150</XPD:ATTR>
 <XPD:ATTR name="Text" type="string">2 : wyswietlProwadzonePrzedmioty(login: string): void</XPD:ATTR>
 <XPD:REF name="Model">rVxPI2oNn0Oq6wR96BlAeAAA</XPD:REF>
 <XPD:REF name="HostEdge">Kw50vV3phUKsHOOp90NiogAA</XPD:REF>
@@ -30665,7 +30675,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="METk22ZHg0usGCi/5P5/fAAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">nryBOe6EmU2QT/4YS3ORUwAA</XPD:REF>
 <XPD:REF name="HostEdge">R+yqexN3S0qc5E9Ooy08GgAA</XPD:REF>
 </XPD:OBJ>
@@ -32216,9 +32226,9 @@
 <XPD:REF name="Head">DSFmB3R1sEaiTFw3vOVIPAAA</XPD:REF>
 <XPD:REF name="Tail">yLq+XqS3J0Wr2z4OnJERwAAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="4QcW1KoE7U+XVnGKoFo1lgAA">
-<XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">-4,64108157266954</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">14,0356688476182</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">oPeBJVkeukG15SeptLmvRwAA</XPD:REF>
 <XPD:REF name="HostEdge">NV26+gjl7U+9NEYN1RML+QAA</XPD:REF>
 </XPD:OBJ>
@@ -33304,9 +33314,9 @@
 <XPD:REF name="Head">KacDE+uNe0KIdzC9m5/kTgAA</XPD:REF>
 <XPD:REF name="Tail">p24PpRYBK0uUdnbc72iWUQAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="jJn82Y3f4U69uk/9ymXQ7AAA">
-<XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">-4,63561720023105</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">13,0384048104053</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">9t8bqVJfLU2kPlYLq4mUgAAA</XPD:REF>
 <XPD:REF name="HostEdge">mvM2Br7+X0qeRnORTlTgmQAA</XPD:REF>
 </XPD:OBJ>
@@ -35180,9 +35190,9 @@
 <XPD:REF name="Head">GdA+GGoug0eWTm0IXmcCpwAA</XPD:REF>
 <XPD:REF name="Tail">X86gRdz4+0qFZeqXMVUUjAAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="zGEhmUYp6kWVyimQnTVMtAAA">
-<XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
-<XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string): bool</XPD:ATTR>
+<XPD:ATTR name="Alpha" type="real">0,43662703207635</XPD:ATTR>
+<XPD:ATTR name="Distance" type="real">33,1058907144937</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">1 : wykonajAkcjeUzytkownika(login: string, plikZKontami: string, plikZPrzedmiotami: string): bool</XPD:ATTR>
 <XPD:REF name="Model">F8A3D8EKhEOQJWW9FP2GOwAA</XPD:REF>
 <XPD:REF name="HostEdge">g9B24BFkpUub4bOlm3Zl8AAA</XPD:REF>
 </XPD:OBJ>

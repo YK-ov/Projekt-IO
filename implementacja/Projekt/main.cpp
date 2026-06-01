@@ -19,7 +19,7 @@ int main()
         cout << "Wprowadz haslo:\n";
         cin >> password;
 
-        bool isLogged = system->logowanie(login, password);
+        bool isLogged = system->logowanie(login, password, "indeksy.csv");
 
         if (isLogged){
             break;

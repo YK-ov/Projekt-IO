@@ -95,7 +95,7 @@ bool SystemEdukacyjny::logowanie(string l, string h, string plikZIndeksami) {
             cout << "Wprowadz haslo do rejestracji:\n";
             cin >> registerPassword;
 
-            rejestracja(registerLogin, registerPassword);
+            rejestracja(registerLogin, registerPassword, plikZIndeksami);
         }
         else if (userRegisterInput == "nie"){
             cout << "Anulowanie rejestracji... powrot do logowania ";
@@ -137,7 +137,7 @@ bool SystemEdukacyjny::logowanie(string l, string h, string plikZIndeksami) {
     }
 }
 
-bool SystemEdukacyjny::rejestracja(string l, string h, string plikZIndeksami) {
+bool SystemEdukacyjny::rejestracja(string l, string h, string plikZIndeksami, string plikZKontami, string plikZPrzedmiotami) {
     Konto* foundKonto = nullptr;
     vector<Konto*>::iterator it;
 
@@ -169,10 +169,10 @@ bool SystemEdukacyjny::rejestracja(string l, string h, string plikZIndeksami) {
             cout << "Wprowadz numer indeksu, ktory zostal ci przydzielony przez uczelnie\n";
             cin >> indexInput;
 
-            bool isValid = zweryfikujIndeks(indexInput, "STUDENT", "indeksy.csv");
+            bool isValid = zweryfikujIndeks(indexInput, "STUDENT", plikZIndeksami);
 
             if (isValid){
-                zaktualizujIndeks(indexInput, l, "indeksy.csv");
+                zaktualizujIndeks(indexInput, l, plikZIndeksami);
                 cout << "Przypisujemy twojemu nowemu kontu numer indeksu studenta...";
             }
             else {
@@ -184,10 +184,10 @@ bool SystemEdukacyjny::rejestracja(string l, string h, string plikZIndeksami) {
             cout << "Wprowadz numer indeksu, ktory zostal ci przydzielony przez uczelnie jako pracownikowi\n";
             cin >> indexInput;
 
-            bool isValid = zweryfikujIndeks(indexInput, "WYKLADOWCA", "indeksy.csv");
+            bool isValid = zweryfikujIndeks(indexInput, "WYKLADOWCA", plikZIndeksami);
 
             if (isValid){
-                zaktualizujIndeks(indexInput, l, "indeksy.csv");
+                zaktualizujIndeks(indexInput, l, plikZIndeksami);
                 cout << "Przypisujemy twojemu nowemu kontu numer indeksu wykladowcy...";
             }
             else {
@@ -220,7 +220,7 @@ bool SystemEdukacyjny::rejestracja(string l, string h, string plikZIndeksami) {
             przypiszStudentaDoPrzedmiotuPoGrupie(l);
         }
 
-        zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
+        zapiszPrzedmiotyIKontaDoPliku(plikZKontami, plikZPrzedmiotami);
 
         cout << "Prosze teraz zalogowac sie do systemu\n";
         return true;
@@ -233,7 +233,7 @@ bool SystemEdukacyjny::rejestracja(string l, string h, string plikZIndeksami) {
     return false;
 }
 
-bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
+bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login, string plikZKontami, stirng plikZPrzedmiotami) {
     Konto* foundKonto = getKonto(login);
 
     if (foundKonto == nullptr){
@@ -295,7 +295,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
             getline(cin, attachment);
 
             subjectFound->zaproponujMaterial(title, attachment, login);
-            zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
+            zapiszPrzedmiotyIKontaDoPliku(plikZKontami, plikZPrzedmiotami);
         }
         else {
             wyswietlPrzypisanePrzedmioty(login);
@@ -338,7 +338,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
 
             if (teacherInput == "Sprawdz"){
                 zweryfikujSugestieStudenta(foundKonto->getLogin());
-                zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
+                zapiszPrzedmiotyIKontaDoPliku(plikZKontami, plikZPrzedmiotami);
             }
         }
 
@@ -367,7 +367,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
 
             if (teacherInput == "Sprawdz"){
                 zweryfikujSugestieStudenta(foundKonto->getLogin());
-                zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
+                zapiszPrzedmiotyIKontaDoPliku(plikZKontami, plikZPrzedmiotami);
             }
             else if (teacherInput == "Material"){
                 wyswietlProwadzonePrzedmioty(login);
@@ -397,12 +397,12 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
                 getline(cin, attachment);
 
                 subjectFound->dodajMaterial(title, attachment, login);
-                zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
+                zapiszPrzedmiotyIKontaDoPliku(plikZKontami, plikZPrzedmiotami);
             }
             else if (teacherInput == "Przedmiot"){
                 dodajPrzedmiot(login);
 
-                zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
+                zapiszPrzedmiotyIKontaDoPliku(plikZKontami, plikZPrzedmiotami);
             }
         return true;
     }
@@ -413,7 +413,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
             cout << "Masz teraz material do dodania, przystap do pracy w wolnej chwili\n";
 
             dodajZweryfkikowanyMaterial(foundKonto->getLogin());
-            zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
+            zapiszPrzedmiotyIKontaDoPliku(plikZKontami, plikZPrzedmiotami);
             return true;
         }
         else {
@@ -437,7 +437,7 @@ bool SystemEdukacyjny::wykonajAkcjeUzytkownika(string login) {
                 return false;
             }
             dodajZweryfkikowanyMaterial(login);
-            zapiszPrzedmiotyIKontaDoPliku("konta.csv", "przedmioty.csv");
+            zapiszPrzedmiotyIKontaDoPliku(plikZKontami, plikZPrzedmiotami);
             return true;
         }
     }

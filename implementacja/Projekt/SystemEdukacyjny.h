@@ -30,8 +30,8 @@ public:
 	string getNazwa();
 	void setNazwa(string n);
 	bool logowanie(string l, string h, string plikZIndeksami);
-	bool rejestracja(string l, string h, string plikZIndeksami);
-	bool wykonajAkcjeUzytkownika(string login);
+	bool rejestracja(string l, string h, string plikZIndeksami, string plikZKontami, string plikZPrzedmiotami);
+	bool wykonajAkcjeUzytkownika(string login, string plikZKontami, stirng plikZPrzedmiotami);
 	void attachPrzedmiot(Przedmiot* p);
 	void detachPrzedmiot(string n);
 	Przedmiot* getPrzedmiot(string n);
